@@ -1,0 +1,24 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Validate projects.json
+        run: python3 scripts/validate_projects.py
+
+      - name: Scan for student IDs
+        run: bash scripts/scan_student_ids.sh
+
+      - name: Check links
+        uses: lycheeverse/lychee-action@v2
+        with:
+          args: --no-progress --max-retries 2 --accept 200,206,429 index.html data/projects.json docs/*.md README.md
+          fail: true
