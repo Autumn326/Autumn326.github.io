@@ -1,0 +1,441 @@
+{
+  "_help": {
+    "types": [
+      "mobile-app",
+      "ai",
+      "data",
+      "algorithm",
+      "systems",
+      "backend",
+      "database",
+      "security",
+      "early"
+    ],
+    "themes": [
+      "apple",
+      "ai-graph",
+      "terminal"
+    ],
+    "fill_in": "Fill links, images, thumbnail, whatILearned yourself. Do not put student IDs or full source code here. youtube = video ID or full link.",
+    "note": "Dates, summaries and types are drafts from reading your folder; edit freely."
+  },
+  "projects": [
+    {
+      "id": "sign-finder",
+      "title": "Sign Finder",
+      "type": "mobile-app",
+      "theme": "apple",
+      "featured": true,
+      "date": "2024-2025",
+      "course": "6COSC023W Final Year Project",
+      "summary": "iOS app that identifies road signs from photos or the live camera using an on-device machine learning model. Final year project.",
+      "tags": [
+        "Swift",
+        "SwiftUI",
+        "Core ML",
+        "Vision",
+        "AVFoundation",
+        "Create ML",
+        "LabelImg",
+        "Python",
+        "TensorFlow"
+      ],
+      "features": [
+        "Scan a road sign from a photo",
+        "Live camera scanning",
+        "Road sign information screen",
+        "Camera quality settings",
+        "Custom dataset merged from public sets plus own annotated images",
+        "Up to 96% accuracy in good conditions"
+      ],
+      "links": {
+        "youtube": "",
+        "github": "",
+        "writeup": "",
+        "demo": ""
+      },
+      "images": [],
+      "thumbnail": "",
+      "whatILearned": "",
+      "notes": ""
+    },
+    {
+      "id": "sudoku-solver",
+      "title": "Sudoku Solver",
+      "type": "algorithm",
+      "theme": "ai-graph",
+      "featured": true,
+      "date": "2026",
+      "course": null,
+      "summary": "Sudoku solver using constraint propagation first and backtracking search only when needed.",
+      "tags": [
+        "Python",
+        "unit testing"
+      ],
+      "features": [
+        "Constraint propagation",
+        "Backtracking with fewest-candidates heuristic",
+        "Small app with launcher",
+        "Unit tests",
+        "About 5 ms on the hardest known puzzle"
+      ],
+      "links": {
+        "youtube": "",
+        "github": "",
+        "writeup": "",
+        "demo": ""
+      },
+      "images": [],
+      "thumbnail": "",
+      "whatILearned": "",
+      "notes": ""
+    },
+    {
+      "id": "theatre-booking-cpp",
+      "title": "Theatre Booking System (C++)",
+      "type": "systems",
+      "theme": "terminal",
+      "featured": true,
+      "date": "2026",
+      "course": null,
+      "summary": "Console theatre booking app, a C++ rewrite of an earlier Java coursework.",
+      "tags": [
+        "C++",
+        "Catch",
+        "Git"
+      ],
+      "features": [
+        "Buy and cancel tickets",
+        "Seat map and available seats",
+        "Save and load seating",
+        "Ticket sorting",
+        "Unit tests"
+      ],
+      "links": {
+        "youtube": "",
+        "github": "",
+        "writeup": "",
+        "demo": ""
+      },
+      "images": [],
+      "thumbnail": "",
+      "whatILearned": "",
+      "notes": ""
+    },
+    {
+      "id": "ios-weather-app",
+      "title": "iOS Weather App",
+      "type": "mobile-app",
+      "theme": "apple",
+      "featured": true,
+      "date": "2024",
+      "course": "6COSC021W Mobile Native",
+      "summary": "SwiftUI weather app with forecasts, a map of tourist attractions and saved places.",
+      "tags": [
+        "Swift",
+        "SwiftUI",
+        "MapKit",
+        "REST APIs"
+      ],
+      "features": [
+        "Current, hourly and daily weather",
+        "Map of tourist attractions",
+        "Visited places list",
+        "Enhancement: tap an attraction to recentre the map",
+        "Enhancement: swipe a saved place to refresh its data"
+      ],
+      "links": {
+        "youtube": "",
+        "github": "",
+        "writeup": "",
+        "demo": ""
+      },
+      "images": [],
+      "thumbnail": "",
+      "whatILearned": "",
+      "notes": ""
+    },
+    {
+      "id": "applied-ai-rnn",
+      "title": "Applied AI: RNN Sentiment Analysis",
+      "type": "ai",
+      "theme": "ai-graph",
+      "featured": false,
+      "date": "2024-2025",
+      "course": "Applied AI",
+      "summary": "Simple RNN that classifies tweet sentiment, with written analysis of CNN and RNN approaches.",
+      "tags": [
+        "Python",
+        "Keras",
+        "TensorFlow",
+        "scikit-learn",
+        "pandas",
+        "matplotlib"
+      ],
+      "features": [
+        "Text tokenising and padding",
+        "RNN model with embedding layer",
+        "85.3% test accuracy",
+        "Confusion matrix",
+        "Prediction function for new text"
+      ],
+      "links": {
+        "youtube": "",
+        "github": "",
+        "writeup": "",
+        "demo": ""
+      },
+      "images": [],
+      "thumbnail": "",
+      "whatILearned": "",
+      "notes": ""
+    },
+    {
+      "id": "applied-robotics-qlearning",
+      "title": "Applied Robotics: Q-Learning Taxi",
+      "type": "ai",
+      "theme": "ai-graph",
+      "featured": false,
+      "date": "2024-2025",
+      "course": "Applied Robotics",
+      "summary": "Reinforcement learning agent that learns to pick up and drop off passengers on a 5x5 grid.",
+      "tags": [
+        "Python",
+        "Reinforcement learning",
+        "matplotlib"
+      ],
+      "features": [
+        "Q-learning with epsilon decay",
+        "Reward design for shortest routes",
+        "Learning-curve graphs",
+        "Testing on random environments"
+      ],
+      "links": {
+        "youtube": "",
+        "github": "",
+        "writeup": "",
+        "demo": ""
+      },
+      "images": [],
+      "thumbnail": "",
+      "whatILearned": "",
+      "notes": ""
+    },
+    {
+      "id": "health-system-api",
+      "title": "Health System REST API",
+      "type": "backend",
+      "theme": "terminal",
+      "featured": false,
+      "date": "2024-05",
+      "course": "Client-Server Architecture",
+      "summary": "Java REST API for a health system, built for a client-server architecture module.",
+      "tags": [
+        "Java",
+        "Maven",
+        "Jersey (JAX-RS)",
+        "NetBeans"
+      ],
+      "features": [
+        "REST endpoints",
+        "Demo video"
+      ],
+      "links": {
+        "youtube": "",
+        "github": "",
+        "writeup": "",
+        "demo": ""
+      },
+      "images": [],
+      "thumbnail": "",
+      "whatILearned": "",
+      "notes": ""
+    },
+    {
+      "id": "r-data-science",
+      "title": "R Data Science: Forecasting and Clustering",
+      "type": "data",
+      "theme": "ai-graph",
+      "featured": false,
+      "date": "2024-04",
+      "course": "5DATA002W",
+      "summary": "Neural network forecasting of USD/EUR exchange rates and partitioning clustering of white wine data.",
+      "tags": [
+        "R",
+        "neuralnet",
+        "NbClust",
+        "factoextra",
+        "PCA"
+      ],
+      "features": [
+        "Time-lagged input matrices for forecasting",
+        "Outlier removal with z-scores",
+        "Choosing cluster count with NbClust, elbow, gap and silhouette",
+        "Written report"
+      ],
+      "links": {
+        "youtube": "",
+        "github": "",
+        "writeup": "",
+        "demo": ""
+      },
+      "images": [],
+      "thumbnail": "",
+      "whatILearned": "",
+      "notes": ""
+    },
+    {
+      "id": "oop-shopping-manager",
+      "title": "OOP: Westminster Shopping Manager",
+      "type": "backend",
+      "theme": "terminal",
+      "featured": false,
+      "date": "2024-01",
+      "course": "5COSC019W",
+      "summary": "Java shopping manager with products, electronics, clothing and a shopping cart.",
+      "tags": [
+        "Java",
+        "Maven",
+        "UML"
+      ],
+      "features": [
+        "Product class hierarchy",
+        "Shopping cart",
+        "UML use case and class diagrams",
+        "Test plan",
+        "Demo video"
+      ],
+      "links": {
+        "youtube": "",
+        "github": "",
+        "writeup": "",
+        "demo": ""
+      },
+      "images": [],
+      "thumbnail": "",
+      "whatILearned": "",
+      "notes": ""
+    },
+    {
+      "id": "database-coursework",
+      "title": "Database Systems Design",
+      "type": "database",
+      "theme": "terminal",
+      "featured": false,
+      "date": "2023-10",
+      "course": "5COSC020W",
+      "summary": "Database design coursework with ER modelling and a second design part.",
+      "tags": [
+        "SQL",
+        "draw.io",
+        "ER modelling"
+      ],
+      "features": [
+        "ER diagram",
+        "Part A report",
+        "Part B design"
+      ],
+      "links": {
+        "youtube": "",
+        "github": "",
+        "writeup": "",
+        "demo": ""
+      },
+      "images": [],
+      "thumbnail": "",
+      "whatILearned": "",
+      "notes": ""
+    },
+    {
+      "id": "cyber-security-pentest",
+      "title": "Cyber Security: Penetration Test Report",
+      "type": "security",
+      "theme": "terminal",
+      "featured": false,
+      "date": "2024-2025",
+      "course": "Cyber Security",
+      "summary": "Penetration test write-up on a lab domain.",
+      "tags": [
+        "Nmap",
+        "Metasploit",
+        "Wireshark",
+        "dnsenum",
+        "John the Ripper"
+      ],
+      "features": [
+        "OSINT and DNS enumeration",
+        "Port scanning",
+        "Exploitation",
+        "Written report"
+      ],
+      "links": {
+        "youtube": "",
+        "github": "",
+        "writeup": "",
+        "demo": ""
+      },
+      "images": [],
+      "thumbnail": "",
+      "whatILearned": "",
+      "notes": ""
+    },
+    {
+      "id": "grade-progression",
+      "title": "Grade Progression Calculator (Python)",
+      "type": "early",
+      "theme": "terminal",
+      "featured": false,
+      "date": "2022-11",
+      "course": "First-year coursework",
+      "summary": "Early Python console program that sorts student credits into progression outcomes.",
+      "tags": [
+        "Python",
+        "Git"
+      ],
+      "features": [
+        "Input validation",
+        "Progress, Trailer, Retriever and Excluded outcomes",
+        "Summary output"
+      ],
+      "links": {
+        "youtube": "",
+        "github": "",
+        "writeup": "",
+        "demo": ""
+      },
+      "images": [],
+      "thumbnail": "",
+      "whatILearned": "",
+      "notes": ""
+    },
+    {
+      "id": "theatre-booking-java",
+      "title": "Theatre Booking System (Java)",
+      "type": "early",
+      "theme": "terminal",
+      "featured": false,
+      "date": "2022-2023",
+      "course": "Software Development",
+      "summary": "Original Java console version of the theatre booking system.",
+      "tags": [
+        "Java"
+      ],
+      "features": [
+        "Buy ticket",
+        "Seating area display",
+        "Ticket list",
+        "File saving"
+      ],
+      "links": {
+        "youtube": "",
+        "github": "",
+        "writeup": "",
+        "demo": ""
+      },
+      "images": [],
+      "thumbnail": "",
+      "whatILearned": "",
+      "notes": ""
+    }
+  ]
+}
