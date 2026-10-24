@@ -3,11 +3,100 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Michael Chen</title>
+    <title>Michael Chen | Computer Science Portfolio</title>
+    <meta name="description" content="Portfolio of Michael Chen, a Computer Science student building iOS apps, machine learning projects and algorithms.">
     <link rel="stylesheet" href="styles.css">
+    <script src="script.js" defer></script>
 </head>
 <body>
-    <div class="center-text">Michael Chen</div>
-    <div class="background"></div>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <header class="site-header">
+        <nav class="nav" aria-label="Main">
+            <a class="nav-brand" href="#top">Michael Chen</a>
+            <ul class="nav-links">
+                <li><a href="#featured">Featured</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main id="main">
+        <section class="hero" id="top">
+            <div class="hero-inner">
+                <p class="eyebrow">Computer Science portfolio</p>
+                <h1>Michael Chen</h1>
+                <p class="tagline">I build iOS apps, machine learning models and clean algorithms.</p>
+                <p class="intro">
+                    I am a Computer Science student at the University of Westminster.
+                    This site collects my projects, from my final year road sign
+                    recognition app to coursework in AI, data science and software design.
+                </p>
+                <div class="hero-actions">
+                    <a class="button" href="#featured">See my work</a>
+                    <a class="button button-ghost" href="#contact">Get in touch</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="featured" aria-labelledby="featured-title">
+            <h2 id="featured-title">Featured projects</h2>
+            <div class="card-grid" id="featured-grid" aria-live="polite">
+                <p class="status">Loading projects…</p>
+            </div>
+        </section>
+
+        <section class="section section-alt" id="projects" aria-labelledby="projects-title">
+            <h2 id="projects-title">All projects</h2>
+            <div class="filters">
+                <div class="chips" id="type-filters" role="group" aria-label="Filter by type"></div>
+                <label class="tag-filter">
+                    <span>Technology</span>
+                    <select id="tag-filter"><option value="">All</option></select>
+                </label>
+            </div>
+            <p class="status" id="result-count" aria-live="polite"></p>
+            <div class="card-grid" id="project-grid"></div>
+        </section>
+
+        <section class="section" id="about" aria-labelledby="about-title">
+            <h2 id="about-title">About</h2>
+            <div class="about-grid">
+                <div>
+                    <h3>Education</h3>
+                    <p><strong>BSc Computer Science</strong><br>University of Westminster</p>
+                    <p>Modules across software development, algorithms, databases, AI, data science,
+                    mobile development and cyber security.</p>
+                </div>
+                <div>
+                    <h3>Languages</h3>
+                    <ul class="pill-list">
+                        <li>Swift</li><li>Python</li><li>Java</li><li>C++</li><li>R</li><li>SQL</li>
+                    </ul>
+                    <h3>Tools and frameworks</h3>
+                    <ul class="pill-list">
+                        <li>SwiftUI</li><li>Core ML</li><li>TensorFlow</li><li>Keras</li>
+                        <li>scikit-learn</li><li>Maven</li><li>Git</li><li>Xcode</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="section section-alt" id="contact" aria-labelledby="contact-title">
+            <h2 id="contact-title">Contact</h2>
+            <p>Interested in working together or want to know more about a project? Get in touch.</p>
+            <ul class="contact-list" id="contact-list">
+                <li><a href="https://github.com/Autumn326" rel="noopener">GitHub</a></li>
+                <!-- LinkedIn, email and CV are added by script.js from SITE_LINKS when filled in -->
+            </ul>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <p>&copy; <span id="year">2026</span> Michael Chen. Built with plain HTML, CSS and JavaScript on GitHub Pages.</p>
+        <p><a href="#top">Back to top</a></p>
+    </footer>
 </body>
 </html>
