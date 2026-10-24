@@ -55,6 +55,24 @@ for i, p in enumerate(projects):
             if url and not (url.startswith("https://") or url.startswith("pages/")):
                 errors.append(f"{name}: links.{key} must be https:// or a local pages/ path")
 
+    images = p.get("images", [])
+    if not isinstance(images, list):
+        errors.append(f"{name}: 'images' must be a list")
+    else:
+        for n, img in enumerate(images, 1):
+            src = img if isinstance(img, str) else (img.get("src") if isinstance(img, dict) else None)
+            if not src or not isinstance(src, str):
+                errors.append(f"{name}: image {n} needs a path (string or object with 'src')")
+            elif not src.startswith("images/"):
+                errors.append(f"{name}: image {n} path must start with images/")
+            elif not (PATH.parent.parent / src).is_file():
+                errors.append(f"{name}: image file not found: {src}")
+            elif isinstance(img, dict) and not img.get("alt"):
+                errors.append(f"{name}: image {n} needs 'alt' text")
+    thumb = p.get("thumbnail", "")
+    if thumb and not (thumb.startswith("images/") and (PATH.parent.parent / thumb).is_file()):
+        errors.append(f"{name}: thumbnail must be an existing file under images/")
+
 if errors:
     print("projects.json problems:")
     print("\n".join(f"  - {e}" for e in errors))
