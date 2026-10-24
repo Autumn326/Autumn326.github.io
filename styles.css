@@ -175,10 +175,9 @@ h1, h2, h3 { line-height: 1.2; }
 .tag-filter { display: flex; align-items: center; gap: 0.5rem; }
 .tag-filter select { font: inherit; padding: 0.35rem 0.6rem; border-radius: 8px; border: 1px solid var(--color-border); }
 
-/* ---------- About / contact ---------- */
+/* ---------- About ---------- */
 .about-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 2rem; }
 .about-grid h3 { margin-top: 0; }
-.contact-list { list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: 0.75rem 1.5rem; font-weight: 600; }
 
 /* ---------- Footer ---------- */
 .site-footer {
