@@ -13,7 +13,7 @@ The page loads `data/projects.json`, so open it through a local server rather th
 
     python -m http.server 8000
 
-then visit http://localhost:8000.
+then visit `http://localhost:8000`.
 
 ## Rules
 
