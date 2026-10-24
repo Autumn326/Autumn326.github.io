@@ -15,10 +15,10 @@ Static site for GitHub Pages (no login, no database). All projects come from `pr
 
 ## Phase 2: Shared template and data
 - [ ] You fill in `projects.json` (links, images, thumbnails, what I learned)
-- [ ] One project page template that reads a project by id
-- [ ] Optional sections hidden when empty: summary, features, tech tags, YouTube embed, screenshots, write-up link, what I learned
-- [ ] Reduced-motion and keyboard basics built in
-- [ ] "Add a new project" steps written down (one JSON entry plus images)
+- [x] One project page template that reads a project by id
+- [x] Optional sections hidden when empty: summary, features, tech tags, YouTube embed, screenshots, write-up link, what I learned
+- [x] Reduced-motion and keyboard basics built in
+- [x] "Add a new project" steps written down (one JSON entry plus images)
 
 ## Phase 3: Content, one checklist per project
 Each project: [ ] confirm summary and dates  [ ] pick screenshots/diagrams  [ ] YouTube link  [ ] key features  [ ] "what I learned"  [ ] remove IDs/code  [ ] thumbnail

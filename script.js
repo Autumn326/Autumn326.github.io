@@ -13,7 +13,19 @@ function buildCard(project, featured) {
     const card = el("article", featured ? "card featured-card" : "card");
     card.dataset.id = project.id;
     card.appendChild(el("span", "card-badge", project.type.replace("-", " ")));
-    card.appendChild(el("h3", "", project.title));
+    if (project.thumbnail) {
+        const img = document.createElement("img");
+        img.className = "card-thumb";
+        img.src = project.thumbnail;
+        img.alt = "";
+        img.loading = "lazy";
+        card.appendChild(img);
+    }
+    const heading = el("h3");
+    const link = el("a", "card-link", project.title);
+    link.href = `project.html?id=${encodeURIComponent(project.id)}`;
+    heading.appendChild(link);
+    card.appendChild(heading);
     const meta = [project.date, project.course].filter(Boolean).join(" · ");
     if (meta) card.appendChild(el("p", "card-meta", meta));
     card.appendChild(el("p", "card-summary", project.summary));
