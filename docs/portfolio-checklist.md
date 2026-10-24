@@ -68,7 +68,15 @@ I will review each project's files when we reach it and suggest the highlights w
 - [ ] AI graph: dark background, node-and-edge pattern, charts as hero
 - [ ] Terminal/blueprint: monospace type, diagrams up front
 - [ ] Apply theme per project (one by one, Sign Finder gets the full showcase)
-- [ ] Check contrast and reduced-motion for every theme
+- [ ] Animation tokens in one place (durations, easing, distances) so every theme can tune them
+- [ ] Hover and focus effects: card lift and soft shadow, button and link transitions, screenshot frame zoom (CSS transitions only)
+- [ ] Scroll reveal: sections and project cards fade and slide in once, using IntersectionObserver plus a small CSS class
+- [ ] Page load: gentle hero fade-in and staggered featured cards
+- [ ] Per-theme motion: `apple` smooth springy lifts, `ai-graph` slow drifting node-and-edge background, `terminal` typing cursor or blink on the hero line
+- [ ] Animate only `transform` and `opacity`, keep each effect short (about 150 to 500 ms), no animation libraries or heavy video backgrounds (GitHub Pages friendly)
+- [ ] Respect `prefers-reduced-motion`: disable reveals, drift and typing, show content immediately, keep simple colour changes
+- [ ] Content must stay visible and usable without JavaScript (reveal classes added by JS only)
+- [ ] Check contrast and reduced-motion (including the animations above) for every theme
 
 ## Phase 5: Polish and launch
 - [ ] Phone, tablet and desktop checks
