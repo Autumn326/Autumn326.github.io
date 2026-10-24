@@ -1,10 +1,3 @@
-// Fill these in when ready. Empty values are hidden from the page.
-const SITE_LINKS = {
-    linkedin: "",
-    email: "",
-    cv: ""
-};
-
 const PROJECTS_URL = "data/projects.json";
 
 const state = { projects: [], type: "", tag: "" };
@@ -72,24 +65,8 @@ function renderFilters() {
     select.value = state.tag;
 }
 
-function renderContact() {
-    const list = document.getElementById("contact-list");
-    const add = (label, href) => {
-        const li = el("li");
-        const a = el("a", "", label);
-        a.href = href;
-        a.rel = "noopener";
-        li.appendChild(a);
-        list.appendChild(li);
-    };
-    if (SITE_LINKS.linkedin) add("LinkedIn", SITE_LINKS.linkedin);
-    if (SITE_LINKS.email) add("Email", "mailto:" + SITE_LINKS.email);
-    if (SITE_LINKS.cv) add("CV", SITE_LINKS.cv);
-}
-
 async function init() {
     document.getElementById("year").textContent = new Date().getFullYear();
-    renderContact();
     document.getElementById("tag-filter").addEventListener("change", e => {
         state.tag = e.target.value;
         renderGrid();

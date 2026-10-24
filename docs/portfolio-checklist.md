@@ -3,16 +3,15 @@
 Static site for GitHub Pages (no login, no database). All projects come from `projects.json`. Rules: no full source code, no student ID anywhere, videos are YouTube embeds.
 
 ## Phase 1: Home page basics
-- [ ] Choose site name, tagline and short intro
-- [ ] Create GitHub repo and enable GitHub Pages
-- [ ] Page skeleton: nav bar, footer, responsive layout
-- [ ] Colour and font tokens in one place (for the later theme pass)
-- [ ] Hero / intro section
-- [ ] Featured projects row (from `featured: true`)
-- [ ] Full project grid built from `projects.json`, with filter by type/tag
-- [ ] About section (education, skills, languages and tools)
-- [ ] Contact and links (GitHub, LinkedIn, email)
-- [ ] CV link (optional)
+- [x] Choose site name, tagline and short intro
+- [x] Create GitHub repo and enable GitHub Pages
+- [x] Page skeleton: nav bar, footer, responsive layout
+- [x] Colour and font tokens in one place (for the later theme pass)
+- [x] Hero / intro section
+- [x] Featured projects row (from `featured: true`)
+- [x] Full project grid built from `projects.json`, with filter by type/tag
+- [x] About section (education, skills, languages and tools)
+- [x] CV link (optional)
 
 ## Phase 2: Shared template and data
 - [ ] You fill in `projects.json` (links, images, thumbnails, what I learned)
