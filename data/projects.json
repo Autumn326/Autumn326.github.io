@@ -40,14 +40,14 @@
       "notes": "",
       "showcase": [
         {
-          "kind": "video",
-          "title": "Demo: photo scan and live scan",
-          "brief": "Screen recording on a real iPhone: pick a photo, tap Scan, then switch to Live Scan and point at signs. 60-90 s, upload to YouTube and paste the ID into links.youtube.",
-          "file": "(YouTube)",
+          "kind": "clip",
+          "title": "Clip: tap Scan and the boxes appear",
+          "brief": "6 s max, muted screen recording: pick a photo, tap Scan, boxes and labels appear.",
+          "file": "videos/sign-finder/scan.mp4",
           "src": "",
           "alt": "",
           "caption": "",
-          "youtube": ""
+          "poster": ""
         },
         {
           "kind": "screenshot",
@@ -129,6 +129,16 @@
           "src": "",
           "alt": "",
           "caption": ""
+        },
+        {
+          "kind": "clip",
+          "title": "Clip: live scan on a sign",
+          "brief": "6 s max: camera pointed at a sign, box and label appear.",
+          "file": "videos/sign-finder/live-scan.mp4",
+          "src": "",
+          "alt": "",
+          "caption": "",
+          "poster": ""
         }
       ]
     },
@@ -208,6 +218,16 @@
           "src": "",
           "alt": "",
           "caption": ""
+        },
+        {
+          "kind": "clip",
+          "title": "Clip: solve the hardest puzzle",
+          "brief": "6 s max: enter the puzzle and press Solve.",
+          "file": "videos/sudoku-solver/solve.mp4",
+          "src": "",
+          "alt": "",
+          "caption": "",
+          "poster": ""
         }
       ]
     },
@@ -299,14 +319,14 @@
           "caption": ""
         },
         {
-          "kind": "video",
-          "title": "Short demo (optional)",
-          "brief": "30-60 s screen recording: buy, view seat map, cancel, save, reload.",
-          "file": "(YouTube)",
+          "kind": "clip",
+          "title": "Clip: buy a ticket and see the seat update",
+          "brief": "6 s max: buy a ticket, then print the seat map showing it booked.",
+          "file": "videos/theatre-booking-cpp/buy.mp4",
           "src": "",
           "alt": "",
           "caption": "",
-          "youtube": ""
+          "poster": ""
         }
       ]
     },
@@ -345,14 +365,14 @@
       "notes": "",
       "showcase": [
         {
-          "kind": "video",
-          "title": "Demo walkthrough",
-          "brief": "Simulator recording: current weather, hourly/daily, map, tap an attraction, save a place, swipe to refresh. 60-90 s on YouTube.",
-          "file": "(YouTube)",
+          "kind": "clip",
+          "title": "Clip: tap an attraction, map recentres",
+          "brief": "6 s max: tap an attraction in the list and the map recentres on it.",
+          "file": "videos/ios-weather-app/recentre.mp4",
           "src": "",
           "alt": "",
           "caption": "",
-          "youtube": ""
+          "poster": ""
         },
         {
           "kind": "screenshot",
@@ -407,6 +427,16 @@
           "src": "",
           "alt": "",
           "caption": ""
+        },
+        {
+          "kind": "clip",
+          "title": "Clip: swipe a saved place to refresh",
+          "brief": "6 s max: swipe right on a saved place and tap the blue refresh button.",
+          "file": "videos/ios-weather-app/swipe-refresh.mp4",
+          "src": "",
+          "alt": "",
+          "caption": "",
+          "poster": ""
         }
       ]
     },
@@ -489,16 +519,6 @@
           "src": "",
           "alt": "",
           "caption": ""
-        },
-        {
-          "kind": "video",
-          "title": "Video explanation (if you have one)",
-          "brief": "The notebook has an empty Video Link; if you recorded one, add the YouTube ID here.",
-          "file": "(YouTube)",
-          "src": "",
-          "alt": "",
-          "caption": "",
-          "youtube": ""
         }
       ]
     },
@@ -624,14 +644,14 @@
       "notes": "",
       "showcase": [
         {
-          "kind": "video",
-          "title": "API demo",
-          "brief": "Your existing demo video, uploaded to YouTube (the 354 MB file must not go in the repo).",
-          "file": "(YouTube)",
+          "kind": "clip",
+          "title": "Clip: one request and its JSON response",
+          "brief": "6 s max: send a request in the client and show the response.",
+          "file": "videos/health-system-api/request.mp4",
           "src": "",
           "alt": "",
           "caption": "",
-          "youtube": ""
+          "poster": ""
         },
         {
           "kind": "screenshot",

@@ -2,10 +2,10 @@
 
 Generated from the `showcase` slots in `data/projects.json`. Preview empty slots on a project page with `?preview=1`, e.g. `project.html?id=sign-finder&preview=1`.
 
-Rules: images under about 500 KB; code images show a short key idea only (about 6 to 20 lines), never a whole file; crop out any student ID, university name, IPs or credentials; fill in `src`, `alt` and `caption` in the slot when the image is added (videos: paste the YouTube ID into `youtube`).
+Rules: images under about 500 KB. Code images show a short key idea only (about 6 to 20 lines), never a whole file. Clips (`kind: clip`) are 6 seconds max, muted, MP4 (H.264) or WebM, 720p or lower, under 5 MB, saved under `videos/<project>/`; they play muted and looped with controls, and do not autoplay when reduced motion is on. Full demos stay on YouTube (`kind: video`, paste the ID into `youtube`). Crop out any student ID, university name, IPs or credentials. When media is added, fill in `src`, `alt` and `caption` on the slot.
 
 ## Sign Finder (`sign-finder`)
-- [ ] **video: Demo: photo scan and live scan**. Screen recording on a real iPhone: pick a photo, tap Scan, then switch to Live Scan and point at signs. 60-90 s, upload to YouTube and paste the ID into links.youtube. Save as `(YouTube)`.
+- [ ] **clip: Clip: tap Scan and the boxes appear**. 6 s max, muted screen recording: pick a photo, tap Scan, boxes and labels appear. Save as `videos/sign-finder/scan.mp4`.
 - [ ] **screenshot: Photo scan with bounding boxes**. Scan tab with a photo containing 2+ signs, boxes, labels and the confidence list visible. This is the hero shot. Save as `images/sign-finder/scan.png`.
 - [ ] **screenshot: Live scan**. Live Scan tab with a box drawn on a sign in the camera feed. Save as `images/sign-finder/live-scan.png`.
 - [ ] **screenshot: Sign info and settings**. Info tab with a category expanded, and the Settings picker for quality and frame interval (side by side in one image). Save as `images/sign-finder/info-settings.png`.
@@ -15,6 +15,7 @@ Rules: images under about 500 KB; code images show a short key idea only (about 
 - [ ] **code: Run the model on every Nth frame**. ScanView/LiveScanViewModel: the frameCounter % frameProcessingInterval guard plus the VNCoreMLRequest. About 12 lines. Shows how battery use is controlled. Save as `images/sign-finder/code-live-frames.png`.
 - [ ] **code: Boxes in the right place**. The GeometryReader + ZStack block in ScanView that converts Vision's normalised boxes to screen coordinates. About 15 lines. Save as `images/sign-finder/code-boxes.png`.
 - [ ] **code: Pascal VOC to Create ML boxes**. The small conversion from corner coordinates to centre + width/height. About 8 lines. Save as `images/sign-finder/code-convert.png`.
+- [ ] **clip: Clip: live scan on a sign**. 6 s max: camera pointed at a sign, box and label appear. Save as `videos/sign-finder/live-scan.mp4`.
 
 ## Sudoku Solver (`sudoku-solver`)
 - [ ] **screenshot: The app solving a puzzle**. App window with the hardest puzzle entered and solved. Save as `images/sudoku-solver/app.png`.
@@ -22,6 +23,7 @@ Rules: images under about 500 KB; code images show a short key idea only (about 
 - [ ] **code: Search: fewest candidates first**. solver.py search(): choose the square with the fewest options, try each on a copy. About 12 lines. Save as `images/sudoku-solver/code-search.png`.
 - [ ] **screenshot: Tests passing and timing**. Terminal after `python3 test_solver.py` showing tests pass and the timings table. Save as `images/sudoku-solver/tests.png`.
 - [ ] **diagram: Candidates before and after propagation**. Two grids side by side for one puzzle: all candidates at the start, remaining candidates after propagation (even a hand-made image works). Save as `images/sudoku-solver/propagation.png`.
+- [ ] **clip: Clip: solve the hardest puzzle**. 6 s max: enter the puzzle and press Solve. Save as `videos/sudoku-solver/solve.mp4`.
 
 ## Theatre Booking System (C++) (`theatre-booking-cpp`)
 - [ ] **screenshot: Main menu**. Console showing the numbered menu (buy, seat map, cancel, list, save, load, tickets, sort, quit). Save as `images/theatre-booking-cpp/menu.png`.
@@ -30,16 +32,17 @@ Rules: images under about 500 KB; code images show a short key idea only (about 
 - [ ] **diagram: Class diagram**. Boxes for Ticket, Person, Row, Auditorium and the SeatState enum with their relationships (draw.io is fine). Save as `images/theatre-booking-cpp/classes.png`.
 - [ ] **code: Row::book and cancel**. Row.cpp book() and cancel(): rules live in one place. About 10 lines. Save as `images/theatre-booking-cpp/code-row.png`.
 - [ ] **code: A Catch test**. One test, for example booking an already-booked seat fails. About 8 lines. Save as `images/theatre-booking-cpp/code-test.png`.
-- [ ] **video: Short demo (optional)**. 30-60 s screen recording: buy, view seat map, cancel, save, reload. Save as `(YouTube)`.
+- [ ] **clip: Clip: buy a ticket and see the seat update**. 6 s max: buy a ticket, then print the seat map showing it booked. Save as `videos/theatre-booking-cpp/buy.mp4`.
 
 ## iOS Weather App (`ios-weather-app`)
-- [ ] **video: Demo walkthrough**. Simulator recording: current weather, hourly/daily, map, tap an attraction, save a place, swipe to refresh. 60-90 s on YouTube. Save as `(YouTube)`.
+- [ ] **clip: Clip: tap an attraction, map recentres**. 6 s max: tap an attraction in the list and the map recentres on it. Save as `videos/ios-weather-app/recentre.mp4`.
 - [ ] **screenshot: Current weather and air quality**. Current weather screen. Save as `images/ios-weather-app/current.png`.
 - [ ] **screenshot: Hourly and daily forecast**. Forecast screens side by side. Save as `images/ios-weather-app/forecast.png`.
 - [ ] **screenshot: Map of attractions**. Map with annotations and the attraction list. Save as `images/ios-weather-app/map.png`.
 - [ ] **screenshot: Visited places with swipe action**. Visited places list with the blue swipe-to-refresh button showing. Save as `images/ios-weather-app/visited-swipe.png`.
 - [ ] **code: Tap to recentre the map (my enhancement)**. The tap gesture in the map/list view that updates the map region. About 8 lines. Save as `images/ios-weather-app/code-recentre.png`.
 - [ ] **code: Swipe to refresh a saved place (my enhancement)**. The swipeActions block in VisitedPlacesView. About 10 lines. Save as `images/ios-weather-app/code-swipe.png`.
+- [ ] **clip: Clip: swipe a saved place to refresh**. 6 s max: swipe right on a saved place and tap the blue refresh button. Save as `videos/ios-weather-app/swipe-refresh.mp4`.
 
 ## Applied AI: RNN Sentiment Analysis (`applied-ai-rnn`)
 - [ ] **diagram: RNN diagram**. Your compact and expanded RNN diagrams from the notebook, as one image. Save as `images/applied-ai-rnn/rnn-diagram.png`.
@@ -47,7 +50,6 @@ Rules: images under about 500 KB; code images show a short key idea only (about 
 - [ ] **screenshot: Training output**. Epoch log showing accuracy and loss rising/falling. Save as `images/applied-ai-rnn/training.png`.
 - [ ] **screenshot: Confusion matrix**. Cropped matrix plot showing the bias toward negative. Save as `images/applied-ai-rnn/confusion.png`.
 - [ ] **screenshot: Predicting new text**. predict_sentiment on two or three sentences with outputs. Save as `images/applied-ai-rnn/predict.png`.
-- [ ] **video: Video explanation (if you have one)**. The notebook has an empty Video Link; if you recorded one, add the YouTube ID here. Save as `(YouTube)`.
 
 ## Applied Robotics: Q-Learning Taxi (`applied-robotics-qlearning`)
 - [ ] **screenshot: Learning curve**. Total reward per episode plot, rising then flattening near episode 250. Save as `images/applied-robotics-qlearning/learning-curve.png`.
@@ -58,7 +60,7 @@ Rules: images under about 500 KB; code images show a short key idea only (about 
 - [ ] **screenshot: 1000 random environments test**. Output of testMultipleEnvs with the average reward. Save as `images/applied-robotics-qlearning/random-envs.png`.
 
 ## Health System REST API (`health-system-api`)
-- [ ] **video: API demo**. Your existing demo video, uploaded to YouTube (the 354 MB file must not go in the repo). Save as `(YouTube)`.
+- [ ] **clip: Clip: one request and its JSON response**. 6 s max: send a request in the client and show the response. Save as `videos/health-system-api/request.mp4`.
 - [ ] **screenshot: Calling an endpoint**. A client (Postman or similar) calling GET all doctors and a create call, showing the JSON. Save as `images/health-system-api/request.png`.
 - [ ] **diagram: Resource map**. A table or diagram of the 6 resources and their create/read/update/delete paths. Save as `images/health-system-api/resources.png`.
 - [ ] **diagram: Layers**. Resource -> DAO -> model, with exception mappers on the side. Save as `images/health-system-api/layers.png`.

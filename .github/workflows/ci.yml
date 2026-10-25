@@ -14,6 +14,12 @@ jobs:
       - name: Validate projects.json
         run: python3 scripts/validate_projects.py
 
+      - name: Check media sizes
+        run: |
+          big=$(find images videos -type f -size +5M 2>/dev/null || true)
+          if [ -n "$big" ]; then echo "Files over 5 MB (trim them):"; echo "$big"; exit 1; fi
+          echo "Media sizes OK."
+
       - name: Scan for student IDs
         run: bash scripts/scan_student_ids.sh
 

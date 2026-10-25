@@ -7,7 +7,9 @@ from pathlib import Path
 
 PATH = Path(__file__).resolve().parent.parent / "data" / "projects.json"
 TYPES = {"mobile-app", "ai", "data", "algorithm", "systems", "backend", "database", "security", "early"}
-KINDS = {"screenshot", "code", "diagram", "video"}
+KINDS = {"screenshot", "code", "diagram", "video", "clip"}
+CLIP_EXT = (".mp4", ".webm")
+MAX_CLIP_BYTES = 5 * 1024 * 1024  # a 6 second clip should be well under this
 THEMES = {"apple", "ai-graph", "terminal"}
 LINK_KEYS = {"youtube", "github", "writeup", "demo"}
 REQUIRED = ["id", "title", "type", "theme", "featured", "date", "summary", "tags", "features", "links"]
@@ -79,7 +81,19 @@ for i, p in enumerate(projects):
                 errors.append(f"{name}: showcase {n} needs a 'kind' of {sorted(KINDS)}")
                 continue
             src = item.get("src", "")
-            if src:
+            if item.get("kind") == "clip":
+                if src:
+                    f = PATH.parent.parent / src
+                    if not (src.startswith("videos/") and src.lower().endswith(CLIP_EXT) and f.is_file()):
+                        errors.append(f"{name}: showcase {n} clip src must be an existing .mp4/.webm under videos/")
+                    elif f.stat().st_size > MAX_CLIP_BYTES:
+                        errors.append(f"{name}: showcase {n} clip is over 5 MB; trim to 6 s or lower the resolution")
+                    elif not item.get("alt"):
+                        errors.append(f"{name}: showcase {n} needs 'alt' text describing the clip")
+                poster = item.get("poster", "")
+                if poster and not (poster.startswith("images/") and (PATH.parent.parent / poster).is_file()):
+                    errors.append(f"{name}: showcase {n} poster must be an existing file under images/")
+            elif src:
                 if not src.startswith("images/") or not (PATH.parent.parent / src).is_file():
                     errors.append(f"{name}: showcase {n} src must be an existing file under images/")
                 elif not item.get("alt"):

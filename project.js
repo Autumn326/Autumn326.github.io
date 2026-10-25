@@ -54,12 +54,13 @@ function normaliseImages(project) {
 // Showcase slots: planned highlights (screenshot, code snippet image, diagram, video).
 // A slot with media is always shown; an empty slot only appears with ?preview=1 so
 // the live site never shows unfinished boxes.
-const SHOWCASE_KINDS = { screenshot: "Screenshot", code: "Code snippet", diagram: "Diagram", video: "Video" };
+const SHOWCASE_KINDS = { screenshot: "Screenshot", code: "Code snippet", diagram: "Diagram", video: "Video", clip: "Short clip" };
 
 function renderShowcaseItem(item, project, preview) {
     const kind = SHOWCASE_KINDS[item.kind] ? item.kind : "screenshot";
     const vid = kind === "video" ? youtubeId(item.youtube) : null;
     const hasMedia = vid || (kind !== "video" && item.src);
+    const isClip = kind === "clip" && item.src;
     if (!hasMedia && !preview) return null;
 
     const fig = el("figure", `showcase-item showcase-${kind}`);
@@ -74,6 +75,19 @@ function renderShowcaseItem(item, project, preview) {
         frame.allowFullscreen = true;
         wrap.appendChild(frame);
         fig.appendChild(wrap);
+    } else if (isClip) {
+        // Short local clip (6 s max): muted, looping, native controls, no autoplay if reduced motion is on.
+        const v = document.createElement("video");
+        v.src = item.src;
+        if (item.poster) v.poster = item.poster;
+        v.muted = true;
+        v.loop = true;
+        v.playsInline = true;
+        v.controls = true;
+        v.preload = "metadata";
+        v.setAttribute("aria-label", item.alt || item.title || `${project.title} clip`);
+        if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) v.autoplay = true;
+        fig.appendChild(v);
     } else if (hasMedia) {
         const pic = document.createElement("img");
         pic.src = item.src;
