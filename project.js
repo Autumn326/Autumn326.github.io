@@ -82,6 +82,7 @@ function renderProject(project, root) {
     const desc = document.querySelector('meta[name="description"]');
     if (desc) desc.content = project.summary;
     if (project.theme) document.body.dataset.theme = project.theme;
+    document.body.dataset.type = project.type;
 
     // Header: always shown
     const head = el("header", "project-head");
@@ -150,6 +151,8 @@ function renderProject(project, root) {
         project.whatILearned.split(/\n{2,}/).forEach(p => s.appendChild(el("p", "", p)));
         root.appendChild(s);
     }
+
+    if (window.revealOnScroll) window.revealOnScroll(root.querySelectorAll(".project-section"));
 }
 
 function renderNotFound(root, message) {

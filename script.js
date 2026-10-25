@@ -12,6 +12,7 @@ function el(tag, className, text) {
 function buildCard(project, featured) {
     const card = el("article", featured ? "card featured-card" : "card");
     card.dataset.id = project.id;
+    card.dataset.theme = project.theme;
     card.appendChild(el("span", "card-badge", project.type.replace("-", " ")));
     if (project.thumbnail) {
         const img = document.createElement("img");
@@ -39,6 +40,11 @@ function renderFeatured() {
     const grid = document.getElementById("featured-grid");
     grid.replaceChildren();
     state.projects.filter(p => p.featured).forEach(p => grid.appendChild(buildCard(p, true)));
+    revealCards(grid);
+}
+
+function revealCards(container) {
+    if (window.revealOnScroll) window.revealOnScroll(container.querySelectorAll(".card"));
 }
 
 function renderGrid() {
@@ -48,6 +54,7 @@ function renderGrid() {
         (!state.type || p.type === state.type) &&
         (!state.tag || (p.tags || []).includes(state.tag)));
     shown.forEach(p => grid.appendChild(buildCard(p, false)));
+    revealCards(grid);
     document.getElementById("result-count").textContent =
         shown.length === 0 ? "No projects match these filters."
         : `Showing ${shown.length} of ${state.projects.length} projects`;
