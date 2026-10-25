@@ -50,45 +50,50 @@
           "title": "Live scan",
           "brief": "Live Scan tab with a box drawn on a sign in the camera feed.",
           "file": "images/sign-finder/live-scan.png",
-          "src": "",
-          "alt": "",
-          "caption": ""
+          "src": "images/sign-finder/live-scan.png",
+          "alt": "Placeholder cartoon of a cat sleeping on a laptop, standing in for: Live scan",
+          "caption": "Placeholder: Live scan",
+          "placeholder": true
         },
         {
           "kind": "screenshot",
           "title": "Sign info and settings",
           "brief": "Info tab with a category expanded, and the Settings picker for quality and frame interval (side by side in one image).",
           "file": "images/sign-finder/info-settings.png",
-          "src": "",
-          "alt": "",
-          "caption": ""
+          "src": "images/sign-finder/info-settings.png",
+          "alt": "Placeholder cartoon of a cat sleeping on a laptop, standing in for: Sign info and settings",
+          "caption": "Placeholder: Sign info and settings",
+          "placeholder": true
         },
         {
           "kind": "diagram",
           "title": "Pipeline: data to app",
           "brief": "Simple redrawn flow: public datasets + own LabelImg photos -> Python merge/convert -> Create ML (YOLOv2) -> Core ML in SwiftUI. Redraw rather than using report figures that carry report headers.",
           "file": "images/sign-finder/pipeline.png",
-          "src": "",
-          "alt": "",
-          "caption": ""
+          "src": "images/sign-finder/pipeline.png",
+          "alt": "Placeholder cartoon of a cat sleeping on a laptop, standing in for: Pipeline: data to app",
+          "caption": "Placeholder: Pipeline: data to app",
+          "placeholder": true
         },
         {
           "kind": "screenshot",
           "title": "Annotating in LabelImg",
           "brief": "LabelImg with boxes drawn on one of your own photos (shows the dataset work).",
           "file": "images/sign-finder/labelimg.png",
-          "src": "",
-          "alt": "",
-          "caption": ""
+          "src": "images/sign-finder/labelimg.png",
+          "alt": "Placeholder cartoon of a cat sleeping on a laptop, standing in for: Annotating in LabelImg",
+          "caption": "Placeholder: Annotating in LabelImg",
+          "placeholder": true
         },
         {
           "kind": "screenshot",
           "title": "Model evaluation",
           "brief": "Create ML evaluation/test-scan view or the CNN confusion matrix, cropped to the chart only.",
           "file": "images/sign-finder/evaluation.png",
-          "src": "",
-          "alt": "",
-          "caption": ""
+          "src": "images/sign-finder/evaluation.png",
+          "alt": "Placeholder cartoon of a cat sleeping on a laptop, standing in for: Model evaluation",
+          "caption": "Placeholder: Model evaluation",
+          "placeholder": true
         },
         {
           "kind": "code",
@@ -286,9 +291,10 @@
           "title": "The app solving a puzzle",
           "brief": "App window with the hardest puzzle entered and solved.",
           "file": "images/sudoku-solver/app.png",
-          "src": "",
-          "alt": "",
-          "caption": ""
+          "src": "images/sudoku-solver/app.png",
+          "alt": "Placeholder cartoon of a cat sleeping on a laptop, standing in for: The app solving a puzzle",
+          "caption": "Placeholder: The app solving a puzzle",
+          "placeholder": true
         },
         {
           "kind": "code",
@@ -313,28 +319,31 @@
           "title": "Tests passing and timing",
           "brief": "Terminal after `python3 test_solver.py` showing tests pass and the timings table.",
           "file": "images/sudoku-solver/tests.png",
-          "src": "",
-          "alt": "",
-          "caption": ""
+          "src": "images/sudoku-solver/tests.png",
+          "alt": "Placeholder cartoon of a cat sleeping on a laptop, standing in for: Tests passing and timing",
+          "caption": "Placeholder: Tests passing and timing",
+          "placeholder": true
         },
         {
           "kind": "diagram",
           "title": "Candidates before and after propagation",
           "brief": "Two grids side by side for one puzzle: all candidates at the start, remaining candidates after propagation (even a hand-made image works).",
           "file": "images/sudoku-solver/propagation.png",
-          "src": "",
-          "alt": "",
-          "caption": ""
+          "src": "images/sudoku-solver/propagation.png",
+          "alt": "Placeholder cartoon of a cat sleeping on a laptop, standing in for: Candidates before and after propagation",
+          "caption": "Placeholder: Candidates before and after propagation",
+          "placeholder": true
         },
         {
           "kind": "clip",
           "title": "Clip: solve the hardest puzzle",
           "brief": "6 s max: enter the puzzle and press Solve.",
           "file": "videos/sudoku-solver/solve.mp4",
-          "src": "",
-          "alt": "",
-          "caption": "",
-          "poster": ""
+          "src": "videos/sudoku-solver/solve.mp4",
+          "alt": "Placeholder clip of a cat snoring, standing in for: Clip: solve the hardest puzzle",
+          "caption": "Placeholder: Clip: solve the hardest puzzle",
+          "poster": "",
+          "placeholder": true
         }
       ],
       "story": [
@@ -470,36 +479,40 @@
           "title": "Main menu",
           "brief": "Console showing the numbered menu (buy, seat map, cancel, list, save, load, tickets, sort, quit).",
           "file": "images/theatre-booking-cpp/menu.png",
-          "src": "",
-          "alt": "",
-          "caption": ""
+          "src": "images/theatre-booking-cpp/menu.png",
+          "alt": "Placeholder cartoon of a cat sleeping on a laptop, standing in for: Main menu",
+          "caption": "Placeholder: Main menu",
+          "placeholder": true
         },
         {
           "kind": "screenshot",
           "title": "Seat map with bookings",
           "brief": "Seat map after booking a few seats, in the console.",
           "file": "images/theatre-booking-cpp/seat-map.png",
-          "src": "",
-          "alt": "",
-          "caption": ""
+          "src": "images/theatre-booking-cpp/seat-map.png",
+          "alt": "Placeholder cartoon of a cat sleeping on a laptop, standing in for: Seat map with bookings",
+          "caption": "Placeholder: Seat map with bookings",
+          "placeholder": true
         },
         {
           "kind": "screenshot",
           "title": "Catch tests passing",
           "brief": "Terminal output of run_tests showing all 9 test cases passing.",
           "file": "images/theatre-booking-cpp/tests.png",
-          "src": "",
-          "alt": "",
-          "caption": ""
+          "src": "images/theatre-booking-cpp/tests.png",
+          "alt": "Placeholder cartoon of a cat sleeping on a laptop, standing in for: Catch tests passing",
+          "caption": "Placeholder: Catch tests passing",
+          "placeholder": true
         },
         {
           "kind": "diagram",
           "title": "Class diagram",
           "brief": "Boxes for Ticket, Person, Row, Auditorium and the SeatState enum with their relationships (draw.io is fine).",
           "file": "images/theatre-booking-cpp/classes.png",
-          "src": "",
-          "alt": "",
-          "caption": ""
+          "src": "images/theatre-booking-cpp/classes.png",
+          "alt": "Placeholder cartoon of a cat sleeping on a laptop, standing in for: Class diagram",
+          "caption": "Placeholder: Class diagram",
+          "placeholder": true
         },
         {
           "kind": "code",
@@ -524,10 +537,11 @@
           "title": "Clip: buy a ticket and see the seat update",
           "brief": "6 s max: buy a ticket, then print the seat map showing it booked.",
           "file": "videos/theatre-booking-cpp/buy.mp4",
-          "src": "",
-          "alt": "",
-          "caption": "",
-          "poster": ""
+          "src": "videos/theatre-booking-cpp/buy.mp4",
+          "alt": "Placeholder clip of a cat snoring, standing in for: Clip: buy a ticket and see the seat update",
+          "caption": "Placeholder: Clip: buy a ticket and see the seat update",
+          "poster": "",
+          "placeholder": true
         }
       ],
       "story": [
@@ -649,46 +663,51 @@
           "title": "Clip: tap an attraction, map recentres",
           "brief": "6 s max: tap an attraction in the list and the map recentres on it.",
           "file": "videos/ios-weather-app/recentre.mp4",
-          "src": "",
-          "alt": "",
-          "caption": "",
-          "poster": ""
+          "src": "videos/ios-weather-app/recentre.mp4",
+          "alt": "Placeholder clip of a cat snoring, standing in for: Clip: tap an attraction, map recentres",
+          "caption": "Placeholder: Clip: tap an attraction, map recentres",
+          "poster": "",
+          "placeholder": true
         },
         {
           "kind": "screenshot",
           "title": "Current weather and air quality",
           "brief": "Current weather screen.",
           "file": "images/ios-weather-app/current.png",
-          "src": "",
-          "alt": "",
-          "caption": ""
+          "src": "images/ios-weather-app/current.png",
+          "alt": "Placeholder cartoon of a cat sleeping on a laptop, standing in for: Current weather and air quality",
+          "caption": "Placeholder: Current weather and air quality",
+          "placeholder": true
         },
         {
           "kind": "screenshot",
           "title": "Hourly and daily forecast",
           "brief": "Forecast screens side by side.",
           "file": "images/ios-weather-app/forecast.png",
-          "src": "",
-          "alt": "",
-          "caption": ""
+          "src": "images/ios-weather-app/forecast.png",
+          "alt": "Placeholder cartoon of a cat sleeping on a laptop, standing in for: Hourly and daily forecast",
+          "caption": "Placeholder: Hourly and daily forecast",
+          "placeholder": true
         },
         {
           "kind": "screenshot",
           "title": "Map of attractions",
           "brief": "Map with annotations and the attraction list.",
           "file": "images/ios-weather-app/map.png",
-          "src": "",
-          "alt": "",
-          "caption": ""
+          "src": "images/ios-weather-app/map.png",
+          "alt": "Placeholder cartoon of a cat sleeping on a laptop, standing in for: Map of attractions",
+          "caption": "Placeholder: Map of attractions",
+          "placeholder": true
         },
         {
           "kind": "screenshot",
           "title": "Visited places with swipe action",
           "brief": "Visited places list with the blue swipe-to-refresh button showing.",
           "file": "images/ios-weather-app/visited-swipe.png",
-          "src": "",
-          "alt": "",
-          "caption": ""
+          "src": "images/ios-weather-app/visited-swipe.png",
+          "alt": "Placeholder cartoon of a cat sleeping on a laptop, standing in for: Visited places with swipe action",
+          "caption": "Placeholder: Visited places with swipe action",
+          "placeholder": true
         },
         {
           "kind": "code",
@@ -713,10 +732,11 @@
           "title": "Clip: swipe a saved place to refresh",
           "brief": "6 s max: swipe right on a saved place and tap the blue refresh button.",
           "file": "videos/ios-weather-app/swipe-refresh.mp4",
-          "src": "",
-          "alt": "",
-          "caption": "",
-          "poster": ""
+          "src": "videos/ios-weather-app/swipe-refresh.mp4",
+          "alt": "Placeholder clip of a cat snoring, standing in for: Clip: swipe a saved place to refresh",
+          "caption": "Placeholder: Clip: swipe a saved place to refresh",
+          "poster": "",
+          "placeholder": true
         }
       ],
       "story": [
@@ -833,9 +853,10 @@
           "title": "RNN diagram",
           "brief": "Your compact and expanded RNN diagrams from the notebook, as one image.",
           "file": "images/applied-ai-rnn/rnn-diagram.png",
-          "src": "",
-          "alt": "",
-          "caption": ""
+          "src": "images/applied-ai-rnn/rnn-diagram.png",
+          "alt": "Placeholder cartoon of a cat sleeping on a laptop, standing in for: RNN diagram",
+          "caption": "Placeholder: RNN diagram",
+          "placeholder": true
         },
         {
           "kind": "code",
@@ -851,27 +872,30 @@
           "title": "Training output",
           "brief": "Epoch log showing accuracy and loss rising/falling.",
           "file": "images/applied-ai-rnn/training.png",
-          "src": "",
-          "alt": "",
-          "caption": ""
+          "src": "images/applied-ai-rnn/training.png",
+          "alt": "Placeholder cartoon of a cat sleeping on a laptop, standing in for: Training output",
+          "caption": "Placeholder: Training output",
+          "placeholder": true
         },
         {
           "kind": "screenshot",
           "title": "Confusion matrix",
           "brief": "Cropped matrix plot showing the bias toward negative.",
           "file": "images/applied-ai-rnn/confusion.png",
-          "src": "",
-          "alt": "",
-          "caption": ""
+          "src": "images/applied-ai-rnn/confusion.png",
+          "alt": "Placeholder cartoon of a cat sleeping on a laptop, standing in for: Confusion matrix",
+          "caption": "Placeholder: Confusion matrix",
+          "placeholder": true
         },
         {
           "kind": "screenshot",
           "title": "Predicting new text",
           "brief": "predict_sentiment on two or three sentences with outputs.",
           "file": "images/applied-ai-rnn/predict.png",
-          "src": "",
-          "alt": "",
-          "caption": ""
+          "src": "images/applied-ai-rnn/predict.png",
+          "alt": "Placeholder cartoon of a cat sleeping on a laptop, standing in for: Predicting new text",
+          "caption": "Placeholder: Predicting new text",
+          "placeholder": true
         }
       ],
       "story": [
@@ -980,54 +1004,60 @@
           "title": "Learning curve",
           "brief": "Total reward per episode plot, rising then flattening near episode 250.",
           "file": "images/applied-robotics-qlearning/learning-curve.png",
-          "src": "",
-          "alt": "",
-          "caption": ""
+          "src": "images/applied-robotics-qlearning/learning-curve.png",
+          "alt": "Placeholder cartoon of a cat sleeping on a laptop, standing in for: Learning curve",
+          "caption": "Placeholder: Learning curve",
+          "placeholder": true
         },
         {
           "kind": "screenshot",
           "title": "Taxi grid in action",
           "brief": "env.render() frame of the 5x5 grid mid-route (or a short GIF if under 500 KB).",
           "file": "images/applied-robotics-qlearning/grid.png",
-          "src": "",
-          "alt": "",
-          "caption": ""
+          "src": "images/applied-robotics-qlearning/grid.png",
+          "alt": "Placeholder cartoon of a cat sleeping on a laptop, standing in for: Taxi grid in action",
+          "caption": "Placeholder: Taxi grid in action",
+          "placeholder": true
         },
         {
           "kind": "code",
           "title": "The Q-update and reward values",
           "brief": "The Bellman update line plus the alpha/gamma/epsilon settings. About 10 lines.",
           "file": "images/applied-robotics-qlearning/code-qupdate.png",
-          "src": "",
-          "alt": "",
-          "caption": ""
+          "src": "images/applied-robotics-qlearning/code-qupdate.png",
+          "alt": "Placeholder cartoon of a cat sleeping on a laptop, standing in for: The Q-update and reward values",
+          "caption": "Placeholder: The Q-update and reward values",
+          "placeholder": true
         },
         {
           "kind": "screenshot",
           "title": "Neural network loss curve",
           "brief": "Loss curve of the MLP imitating the policy.",
           "file": "images/applied-robotics-qlearning/loss.png",
-          "src": "",
-          "alt": "",
-          "caption": ""
+          "src": "images/applied-robotics-qlearning/loss.png",
+          "alt": "Placeholder cartoon of a cat sleeping on a laptop, standing in for: Neural network loss curve",
+          "caption": "Placeholder: Neural network loss curve",
+          "placeholder": true
         },
         {
           "kind": "screenshot",
           "title": "Neural network confusion matrix",
           "brief": "Matrix showing north/west and south/east confusions.",
           "file": "images/applied-robotics-qlearning/confusion.png",
-          "src": "",
-          "alt": "",
-          "caption": ""
+          "src": "images/applied-robotics-qlearning/confusion.png",
+          "alt": "Placeholder cartoon of a cat sleeping on a laptop, standing in for: Neural network confusion matrix",
+          "caption": "Placeholder: Neural network confusion matrix",
+          "placeholder": true
         },
         {
           "kind": "screenshot",
           "title": "1000 random environments test",
           "brief": "Output of testMultipleEnvs with the average reward.",
           "file": "images/applied-robotics-qlearning/random-envs.png",
-          "src": "",
-          "alt": "",
-          "caption": ""
+          "src": "images/applied-robotics-qlearning/random-envs.png",
+          "alt": "Placeholder cartoon of a cat sleeping on a laptop, standing in for: 1000 random environments test",
+          "caption": "Placeholder: 1000 random environments test",
+          "placeholder": true
         }
       ],
       "story": [
@@ -1125,37 +1155,41 @@
           "title": "Clip: one request and its JSON response",
           "brief": "6 s max: send a request in the client and show the response.",
           "file": "videos/health-system-api/request.mp4",
-          "src": "",
-          "alt": "",
-          "caption": "",
-          "poster": ""
+          "src": "videos/health-system-api/request.mp4",
+          "alt": "Placeholder clip of a cat snoring, standing in for: Clip: one request and its JSON response",
+          "caption": "Placeholder: Clip: one request and its JSON response",
+          "poster": "",
+          "placeholder": true
         },
         {
           "kind": "screenshot",
           "title": "Calling an endpoint",
           "brief": "A client (Postman or similar) calling GET all doctors and a create call, showing the JSON.",
           "file": "images/health-system-api/request.png",
-          "src": "",
-          "alt": "",
-          "caption": ""
+          "src": "images/health-system-api/request.png",
+          "alt": "Placeholder cartoon of a cat sleeping on a laptop, standing in for: Calling an endpoint",
+          "caption": "Placeholder: Calling an endpoint",
+          "placeholder": true
         },
         {
           "kind": "diagram",
           "title": "Resource map",
           "brief": "A table or diagram of the 6 resources and their create/read/update/delete paths.",
           "file": "images/health-system-api/resources.png",
-          "src": "",
-          "alt": "",
-          "caption": ""
+          "src": "images/health-system-api/resources.png",
+          "alt": "Placeholder cartoon of a cat sleeping on a laptop, standing in for: Resource map",
+          "caption": "Placeholder: Resource map",
+          "placeholder": true
         },
         {
           "kind": "diagram",
           "title": "Layers",
           "brief": "Resource -> DAO -> model, with exception mappers on the side.",
           "file": "images/health-system-api/layers.png",
-          "src": "",
-          "alt": "",
-          "caption": ""
+          "src": "images/health-system-api/layers.png",
+          "alt": "Placeholder cartoon of a cat sleeping on a laptop, standing in for: Layers",
+          "caption": "Placeholder: Layers",
+          "placeholder": true
         },
         {
           "kind": "code",
@@ -1180,9 +1214,10 @@
           "title": "Error response",
           "brief": "Client showing the 404 JSON for a missing record.",
           "file": "images/health-system-api/error.png",
-          "src": "",
-          "alt": "",
-          "caption": ""
+          "src": "images/health-system-api/error.png",
+          "alt": "Placeholder cartoon of a cat sleeping on a laptop, standing in for: Error response",
+          "caption": "Placeholder: Error response",
+          "placeholder": true
         }
       ],
       "story": [
@@ -1304,45 +1339,50 @@
           "title": "Choosing the number of clusters",
           "brief": "Elbow, gap statistic and silhouette plots together, all pointing to 2.",
           "file": "images/r-data-science/cluster-count.png",
-          "src": "",
-          "alt": "",
-          "caption": ""
+          "src": "images/r-data-science/cluster-count.png",
+          "alt": "Placeholder cartoon of a cat sleeping on a laptop, standing in for: Choosing the number of clusters",
+          "caption": "Placeholder: Choosing the number of clusters",
+          "placeholder": true
         },
         {
           "kind": "screenshot",
           "title": "Clusters plotted",
           "brief": "The 2-cluster k-means plot (before or after PCA).",
           "file": "images/r-data-science/clusters.png",
-          "src": "",
-          "alt": "",
-          "caption": ""
+          "src": "images/r-data-science/clusters.png",
+          "alt": "Placeholder cartoon of a cat sleeping on a laptop, standing in for: Clusters plotted",
+          "caption": "Placeholder: Clusters plotted",
+          "placeholder": true
         },
         {
           "kind": "screenshot",
           "title": "Silhouette plot before and after PCA",
           "brief": "Side by side to show the improvement.",
           "file": "images/r-data-science/silhouette.png",
-          "src": "",
-          "alt": "",
-          "caption": ""
+          "src": "images/r-data-science/silhouette.png",
+          "alt": "Placeholder cartoon of a cat sleeping on a laptop, standing in for: Silhouette plot before and after PCA",
+          "caption": "Placeholder: Silhouette plot before and after PCA",
+          "placeholder": true
         },
         {
           "kind": "screenshot",
           "title": "Predicted versus actual exchange rate",
           "brief": "Scatter plot for the best network (10 and 8 nodes).",
           "file": "images/r-data-science/forecast.png",
-          "src": "",
-          "alt": "",
-          "caption": ""
+          "src": "images/r-data-science/forecast.png",
+          "alt": "Placeholder cartoon of a cat sleeping on a laptop, standing in for: Predicted versus actual exchange rate",
+          "caption": "Placeholder: Predicted versus actual exchange rate",
+          "placeholder": true
         },
         {
           "kind": "screenshot",
           "title": "Neural network model comparison",
           "brief": "The comparison table of RMSE, MAE, MAPE and sMAPE (crop out any ID).",
           "file": "images/r-data-science/nn-table.png",
-          "src": "",
-          "alt": "",
-          "caption": ""
+          "src": "images/r-data-science/nn-table.png",
+          "alt": "Placeholder cartoon of a cat sleeping on a laptop, standing in for: Neural network model comparison",
+          "caption": "Placeholder: Neural network model comparison",
+          "placeholder": true
         },
         {
           "kind": "code",
@@ -1455,36 +1495,40 @@
           "title": "Class diagram",
           "brief": "OOP_Class_UML export as PNG (check no student ID in it).",
           "file": "images/oop-shopping-manager/class-diagram.png",
-          "src": "",
-          "alt": "",
-          "caption": ""
+          "src": "images/oop-shopping-manager/class-diagram.png",
+          "alt": "Placeholder cartoon of a cat sleeping on a laptop, standing in for: Class diagram",
+          "caption": "Placeholder: Class diagram",
+          "placeholder": true
         },
         {
           "kind": "diagram",
           "title": "Use case diagram",
           "brief": "OOP_Use_Case_UML export as PNG.",
           "file": "images/oop-shopping-manager/use-case.png",
-          "src": "",
-          "alt": "",
-          "caption": ""
+          "src": "images/oop-shopping-manager/use-case.png",
+          "alt": "Placeholder cartoon of a cat sleeping on a laptop, standing in for: Use case diagram",
+          "caption": "Placeholder: Use case diagram",
+          "placeholder": true
         },
         {
           "kind": "screenshot",
           "title": "GUI with cart and discount",
           "brief": "GUI with a category selected, items in the cart and the discounted total.",
           "file": "images/oop-shopping-manager/gui.png",
-          "src": "",
-          "alt": "",
-          "caption": ""
+          "src": "images/oop-shopping-manager/gui.png",
+          "alt": "Placeholder cartoon of a cat sleeping on a laptop, standing in for: GUI with cart and discount",
+          "caption": "Placeholder: GUI with cart and discount",
+          "placeholder": true
         },
         {
           "kind": "screenshot",
           "title": "Console menu",
           "brief": "The 7-option console menu.",
           "file": "images/oop-shopping-manager/menu.png",
-          "src": "",
-          "alt": "",
-          "caption": ""
+          "src": "images/oop-shopping-manager/menu.png",
+          "alt": "Placeholder cartoon of a cat sleeping on a laptop, standing in for: Console menu",
+          "caption": "Placeholder: Console menu",
+          "placeholder": true
         },
         {
           "kind": "code",
@@ -1594,36 +1638,40 @@
           "title": "Part A: ER model",
           "brief": "CourseworkERD redrawn or edited so every table name has no student ID prefix. The generalisation (specialisation) areas are the highlight.",
           "file": "images/database-coursework/erd.png",
-          "src": "",
-          "alt": "",
-          "caption": ""
+          "src": "images/database-coursework/erd.png",
+          "alt": "Placeholder cartoon of a cat sleeping on a laptop, standing in for: Part A: ER model",
+          "caption": "Placeholder: Part A: ER model",
+          "placeholder": true
         },
         {
           "kind": "diagram",
           "title": "Part B: tour company design",
           "brief": "PartBTourmato redrawn without the ID prefix; highlight the linking tables.",
           "file": "images/database-coursework/tourmato.png",
-          "src": "",
-          "alt": "",
-          "caption": ""
+          "src": "images/database-coursework/tourmato.png",
+          "alt": "Placeholder cartoon of a cat sleeping on a laptop, standing in for: Part B: tour company design",
+          "caption": "Placeholder: Part B: tour company design",
+          "placeholder": true
         },
         {
           "kind": "screenshot",
           "title": "Zoom on specialisation",
           "brief": "Cropped close-up of accommodation (apartment / stand-alone room) with its constraint labels.",
           "file": "images/database-coursework/specialisation.png",
-          "src": "",
-          "alt": "",
-          "caption": ""
+          "src": "images/database-coursework/specialisation.png",
+          "alt": "Placeholder cartoon of a cat sleeping on a laptop, standing in for: Zoom on specialisation",
+          "caption": "Placeholder: Zoom on specialisation",
+          "placeholder": true
         },
         {
           "kind": "screenshot",
           "title": "Zoom on a linking table",
           "brief": "Cropped close-up of Tour_Session_Attraction_Coverage with composite key.",
           "file": "images/database-coursework/linking-table.png",
-          "src": "",
-          "alt": "",
-          "caption": ""
+          "src": "images/database-coursework/linking-table.png",
+          "alt": "Placeholder cartoon of a cat sleeping on a laptop, standing in for: Zoom on a linking table",
+          "caption": "Placeholder: Zoom on a linking table",
+          "placeholder": true
         }
       ],
       "story": [
@@ -1698,36 +1746,40 @@
           "title": "Methodology flow",
           "brief": "Redrawn stages: passive recon -> active scan -> fingerprint -> vulnerability analysis -> exploit -> report and mitigate.",
           "file": "images/cyber-security-pentest/method.png",
-          "src": "",
-          "alt": "",
-          "caption": ""
+          "src": "images/cyber-security-pentest/method.png",
+          "alt": "Placeholder cartoon of a cat sleeping on a laptop, standing in for: Methodology flow",
+          "caption": "Placeholder: Methodology flow",
+          "placeholder": true
         },
         {
           "kind": "screenshot",
           "title": "Scan output (lab only)",
           "brief": "One Nmap result from the lab machine with all IPs/hostnames cropped or blurred.",
           "file": "images/cyber-security-pentest/nmap.png",
-          "src": "",
-          "alt": "",
-          "caption": ""
+          "src": "images/cyber-security-pentest/nmap.png",
+          "alt": "Placeholder cartoon of a cat sleeping on a laptop, standing in for: Scan output (lab only)",
+          "caption": "Placeholder: Scan output (lab only)",
+          "placeholder": true
         },
         {
           "kind": "screenshot",
           "title": "Wireshark capture",
           "brief": "A capture showing the handshake of SYN vs connect scan, addresses blurred.",
           "file": "images/cyber-security-pentest/wireshark.png",
-          "src": "",
-          "alt": "",
-          "caption": ""
+          "src": "images/cyber-security-pentest/wireshark.png",
+          "alt": "Placeholder cartoon of a cat sleeping on a laptop, standing in for: Wireshark capture",
+          "caption": "Placeholder: Wireshark capture",
+          "placeholder": true
         },
         {
           "kind": "diagram",
           "title": "Attack and defence table",
           "brief": "Table pairing each weakness with its mitigation (no credentials or real targets).",
           "file": "images/cyber-security-pentest/mitigations.png",
-          "src": "",
-          "alt": "",
-          "caption": ""
+          "src": "images/cyber-security-pentest/mitigations.png",
+          "alt": "Placeholder cartoon of a cat sleeping on a laptop, standing in for: Attack and defence table",
+          "caption": "Placeholder: Attack and defence table",
+          "placeholder": true
         }
       ],
       "story": [
@@ -1816,18 +1868,20 @@
           "title": "Program run",
           "brief": "Terminal run showing validation errors then a valid entry and the outcome.",
           "file": "images/grade-progression/run.png",
-          "src": "",
-          "alt": "",
-          "caption": ""
+          "src": "images/grade-progression/run.png",
+          "alt": "Placeholder cartoon of a cat sleeping on a laptop, standing in for: Program run",
+          "caption": "Placeholder: Program run",
+          "placeholder": true
         },
         {
           "kind": "screenshot",
           "title": "Histogram summary",
           "brief": "The histogram-style summary at the end.",
           "file": "images/grade-progression/histogram.png",
-          "src": "",
-          "alt": "",
-          "caption": ""
+          "src": "images/grade-progression/histogram.png",
+          "alt": "Placeholder cartoon of a cat sleeping on a laptop, standing in for: Histogram summary",
+          "caption": "Placeholder: Histogram summary",
+          "placeholder": true
         },
         {
           "kind": "code",
@@ -1914,27 +1968,30 @@
           "title": "Console run",
           "brief": "Java console buying a ticket and showing the seating area.",
           "file": "images/theatre-booking-java/run.png",
-          "src": "",
-          "alt": "",
-          "caption": ""
+          "src": "images/theatre-booking-java/run.png",
+          "alt": "Placeholder cartoon of a cat sleeping on a laptop, standing in for: Console run",
+          "caption": "Placeholder: Console run",
+          "placeholder": true
         },
         {
           "kind": "code",
           "title": "Saving the seating plan",
           "brief": "The save() method writing 0s and 1s. About 10 lines.",
           "file": "images/theatre-booking-java/code-save.png",
-          "src": "",
-          "alt": "",
-          "caption": ""
+          "src": "images/theatre-booking-java/code-save.png",
+          "alt": "Placeholder cartoon of a cat sleeping on a laptop, standing in for: Saving the seating plan",
+          "caption": "Placeholder: Saving the seating plan",
+          "placeholder": true
         },
         {
           "kind": "diagram",
           "title": "Java versus C++ comparison",
           "brief": "Small side-by-side table: arrays and big methods vs classes and tests.",
           "file": "images/theatre-booking-java/compare.png",
-          "src": "",
-          "alt": "",
-          "caption": ""
+          "src": "images/theatre-booking-java/compare.png",
+          "alt": "Placeholder cartoon of a cat sleeping on a laptop, standing in for: Java versus C++ comparison",
+          "caption": "Placeholder: Java versus C++ comparison",
+          "placeholder": true
         }
       ],
       "story": [

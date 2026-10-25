@@ -57,7 +57,10 @@ function buildMedia(item, project, preview) {
         v.disablePictureInPicture = true;
         v.setAttribute("aria-label", item.alt || item.title || `${project.title} clip`);
         if (reducedMotion()) v.controls = true;
-        else v.autoplay = true;
+        else {
+            v.autoplay = true;
+            v.play().catch(() => {});
+        }
         fig.appendChild(v);
     } else if (item.src) {
         const pic = document.createElement("img");

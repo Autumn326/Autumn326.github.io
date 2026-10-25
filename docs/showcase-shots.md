@@ -2,6 +2,8 @@
 
 Generated from the `showcase` items in `data/projects.json`, which fill each project's Gallery tab and design story. Code snippet images are already rendered and committed; screenshots, diagrams and clips are yours to add. Preview empty slots on a project page with `?preview=1`, e.g. `project.html?id=sign-finder&preview=1`.
 
+**Placeholders:** every slot without real media currently holds a sleeping-cat placeholder (image or 2 second clip) saved under the real file name and marked `"placeholder": true` in `data/projects.json`. To replace one, overwrite the file with your real image or clip (same name), then delete `"placeholder": true` and update `alt` and `caption`. Find what is left with: `grep -c '"placeholder": true' data/projects.json`.
+
 Rules: images under about 500 KB. Code images show a short key idea only (about 6 to 20 lines), never a whole file. Clips (`kind: clip`) are 6 seconds max, muted, MP4 (H.264) or WebM, 720p or lower, under 5 MB, saved under `videos/<project>/`; they autoplay muted and looped with no controls (visitors with reduced motion on get a still frame and controls). No YouTube or external video links. Crop out any student ID, university name, IPs or credentials. When media is added, fill in `src`, `alt` and `caption` on the slot.
 
 ## Sign Finder (`sign-finder`)
