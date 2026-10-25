@@ -37,7 +37,100 @@
       "images": [],
       "thumbnail": "",
       "whatILearned": "The problem: signs are easy to miss or misread, especially for learner drivers and tourists, and built-in sign recognition only exists in newer, expensive cars. I wanted a free tool that works on any iPhone, both as a quick \"what does that sign mean?\" helper and as a revision aid for the driving test.\n\nThe dataset: public datasets used different layouts (Pascal VOC XML, CSV) and some contained duplicate boxes or signs that do not exist in the UK. I wrote Python scripts to convert everything into one format, drop duplicates and filter out irrelevant classes, then added my own photos annotated by hand in LabelImg. Only datasets with reuse licences were used and they are credited in the report.\n\nThe models: I first trained a TensorFlow object detector, which scored above 90%, but converting it to Core ML with coremltools made accuracy drop badly. After researching lightweight options (SSD-MobileNet, YOLOv5 Nano, EfficientDet) I switched to Create ML, whose YOLOv2-style detector drops straight into Xcode, and that gave the reliable result I needed. Lesson learned: check the deployment path before committing to a training framework.\n\nThe app: SwiftUI for the screens, Vision and Core ML for inference, AVFoundation for the camera. The Scan button stays disabled until a photo is chosen, and the live camera never starts on launch, which came out of black-box testing.\n\nLimitations and future work: the model struggles with signs that are far away, at odd angles or in poor light, and rarer signs such as no-entry were sometimes mistaken for common ones like speed limits because the public data was unbalanced. A broader, more balanced set of photos taken in varied conditions is the clear next step, followed by more languages and theme options. The full report is summarised here rather than published.",
-      "notes": ""
+      "notes": "",
+      "showcase": [
+        {
+          "kind": "video",
+          "title": "Demo: photo scan and live scan",
+          "brief": "Screen recording on a real iPhone: pick a photo, tap Scan, then switch to Live Scan and point at signs. 60-90 s, upload to YouTube and paste the ID into links.youtube.",
+          "file": "(YouTube)",
+          "src": "",
+          "alt": "",
+          "caption": "",
+          "youtube": ""
+        },
+        {
+          "kind": "screenshot",
+          "title": "Photo scan with bounding boxes",
+          "brief": "Scan tab with a photo containing 2+ signs, boxes, labels and the confidence list visible. This is the hero shot.",
+          "file": "images/sign-finder/scan.png",
+          "src": "",
+          "alt": "",
+          "caption": ""
+        },
+        {
+          "kind": "screenshot",
+          "title": "Live scan",
+          "brief": "Live Scan tab with a box drawn on a sign in the camera feed.",
+          "file": "images/sign-finder/live-scan.png",
+          "src": "",
+          "alt": "",
+          "caption": ""
+        },
+        {
+          "kind": "screenshot",
+          "title": "Sign info and settings",
+          "brief": "Info tab with a category expanded, and the Settings picker for quality and frame interval (side by side in one image).",
+          "file": "images/sign-finder/info-settings.png",
+          "src": "",
+          "alt": "",
+          "caption": ""
+        },
+        {
+          "kind": "diagram",
+          "title": "Pipeline: data to app",
+          "brief": "Simple redrawn flow: public datasets + own LabelImg photos -> Python merge/convert -> Create ML (YOLOv2) -> Core ML in SwiftUI. Redraw rather than using report figures that carry report headers.",
+          "file": "images/sign-finder/pipeline.png",
+          "src": "",
+          "alt": "",
+          "caption": ""
+        },
+        {
+          "kind": "screenshot",
+          "title": "Annotating in LabelImg",
+          "brief": "LabelImg with boxes drawn on one of your own photos (shows the dataset work).",
+          "file": "images/sign-finder/labelimg.png",
+          "src": "",
+          "alt": "",
+          "caption": ""
+        },
+        {
+          "kind": "screenshot",
+          "title": "Model evaluation",
+          "brief": "Create ML evaluation/test-scan view or the CNN confusion matrix, cropped to the chart only.",
+          "file": "images/sign-finder/evaluation.png",
+          "src": "",
+          "alt": "",
+          "caption": ""
+        },
+        {
+          "kind": "code",
+          "title": "Run the model on every Nth frame",
+          "brief": "ScanView/LiveScanViewModel: the frameCounter % frameProcessingInterval guard plus the VNCoreMLRequest. About 12 lines. Shows how battery use is controlled.",
+          "file": "images/sign-finder/code-live-frames.png",
+          "src": "",
+          "alt": "",
+          "caption": ""
+        },
+        {
+          "kind": "code",
+          "title": "Boxes in the right place",
+          "brief": "The GeometryReader + ZStack block in ScanView that converts Vision's normalised boxes to screen coordinates. About 15 lines.",
+          "file": "images/sign-finder/code-boxes.png",
+          "src": "",
+          "alt": "",
+          "caption": ""
+        },
+        {
+          "kind": "code",
+          "title": "Pascal VOC to Create ML boxes",
+          "brief": "The small conversion from corner coordinates to centre + width/height. About 8 lines.",
+          "file": "images/sign-finder/code-convert.png",
+          "src": "",
+          "alt": "",
+          "caption": ""
+        }
+      ]
     },
     {
       "id": "sudoku-solver",
@@ -69,7 +162,54 @@
       "images": [],
       "thumbnail": "",
       "whatILearned": "Brute force would try 9^81 combinations, more than the atoms in the universe, so the interesting part is cutting the search space. Each square starts as \"any of 1 to 9\". Two rules then fire repeatedly: if a square is down to one digit, no peer can use it; if a digit fits in only one square of a row, column or box, it goes there. These rules cascade, so an easy puzzle collapses with no guessing at all.\n\nWhen logic stalls, the solver guesses in the square with the fewest options (a two-option guess is right half the time), propagates the consequences, and backs out if it hits a contradiction.\n\nResults: the easy puzzle is fully solved by logic alone, the \"hardest ever\" puzzle has 33 of 81 squares solved by logic before the search starts, and the 17-clue puzzle (the proven minimum) needs no guessing. The main limitation is that each guess copies the whole board; real solvers undo moves instead. Ideas for next time: a puzzle generator with unique solutions, a difficulty rating based on how far logic gets, and reading a puzzle from a photo with OCR.",
-      "notes": ""
+      "notes": "",
+      "showcase": [
+        {
+          "kind": "screenshot",
+          "title": "The app solving a puzzle",
+          "brief": "App window with the hardest puzzle entered and solved.",
+          "file": "images/sudoku-solver/app.png",
+          "src": "",
+          "alt": "",
+          "caption": ""
+        },
+        {
+          "kind": "code",
+          "title": "Eliminate: the cascade",
+          "brief": "solver.py eliminate(): the two rules (single candidate removes from peers; one home for a digit places it). About 20 lines, the core idea.",
+          "file": "images/sudoku-solver/code-eliminate.png",
+          "src": "",
+          "alt": "",
+          "caption": ""
+        },
+        {
+          "kind": "code",
+          "title": "Search: fewest candidates first",
+          "brief": "solver.py search(): choose the square with the fewest options, try each on a copy. About 12 lines.",
+          "file": "images/sudoku-solver/code-search.png",
+          "src": "",
+          "alt": "",
+          "caption": ""
+        },
+        {
+          "kind": "screenshot",
+          "title": "Tests passing and timing",
+          "brief": "Terminal after `python3 test_solver.py` showing tests pass and the timings table.",
+          "file": "images/sudoku-solver/tests.png",
+          "src": "",
+          "alt": "",
+          "caption": ""
+        },
+        {
+          "kind": "diagram",
+          "title": "Candidates before and after propagation",
+          "brief": "Two grids side by side for one puzzle: all candidates at the start, remaining candidates after propagation (even a hand-made image works).",
+          "file": "images/sudoku-solver/propagation.png",
+          "src": "",
+          "alt": "",
+          "caption": ""
+        }
+      ]
     },
     {
       "id": "theatre-booking-cpp",
@@ -102,7 +242,73 @@
       "images": [],
       "thumbnail": "",
       "whatILearned": "Class design: Ticket holds the row, seat and price; Person holds the customer details; Row owns the state of each seat (free or booked, using an enum class); Auditorium owns the rows and their prices. Booking and cancelling go through Row so the rules live in one place, and the menu code in Main only talks to those classes.\n\nTesting: nine Catch test cases check that a new row starts free, booking a free seat works, double-booking fails, cancelling frees the seat, out-of-range seats are rejected, the auditorium is built with the expected rows and prices, and that tickets and people return the values they were created with.\n\nThe project began as the Java version (see the early work section). Porting it showed me what changes between languages: manual header files, const correctness, value versus reference semantics and no garbage collector, while the design carried over almost unchanged.",
-      "notes": ""
+      "notes": "",
+      "showcase": [
+        {
+          "kind": "screenshot",
+          "title": "Main menu",
+          "brief": "Console showing the numbered menu (buy, seat map, cancel, list, save, load, tickets, sort, quit).",
+          "file": "images/theatre-booking-cpp/menu.png",
+          "src": "",
+          "alt": "",
+          "caption": ""
+        },
+        {
+          "kind": "screenshot",
+          "title": "Seat map with bookings",
+          "brief": "Seat map after booking a few seats, in the console.",
+          "file": "images/theatre-booking-cpp/seat-map.png",
+          "src": "",
+          "alt": "",
+          "caption": ""
+        },
+        {
+          "kind": "screenshot",
+          "title": "Catch tests passing",
+          "brief": "Terminal output of run_tests showing all 9 test cases passing.",
+          "file": "images/theatre-booking-cpp/tests.png",
+          "src": "",
+          "alt": "",
+          "caption": ""
+        },
+        {
+          "kind": "diagram",
+          "title": "Class diagram",
+          "brief": "Boxes for Ticket, Person, Row, Auditorium and the SeatState enum with their relationships (draw.io is fine).",
+          "file": "images/theatre-booking-cpp/classes.png",
+          "src": "",
+          "alt": "",
+          "caption": ""
+        },
+        {
+          "kind": "code",
+          "title": "Row::book and cancel",
+          "brief": "Row.cpp book() and cancel(): rules live in one place. About 10 lines.",
+          "file": "images/theatre-booking-cpp/code-row.png",
+          "src": "",
+          "alt": "",
+          "caption": ""
+        },
+        {
+          "kind": "code",
+          "title": "A Catch test",
+          "brief": "One test, for example booking an already-booked seat fails. About 8 lines.",
+          "file": "images/theatre-booking-cpp/code-test.png",
+          "src": "",
+          "alt": "",
+          "caption": ""
+        },
+        {
+          "kind": "video",
+          "title": "Short demo (optional)",
+          "brief": "30-60 s screen recording: buy, view seat map, cancel, save, reload.",
+          "file": "(YouTube)",
+          "src": "",
+          "alt": "",
+          "caption": "",
+          "youtube": ""
+        }
+      ]
     },
     {
       "id": "ios-weather-app",
@@ -136,7 +342,73 @@
       "images": [],
       "thumbnail": "",
       "whatILearned": "The app is split into views (current, hourly, daily, forecast, map, visited places and a tab bar) and view models that fetch and decode data from the OpenWeatherMap forecast and air pollution services. Keeping networking out of the views made each screen small and easy to change.\n\nMy two enhancements aimed at everyday friction. Tapping an attraction in the list recentres the map on it, which helps when attractions are close together or hard to find. Swiping right on a saved place shows a button that pulls fresh data for that city, mirroring the familiar swipe-left-to-delete gesture.\n\nI learned SwiftUI state and navigation, MapKit annotations, decoding JSON into Swift models, and handling asynchronous loading so screens do not show stale data.",
-      "notes": ""
+      "notes": "",
+      "showcase": [
+        {
+          "kind": "video",
+          "title": "Demo walkthrough",
+          "brief": "Simulator recording: current weather, hourly/daily, map, tap an attraction, save a place, swipe to refresh. 60-90 s on YouTube.",
+          "file": "(YouTube)",
+          "src": "",
+          "alt": "",
+          "caption": "",
+          "youtube": ""
+        },
+        {
+          "kind": "screenshot",
+          "title": "Current weather and air quality",
+          "brief": "Current weather screen.",
+          "file": "images/ios-weather-app/current.png",
+          "src": "",
+          "alt": "",
+          "caption": ""
+        },
+        {
+          "kind": "screenshot",
+          "title": "Hourly and daily forecast",
+          "brief": "Forecast screens side by side.",
+          "file": "images/ios-weather-app/forecast.png",
+          "src": "",
+          "alt": "",
+          "caption": ""
+        },
+        {
+          "kind": "screenshot",
+          "title": "Map of attractions",
+          "brief": "Map with annotations and the attraction list.",
+          "file": "images/ios-weather-app/map.png",
+          "src": "",
+          "alt": "",
+          "caption": ""
+        },
+        {
+          "kind": "screenshot",
+          "title": "Visited places with swipe action",
+          "brief": "Visited places list with the blue swipe-to-refresh button showing.",
+          "file": "images/ios-weather-app/visited-swipe.png",
+          "src": "",
+          "alt": "",
+          "caption": ""
+        },
+        {
+          "kind": "code",
+          "title": "Tap to recentre the map (my enhancement)",
+          "brief": "The tap gesture in the map/list view that updates the map region. About 8 lines.",
+          "file": "images/ios-weather-app/code-recentre.png",
+          "src": "",
+          "alt": "",
+          "caption": ""
+        },
+        {
+          "kind": "code",
+          "title": "Swipe to refresh a saved place (my enhancement)",
+          "brief": "The swipeActions block in VisitedPlacesView. About 10 lines.",
+          "file": "images/ios-weather-app/code-swipe.png",
+          "src": "",
+          "alt": "",
+          "caption": ""
+        }
+      ]
     },
     {
       "id": "applied-ai-rnn",
@@ -171,7 +443,64 @@
       "images": [],
       "thumbnail": "",
       "whatILearned": "The data is a public tweet sentiment set labelled negative or positive. Cleaning it meant keeping the two useful columns, converting the labels to 0 and 1, turning words into integer tokens and padding every tweet to the same length so the network can process them in batches.\n\nThe model is deliberately small: an embedding layer that learns a vector per word, one simple RNN layer that reads the tweet in order, and a single sigmoid neuron for the probability of positive. It trained for five epochs and scored 85.3% on unseen tweets.\n\nThe confusion matrix showed a bias toward predicting negative, because the data I could download was imbalanced. Balancing by throwing away data would have cost more accuracy than it fixed. Natural improvements are an LSTM, which copes better with vanishing gradients, and a longer vocabulary and sequence length so long tweets do not lose words.",
-      "notes": ""
+      "notes": "",
+      "showcase": [
+        {
+          "kind": "diagram",
+          "title": "RNN diagram",
+          "brief": "Your compact and expanded RNN diagrams from the notebook, as one image.",
+          "file": "images/applied-ai-rnn/rnn-diagram.png",
+          "src": "",
+          "alt": "",
+          "caption": ""
+        },
+        {
+          "kind": "code",
+          "title": "Model definition",
+          "brief": "The Sequential model: Embedding, SimpleRNN(32), Dense sigmoid. About 6 lines.",
+          "file": "images/applied-ai-rnn/code-model.png",
+          "src": "",
+          "alt": "",
+          "caption": ""
+        },
+        {
+          "kind": "screenshot",
+          "title": "Training output",
+          "brief": "Epoch log showing accuracy and loss rising/falling.",
+          "file": "images/applied-ai-rnn/training.png",
+          "src": "",
+          "alt": "",
+          "caption": ""
+        },
+        {
+          "kind": "screenshot",
+          "title": "Confusion matrix",
+          "brief": "Cropped matrix plot showing the bias toward negative.",
+          "file": "images/applied-ai-rnn/confusion.png",
+          "src": "",
+          "alt": "",
+          "caption": ""
+        },
+        {
+          "kind": "screenshot",
+          "title": "Predicting new text",
+          "brief": "predict_sentiment on two or three sentences with outputs.",
+          "file": "images/applied-ai-rnn/predict.png",
+          "src": "",
+          "alt": "",
+          "caption": ""
+        },
+        {
+          "kind": "video",
+          "title": "Video explanation (if you have one)",
+          "brief": "The notebook has an empty Video Link; if you recorded one, add the YouTube ID here.",
+          "file": "(YouTube)",
+          "src": "",
+          "alt": "",
+          "caption": "",
+          "youtube": ""
+        }
+      ]
     },
     {
       "id": "applied-robotics-qlearning",
@@ -203,7 +532,63 @@
       "images": [],
       "thumbnail": "",
       "whatILearned": "Reward design is the lever. A small penalty on every step pushes the taxi to find the shortest route, a heavy penalty on wrong pick-ups and drop-offs stops it doing those at random, and a bonus for the correct drop-off gives it something to aim for.\n\nExploration is handled with epsilon: high at the start so the taxi maps out the grid, then decaying to a minimum so it increasingly uses what it learned. The learning curve rises quickly and levels off after about 250 episodes, which shows the policy has settled. I then tested it on 1000 random starting environments to check the average reward was consistent.\n\nIn part two I used the Q-table to build a dataset of 400 valid states with their best action and trained a neural network on an 80/20 split. It reached about 67% accuracy, which was only average: the confusion matrix showed it mixing up directions such as north and west. That taught me how much harder it is to imitate a policy than to learn one.",
-      "notes": ""
+      "notes": "",
+      "showcase": [
+        {
+          "kind": "screenshot",
+          "title": "Learning curve",
+          "brief": "Total reward per episode plot, rising then flattening near episode 250.",
+          "file": "images/applied-robotics-qlearning/learning-curve.png",
+          "src": "",
+          "alt": "",
+          "caption": ""
+        },
+        {
+          "kind": "screenshot",
+          "title": "Taxi grid in action",
+          "brief": "env.render() frame of the 5x5 grid mid-route (or a short GIF if under 500 KB).",
+          "file": "images/applied-robotics-qlearning/grid.png",
+          "src": "",
+          "alt": "",
+          "caption": ""
+        },
+        {
+          "kind": "code",
+          "title": "The Q-update and reward values",
+          "brief": "The Bellman update line plus the alpha/gamma/epsilon settings. About 10 lines.",
+          "file": "images/applied-robotics-qlearning/code-qupdate.png",
+          "src": "",
+          "alt": "",
+          "caption": ""
+        },
+        {
+          "kind": "screenshot",
+          "title": "Neural network loss curve",
+          "brief": "Loss curve of the MLP imitating the policy.",
+          "file": "images/applied-robotics-qlearning/loss.png",
+          "src": "",
+          "alt": "",
+          "caption": ""
+        },
+        {
+          "kind": "screenshot",
+          "title": "Neural network confusion matrix",
+          "brief": "Matrix showing north/west and south/east confusions.",
+          "file": "images/applied-robotics-qlearning/confusion.png",
+          "src": "",
+          "alt": "",
+          "caption": ""
+        },
+        {
+          "kind": "screenshot",
+          "title": "1000 random environments test",
+          "brief": "Output of testMultipleEnvs with the average reward.",
+          "file": "images/applied-robotics-qlearning/random-envs.png",
+          "src": "",
+          "alt": "",
+          "caption": ""
+        }
+      ]
     },
     {
       "id": "health-system-api",
@@ -236,7 +621,73 @@
       "images": [],
       "thumbnail": "",
       "whatILearned": "The structure is layered: model classes (a shared Person base for doctors and patients), data access classes that hold the data, and resource classes that expose it over HTTP. Keeping those apart meant I could change how data is stored without touching the endpoints.\n\nError handling was a focus: a not-found exception and a validation exception are each translated by an exception mapper into a proper HTTP response, so clients get a meaningful message instead of a stack trace.\n\nI learned how REST resources are designed around nouns, how path parameters tie related records together, and how to test an API with a client rather than a browser. The demo video shows the endpoints being called.",
-      "notes": ""
+      "notes": "",
+      "showcase": [
+        {
+          "kind": "video",
+          "title": "API demo",
+          "brief": "Your existing demo video, uploaded to YouTube (the 354 MB file must not go in the repo).",
+          "file": "(YouTube)",
+          "src": "",
+          "alt": "",
+          "caption": "",
+          "youtube": ""
+        },
+        {
+          "kind": "screenshot",
+          "title": "Calling an endpoint",
+          "brief": "A client (Postman or similar) calling GET all doctors and a create call, showing the JSON.",
+          "file": "images/health-system-api/request.png",
+          "src": "",
+          "alt": "",
+          "caption": ""
+        },
+        {
+          "kind": "diagram",
+          "title": "Resource map",
+          "brief": "A table or diagram of the 6 resources and their create/read/update/delete paths.",
+          "file": "images/health-system-api/resources.png",
+          "src": "",
+          "alt": "",
+          "caption": ""
+        },
+        {
+          "kind": "diagram",
+          "title": "Layers",
+          "brief": "Resource -> DAO -> model, with exception mappers on the side.",
+          "file": "images/health-system-api/layers.png",
+          "src": "",
+          "alt": "",
+          "caption": ""
+        },
+        {
+          "kind": "code",
+          "title": "A resource method",
+          "brief": "One JAX-RS method from DoctorResource: annotations, path parameter, response. About 12 lines.",
+          "file": "images/health-system-api/code-resource.png",
+          "src": "",
+          "alt": "",
+          "caption": ""
+        },
+        {
+          "kind": "code",
+          "title": "Exception mapper",
+          "brief": "ResourceNotFoundExceptionMapper turning an exception into a 404 response. About 10 lines.",
+          "file": "images/health-system-api/code-mapper.png",
+          "src": "",
+          "alt": "",
+          "caption": ""
+        },
+        {
+          "kind": "screenshot",
+          "title": "Error response",
+          "brief": "Client showing the 404 JSON for a missing record.",
+          "file": "images/health-system-api/error.png",
+          "src": "",
+          "alt": "",
+          "caption": ""
+        }
+      ]
     },
     {
       "id": "r-data-science",
@@ -271,7 +722,63 @@
       "images": [],
       "thumbnail": "",
       "whatILearned": "Forecasting: a time series can be turned into a normal learning problem by giving the network the last few days as inputs. I normalised the data so no input dominated, trained several layouts and scored them with four error measures, because each one hides something the others show. A network with two hidden layers (10 and 8 nodes) beat the best single-layer one, and the predicted-versus-actual plot followed the trend closely with a few outliers.\n\nClustering: I removed outliers more than three standard deviations from the mean before scaling, since outliers stretch the scale. All four methods agreed that two clusters was the best choice. The clusters overlapped a little, and the average silhouette width was low (about 0.22) on the raw data. After PCA the silhouette score improved, which shows the compressed data separated the wines better.\n\nThe main takeaway was to judge a model with several measures and to be honest about what the plots show.",
-      "notes": ""
+      "notes": "",
+      "showcase": [
+        {
+          "kind": "screenshot",
+          "title": "Choosing the number of clusters",
+          "brief": "Elbow, gap statistic and silhouette plots together, all pointing to 2.",
+          "file": "images/r-data-science/cluster-count.png",
+          "src": "",
+          "alt": "",
+          "caption": ""
+        },
+        {
+          "kind": "screenshot",
+          "title": "Clusters plotted",
+          "brief": "The 2-cluster k-means plot (before or after PCA).",
+          "file": "images/r-data-science/clusters.png",
+          "src": "",
+          "alt": "",
+          "caption": ""
+        },
+        {
+          "kind": "screenshot",
+          "title": "Silhouette plot before and after PCA",
+          "brief": "Side by side to show the improvement.",
+          "file": "images/r-data-science/silhouette.png",
+          "src": "",
+          "alt": "",
+          "caption": ""
+        },
+        {
+          "kind": "screenshot",
+          "title": "Predicted versus actual exchange rate",
+          "brief": "Scatter plot for the best network (10 and 8 nodes).",
+          "file": "images/r-data-science/forecast.png",
+          "src": "",
+          "alt": "",
+          "caption": ""
+        },
+        {
+          "kind": "screenshot",
+          "title": "Neural network model comparison",
+          "brief": "The comparison table of RMSE, MAE, MAPE and sMAPE (crop out any ID).",
+          "file": "images/r-data-science/nn-table.png",
+          "src": "",
+          "alt": "",
+          "caption": ""
+        },
+        {
+          "kind": "code",
+          "title": "Building the lag matrix",
+          "brief": "The few lines that create t-1..t-4 inputs from the exchange-rate column. About 8 lines.",
+          "file": "images/r-data-science/code-lag.png",
+          "src": "",
+          "alt": "",
+          "caption": ""
+        }
+      ]
     },
     {
       "id": "oop-shopping-manager",
@@ -304,7 +811,64 @@
       "images": [],
       "thumbnail": "",
       "whatILearned": "The design came first: a use case diagram for what the user can do and a class diagram for how Product, Electronics, Clothing and ShoppingCart relate, then the code followed it. Inheritance let the two product types share common fields and add their own.\n\nThe test plan covered adding, deleting, ordered printing, saving to and loading from the CSV file, opening the GUI and exiting, each with expected results. Looking back, two things I would improve are highlighting low-stock items, which I did not finish, and replacing the manual test plan with automated unit tests and more consistent error handling.",
-      "notes": ""
+      "notes": "",
+      "showcase": [
+        {
+          "kind": "video",
+          "title": "Demo video",
+          "brief": "Your existing YouTube demo (https://youtu.be/EZFL0dwEXKE) - paste it into links.youtube.",
+          "file": "(YouTube)",
+          "src": "",
+          "alt": "",
+          "caption": "",
+          "youtube": ""
+        },
+        {
+          "kind": "diagram",
+          "title": "Class diagram",
+          "brief": "OOP_Class_UML export as PNG (check no student ID in it).",
+          "file": "images/oop-shopping-manager/class-diagram.png",
+          "src": "",
+          "alt": "",
+          "caption": ""
+        },
+        {
+          "kind": "diagram",
+          "title": "Use case diagram",
+          "brief": "OOP_Use_Case_UML export as PNG.",
+          "file": "images/oop-shopping-manager/use-case.png",
+          "src": "",
+          "alt": "",
+          "caption": ""
+        },
+        {
+          "kind": "screenshot",
+          "title": "GUI with cart and discount",
+          "brief": "GUI with a category selected, items in the cart and the discounted total.",
+          "file": "images/oop-shopping-manager/gui.png",
+          "src": "",
+          "alt": "",
+          "caption": ""
+        },
+        {
+          "kind": "screenshot",
+          "title": "Console menu",
+          "brief": "The 7-option console menu.",
+          "file": "images/oop-shopping-manager/menu.png",
+          "src": "",
+          "alt": "",
+          "caption": ""
+        },
+        {
+          "kind": "code",
+          "title": "Subclass overriding product details",
+          "brief": "Electronics or Clothing extending Product. About 12 lines.",
+          "file": "images/oop-shopping-manager/code-inheritance.png",
+          "src": "",
+          "alt": "",
+          "caption": ""
+        }
+      ]
     },
     {
       "id": "database-coursework",
@@ -336,7 +900,45 @@
       "images": [],
       "thumbnail": "",
       "whatILearned": "Part A is an entity-relationship model for a business that sells accommodation, meals and experiences. The interesting part was specialisation: accommodation is either an apartment or a stand-alone room, meals are delivered or collective, and experiences are on-site (cooking, crafts, fitness) or off-site (hikes, excursions), each with its own attributes and the staff who oversee them.\n\nPart B turns a tour company into tables. Many-to-many relationships, such as which attractions a tour session covers or which equipment it needs, get their own linking tables with composite keys, and flags such as a food or walking session are stored on the session.\n\nI learned how cardinalities drive keys, when to split a table, and how to check a design against the real-world rules before writing any SQL. Note: the source diagrams contain my student number in their table names, so only redrawn or cleaned versions are suitable to publish.",
-      "notes": ""
+      "notes": "",
+      "showcase": [
+        {
+          "kind": "diagram",
+          "title": "Part A: ER model",
+          "brief": "CourseworkERD redrawn or edited so every table name has no student ID prefix. The generalisation (specialisation) areas are the highlight.",
+          "file": "images/database-coursework/erd.png",
+          "src": "",
+          "alt": "",
+          "caption": ""
+        },
+        {
+          "kind": "diagram",
+          "title": "Part B: tour company design",
+          "brief": "PartBTourmato redrawn without the ID prefix; highlight the linking tables.",
+          "file": "images/database-coursework/tourmato.png",
+          "src": "",
+          "alt": "",
+          "caption": ""
+        },
+        {
+          "kind": "screenshot",
+          "title": "Zoom on specialisation",
+          "brief": "Cropped close-up of accommodation (apartment / stand-alone room) with its constraint labels.",
+          "file": "images/database-coursework/specialisation.png",
+          "src": "",
+          "alt": "",
+          "caption": ""
+        },
+        {
+          "kind": "screenshot",
+          "title": "Zoom on a linking table",
+          "brief": "Cropped close-up of Tour_Session_Attraction_Coverage with composite key.",
+          "file": "images/database-coursework/linking-table.png",
+          "src": "",
+          "alt": "",
+          "caption": ""
+        }
+      ]
     },
     {
       "id": "cyber-security-pentest",
@@ -371,7 +973,45 @@
       "images": [],
       "thumbnail": "",
       "whatILearned": "This write-up is about method, not targets: all work was done in an isolated lab, and no real systems, addresses or credentials are shown here.\n\nI learned to work in stages. Passive reconnaissance first, because what you learn from public pages and DNS shapes which scans are worth running. Then active scanning, where the choice of scan matters: a ping sweep and half-open SYN scans are quieter than full connect scans, and I could explain the trade-off between stealth and reliability. Service and OS fingerprinting then turned open ports into specific, checkable findings.\n\nFor each weakness (information leaks, injection flaws, weak passwords, trusting users) I paired the attack with the control that prevents it: restricting DNS zone transfers, authentication instead of hiding paths in robots.txt, input validation and parameterised queries, rate limiting and strong password policy. The skill I value most is explaining risk to a non-specialist.",
-      "notes": ""
+      "notes": "",
+      "showcase": [
+        {
+          "kind": "diagram",
+          "title": "Methodology flow",
+          "brief": "Redrawn stages: passive recon -> active scan -> fingerprint -> vulnerability analysis -> exploit -> report and mitigate.",
+          "file": "images/cyber-security-pentest/method.png",
+          "src": "",
+          "alt": "",
+          "caption": ""
+        },
+        {
+          "kind": "screenshot",
+          "title": "Scan output (lab only)",
+          "brief": "One Nmap result from the lab machine with all IPs/hostnames cropped or blurred.",
+          "file": "images/cyber-security-pentest/nmap.png",
+          "src": "",
+          "alt": "",
+          "caption": ""
+        },
+        {
+          "kind": "screenshot",
+          "title": "Wireshark capture",
+          "brief": "A capture showing the handshake of SYN vs connect scan, addresses blurred.",
+          "file": "images/cyber-security-pentest/wireshark.png",
+          "src": "",
+          "alt": "",
+          "caption": ""
+        },
+        {
+          "kind": "diagram",
+          "title": "Attack and defence table",
+          "brief": "Table pairing each weakness with its mitigation (no credentials or real targets).",
+          "file": "images/cyber-security-pentest/mitigations.png",
+          "src": "",
+          "alt": "",
+          "caption": ""
+        }
+      ]
     },
     {
       "id": "grade-progression",
@@ -402,7 +1042,36 @@
       "images": [],
       "thumbnail": "",
       "whatILearned": "This was one of my first complete programs. It taught me loops, input validation with try and except so a typo cannot crash the program, dictionaries and lists for storing results, and writing to and reading from files.\n\nLooking back, the code is one long script with repeated blocks. Today I would split it into small functions and add tests, which is something I later did in the Sudoku and theatre projects.",
-      "notes": ""
+      "notes": "",
+      "showcase": [
+        {
+          "kind": "screenshot",
+          "title": "Program run",
+          "brief": "Terminal run showing validation errors then a valid entry and the outcome.",
+          "file": "images/grade-progression/run.png",
+          "src": "",
+          "alt": "",
+          "caption": ""
+        },
+        {
+          "kind": "screenshot",
+          "title": "Histogram summary",
+          "brief": "The histogram-style summary at the end.",
+          "file": "images/grade-progression/histogram.png",
+          "src": "",
+          "alt": "",
+          "caption": ""
+        },
+        {
+          "kind": "code",
+          "title": "Input validation loop",
+          "brief": "The try/except loop that only accepts allowed credit values. About 10 lines.",
+          "file": "images/grade-progression/code-validation.png",
+          "src": "",
+          "alt": "",
+          "caption": ""
+        }
+      ]
     },
     {
       "id": "theatre-booking-java",
@@ -431,7 +1100,36 @@
       "images": [],
       "thumbnail": "",
       "whatILearned": "This version used arrays and ArrayLists to hold seats and tickets and a plain text file for saving. It worked, but the logic was spread across a few large methods.\n\nThat is why the C++ rewrite moved the rules into Ticket, Person, Row and Auditorium classes with unit tests. Comparing the two is a good measure of how much my design skills improved in a year.",
-      "notes": ""
+      "notes": "",
+      "showcase": [
+        {
+          "kind": "screenshot",
+          "title": "Console run",
+          "brief": "Java console buying a ticket and showing the seating area.",
+          "file": "images/theatre-booking-java/run.png",
+          "src": "",
+          "alt": "",
+          "caption": ""
+        },
+        {
+          "kind": "code",
+          "title": "Saving the seating plan",
+          "brief": "The save() method writing 0s and 1s. About 10 lines.",
+          "file": "images/theatre-booking-java/code-save.png",
+          "src": "",
+          "alt": "",
+          "caption": ""
+        },
+        {
+          "kind": "diagram",
+          "title": "Java versus C++ comparison",
+          "brief": "Small side-by-side table: arrays and big methods vs classes and tests.",
+          "file": "images/theatre-booking-java/compare.png",
+          "src": "",
+          "alt": "",
+          "caption": ""
+        }
+      ]
     }
   ]
 }

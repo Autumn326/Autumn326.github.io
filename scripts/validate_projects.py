@@ -7,6 +7,7 @@ from pathlib import Path
 
 PATH = Path(__file__).resolve().parent.parent / "data" / "projects.json"
 TYPES = {"mobile-app", "ai", "data", "algorithm", "systems", "backend", "database", "security", "early"}
+KINDS = {"screenshot", "code", "diagram", "video"}
 THEMES = {"apple", "ai-graph", "terminal"}
 LINK_KEYS = {"youtube", "github", "writeup", "demo"}
 REQUIRED = ["id", "title", "type", "theme", "featured", "date", "summary", "tags", "features", "links"]
@@ -69,6 +70,23 @@ for i, p in enumerate(projects):
                 errors.append(f"{name}: image file not found: {src}")
             elif isinstance(img, dict) and not img.get("alt"):
                 errors.append(f"{name}: image {n} needs 'alt' text")
+    showcase = p.get("showcase", [])
+    if not isinstance(showcase, list):
+        errors.append(f"{name}: 'showcase' must be a list")
+    else:
+        for n, item in enumerate(showcase, 1):
+            if not isinstance(item, dict) or item.get("kind") not in KINDS:
+                errors.append(f"{name}: showcase {n} needs a 'kind' of {sorted(KINDS)}")
+                continue
+            src = item.get("src", "")
+            if src:
+                if not src.startswith("images/") or not (PATH.parent.parent / src).is_file():
+                    errors.append(f"{name}: showcase {n} src must be an existing file under images/")
+                elif not item.get("alt"):
+                    errors.append(f"{name}: showcase {n} needs 'alt' text")
+            yt = item.get("youtube", "")
+            if yt and not YT_RE.match(yt):
+                errors.append(f"{name}: showcase {n} youtube must be a video ID or a YouTube link")
     thumb = p.get("thumbnail", "")
     if thumb and not (thumb.startswith("images/") and (PATH.parent.parent / thumb).is_file()):
         errors.append(f"{name}: thumbnail must be an existing file under images/")

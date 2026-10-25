@@ -50,6 +50,48 @@ function normaliseImages(project) {
     }).filter(img => img.src);
 }
 
+
+// Showcase slots: planned highlights (screenshot, code snippet image, diagram, video).
+// A slot with media is always shown; an empty slot only appears with ?preview=1 so
+// the live site never shows unfinished boxes.
+const SHOWCASE_KINDS = { screenshot: "Screenshot", code: "Code snippet", diagram: "Diagram", video: "Video" };
+
+function renderShowcaseItem(item, project, preview) {
+    const kind = SHOWCASE_KINDS[item.kind] ? item.kind : "screenshot";
+    const vid = kind === "video" ? youtubeId(item.youtube) : null;
+    const hasMedia = vid || (kind !== "video" && item.src);
+    if (!hasMedia && !preview) return null;
+
+    const fig = el("figure", `showcase-item showcase-${kind}`);
+    if (vid) {
+        const wrap = el("div", "video-frame");
+        const frame = document.createElement("iframe");
+        frame.src = `https://www.youtube-nocookie.com/embed/${vid}`;
+        frame.title = item.title || `${project.title} video`;
+        frame.loading = "lazy";
+        frame.allow = "encrypted-media; picture-in-picture";
+        frame.referrerPolicy = "strict-origin-when-cross-origin";
+        frame.allowFullscreen = true;
+        wrap.appendChild(frame);
+        fig.appendChild(wrap);
+    } else if (hasMedia) {
+        const pic = document.createElement("img");
+        pic.src = item.src;
+        pic.alt = item.alt || item.title || `${project.title} ${kind}`;
+        pic.loading = "lazy";
+        fig.appendChild(pic);
+    } else {
+        const box = el("div", "showcase-placeholder");
+        box.appendChild(el("strong", "", `${SHOWCASE_KINDS[kind]} slot`));
+        box.appendChild(el("span", "", item.brief || ""));
+        if (item.file) box.appendChild(el("code", "", item.file));
+        fig.appendChild(box);
+    }
+    const caption = item.caption || item.title;
+    if (caption) fig.appendChild(el("figcaption", "", caption));
+    return fig;
+}
+
 function renderProject(project, root) {
     root.replaceChildren();
     document.title = `${project.title} | Michael Chen`;
@@ -100,6 +142,19 @@ function renderProject(project, root) {
         const list = el("ul", "feature-list");
         project.features.forEach(f => list.appendChild(el("li", "", f)));
         s.appendChild(list);
+        root.appendChild(s);
+    }
+
+    // Highlights (showcase slots)
+    const preview = new URLSearchParams(location.search).get("preview") === "1";
+    const slots = (project.showcase || [])
+        .map(item => renderShowcaseItem(item, project, preview))
+        .filter(Boolean);
+    if (slots.length) {
+        const s = section("Highlights", "highlights-title");
+        const grid = el("div", "showcase");
+        slots.forEach(f => grid.appendChild(f));
+        s.appendChild(grid);
         root.appendChild(s);
     }
 
