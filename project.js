@@ -41,17 +41,22 @@ function renderShowcaseItem(item, project, preview) {
 
     const fig = el("figure", `showcase-item showcase-${kind}`);
     if (isClip) {
-        // Short local clip (6 s max): muted, looping, native controls, no autoplay if reduced motion is on.
+        // Short local clip (6 s max): muted, looping, autoplays on load with no controls.
+        // Visitors who prefer reduced motion get a still first frame plus controls instead.
         const v = document.createElement("video");
         v.src = item.src;
         if (item.poster) v.poster = item.poster;
         v.muted = true;
         v.loop = true;
         v.playsInline = true;
-        v.controls = true;
-        v.preload = "metadata";
+        v.preload = "auto";
+        v.disablePictureInPicture = true;
         v.setAttribute("aria-label", item.alt || item.title || `${project.title} clip`);
-        if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) v.autoplay = true;
+        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+            v.controls = true;
+        } else {
+            v.autoplay = true;
+        }
         fig.appendChild(v);
     } else if (hasMedia) {
         const pic = document.createElement("img");

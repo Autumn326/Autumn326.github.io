@@ -2,11 +2,10 @@
 
 Generated from the `showcase` slots in `data/projects.json`. Preview empty slots on a project page with `?preview=1`, e.g. `project.html?id=sign-finder&preview=1`.
 
-Rules: images under about 500 KB. Code images show a short key idea only (about 6 to 20 lines), never a whole file. Clips (`kind: clip`) are 6 seconds max, muted, MP4 (H.264) or WebM, 720p or lower, under 5 MB, saved under `videos/<project>/`; they play muted and looped with controls, and do not autoplay when reduced motion is on. No YouTube or external video links. Crop out any student ID, university name, IPs or credentials. When media is added, fill in `src`, `alt` and `caption` on the slot.
+Rules: images under about 500 KB. Code images show a short key idea only (about 6 to 20 lines), never a whole file. Clips (`kind: clip`) are 6 seconds max, muted, MP4 (H.264) or WebM, 720p or lower, under 5 MB, saved under `videos/<project>/`; they autoplay muted and looped with no controls (visitors with reduced motion on get a still frame and controls). No YouTube or external video links. Crop out any student ID, university name, IPs or credentials. When media is added, fill in `src`, `alt` and `caption` on the slot.
 
 ## Sign Finder (`sign-finder`)
-- [ ] **clip: Clip: tap Scan and the boxes appear**. 6 s max, muted screen recording: pick a photo, tap Scan, boxes and labels appear. Save as `videos/sign-finder/scan.mp4`.
-- [ ] **screenshot: Photo scan with bounding boxes**. Scan tab with a photo containing 2+ signs, boxes, labels and the confidence list visible. This is the hero shot. Save as `images/sign-finder/scan.png`.
+- [ ] **screenshot: Photo scan with bounding boxes**. Scan tab with a photo containing 2+ signs, boxes, labels and the confidence list visible. This is the hero shot. Save as `images/sign-finder/scan.jpg`.
 - [ ] **screenshot: Live scan**. Live Scan tab with a box drawn on a sign in the camera feed. Save as `images/sign-finder/live-scan.png`.
 - [ ] **screenshot: Sign info and settings**. Info tab with a category expanded, and the Settings picker for quality and frame interval (side by side in one image). Save as `images/sign-finder/info-settings.png`.
 - [ ] **diagram: Pipeline: data to app**. Simple redrawn flow: public datasets + own LabelImg photos -> Python merge/convert -> Create ML (YOLOv2) -> Core ML in SwiftUI. Redraw rather than using report figures that carry report headers. Save as `images/sign-finder/pipeline.png`.

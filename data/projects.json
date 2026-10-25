@@ -37,23 +37,13 @@
       "notes": "",
       "showcase": [
         {
-          "kind": "clip",
-          "title": "Clip: tap Scan and the boxes appear",
-          "brief": "6 s max, muted screen recording: pick a photo, tap Scan, boxes and labels appear.",
-          "file": "videos/sign-finder/scan.mp4",
-          "src": "",
-          "alt": "",
-          "caption": "",
-          "poster": ""
-        },
-        {
           "kind": "screenshot",
           "title": "Photo scan with bounding boxes",
           "brief": "Scan tab with a photo containing 2+ signs, boxes, labels and the confidence list visible. This is the hero shot.",
-          "file": "images/sign-finder/scan.png",
-          "src": "",
-          "alt": "",
-          "caption": ""
+          "file": "images/sign-finder/scan.jpg",
+          "src": "images/sign-finder/scan.jpg",
+          "alt": "Sign Finder scan screen showing a photo of a stop sign, two traffic lights and a crosswalk sign, each outlined with a labelled box and a confidence score of 99% or higher",
+          "caption": "Photo scan: each detected sign gets a box, a label and a confidence score."
         },
         {
           "kind": "screenshot",
@@ -132,9 +122,9 @@
           "title": "Clip: live scan on a sign",
           "brief": "6 s max: camera pointed at a sign, box and label appear.",
           "file": "videos/sign-finder/live-scan.mp4",
-          "src": "",
-          "alt": "",
-          "caption": "",
+          "src": "videos/sign-finder/live-scan.mp4",
+          "alt": "Live Scan screen: tapping Start Scanning, then the camera finds a No Entry sign and draws a green box with a label",
+          "caption": "Live scan: start the camera and the sign is boxed and labelled in real time.",
           "poster": ""
         }
       ]
