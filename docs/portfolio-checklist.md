@@ -78,6 +78,9 @@ I will review each project's files when we reach it and suggest the highlights w
 - [x] Content must stay visible and usable without JavaScript (reveal classes added by JS only)
 - [x] Check contrast and reduced-motion (including the animations above) for every theme
 
+- [x] Project page: Design story tab (numbered steps with a sticky process bar) and Gallery tab (all images and clips, filter and viewer) instead of a Highlights section
+- [x] Design walkthrough written for every project, with code screenshots and the reasoning beside them
+
 ## Phase 5: Polish and launch
 - [ ] Phone, tablet and desktop checks
 - [ ] Accessibility pass (alt text, headings, focus)
