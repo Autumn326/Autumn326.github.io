@@ -10,13 +10,13 @@ Every project page is generated from one entry in `data/projects.json`. No HTML 
 3. **Reference the images** in the entry:
    - `"thumbnail": "images/my-new-project/thumb.png"` shows on the home page card.
    - `"images": [{ "src": "images/my-new-project/home.png", "alt": "Home screen showing ...", "caption": "Optional caption" }]` shows in the Screenshots section. Always write `alt` text.
-4. **Add a video** (optional): put the YouTube link or the 11-character video ID in `links.youtube`. It is embedded with the privacy-friendly YouTube domain.
-5. **Add a write-up or demo link** (optional): `links.writeup` and `links.demo` accept an `https://` link or a local `pages/...` path.
+4. **GitHub link** (optional): `links.github` takes an `https://` link. It is kept for later and is not shown on project pages.
+5. **Short clips** (optional): see step 7; clips are local files, there are no YouTube or external links.
 6. **Fill in `whatILearned`** (optional). Separate paragraphs with a blank line (`\n\n` inside the JSON string).
-7. **Plan highlights** (optional): `showcase` is a list of slots, each `{ "kind": "screenshot|code|diagram|clip|video", "title", "brief", "file", "src", "alt", "caption", "youtube" }`. Slots without media stay hidden; add `?preview=1` to the page URL to see them. Code slots are images of a short snippet only. `clip` slots are local videos of 6 seconds max (MP4 or WebM under `videos/<project>/`, under 5 MB, plus optional `poster`); `video` slots are YouTube. `docs/showcase-shots.md` lists what to capture.
+7. **Plan highlights** (optional): `showcase` is a list of slots, each `{ "kind": "screenshot|code|diagram|clip", "title", "brief", "file", "src", "alt", "caption", "youtube" }`. Slots without media stay hidden; add `?preview=1` to the page URL to see them. Code slots are images of a short snippet only. `clip` slots are local videos of 6 seconds max (MP4 or WebM under `videos/<project>/`, under 5 MB, plus optional `poster`). `docs/showcase-shots.md` lists what to capture.
 8. **Check it**: run `python3 scripts/validate_projects.py`, then `python -m http.server 8000` and open `http://localhost:8000/project.html?id=my-new-project`.
 
-Any section whose field is empty (`summary`, `tags`, `features`, `links.youtube`, `images`, `whatILearned`, write-up and demo links) is hidden automatically.
+Any section whose field is empty (`summary`, `tags`, `features`, `images`, `whatILearned`) is hidden automatically.
 
 ## Rules
 

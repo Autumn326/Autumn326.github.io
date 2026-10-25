@@ -29,10 +29,7 @@
         "Custom dataset merged from public sets plus my own annotated photos"
       ],
       "links": {
-        "youtube": "",
-        "github": "",
-        "writeup": "",
-        "demo": ""
+        "github": ""
       },
       "images": [],
       "thumbnail": "",
@@ -164,10 +161,7 @@
         "Timing: easy ~7 ms, hardest known puzzle ~5 ms, 17-clue puzzle ~4 ms"
       ],
       "links": {
-        "youtube": "",
-        "github": "",
-        "writeup": "",
-        "demo": ""
+        "github": ""
       },
       "images": [],
       "thumbnail": "",
@@ -254,10 +248,7 @@
         "Catch unit tests covering seats, rows, the auditorium, tickets and people"
       ],
       "links": {
-        "youtube": "",
-        "github": "",
-        "writeup": "",
-        "demo": ""
+        "github": ""
       },
       "images": [],
       "thumbnail": "",
@@ -354,10 +345,7 @@
         "My enhancement: swipe right on a saved place to refresh its weather"
       ],
       "links": {
-        "youtube": "",
-        "github": "",
-        "writeup": "",
-        "demo": ""
+        "github": ""
       },
       "images": [],
       "thumbnail": "",
@@ -465,10 +453,7 @@
         "Prediction function that cleans and classifies any new sentence"
       ],
       "links": {
-        "youtube": "",
-        "github": "",
-        "writeup": "",
-        "demo": ""
+        "github": ""
       },
       "images": [],
       "thumbnail": "",
@@ -544,10 +529,7 @@
         "Neural network (MLP classifier) trained on the optimal actions, with loss curve and confusion matrix"
       ],
       "links": {
-        "youtube": "",
-        "github": "",
-        "writeup": "",
-        "demo": ""
+        "github": ""
       },
       "images": [],
       "thumbnail": "",
@@ -633,14 +615,11 @@
         "Custom exceptions mapped to clear HTTP error responses for missing records and invalid input"
       ],
       "links": {
-        "youtube": "",
-        "github": "",
-        "writeup": "",
-        "demo": ""
+        "github": ""
       },
       "images": [],
       "thumbnail": "",
-      "whatILearned": "The structure is layered: model classes (a shared Person base for doctors and patients), data access classes that hold the data, and resource classes that expose it over HTTP. Keeping those apart meant I could change how data is stored without touching the endpoints.\n\nError handling was a focus: a not-found exception and a validation exception are each translated by an exception mapper into a proper HTTP response, so clients get a meaningful message instead of a stack trace.\n\nI learned how REST resources are designed around nouns, how path parameters tie related records together, and how to test an API with a client rather than a browser. The demo video shows the endpoints being called.",
+      "whatILearned": "The structure is layered: model classes (a shared Person base for doctors and patients), data access classes that hold the data, and resource classes that expose it over HTTP. Keeping those apart meant I could change how data is stored without touching the endpoints.\n\nError handling was a focus: a not-found exception and a validation exception are each translated by an exception mapper into a proper HTTP response, so clients get a meaningful message instead of a stack trace.\n\nI learned how REST resources are designed around nouns, how path parameters tie related records together, and how to test an API with a client rather than a browser.",
       "notes": "",
       "showcase": [
         {
@@ -734,10 +713,7 @@
         "Quality checked with silhouette width and the Calinski-Harabasz index"
       ],
       "links": {
-        "youtube": "",
-        "github": "",
-        "writeup": "",
-        "demo": ""
+        "github": ""
       },
       "images": [],
       "thumbnail": "",
@@ -819,30 +795,16 @@
         "Console menu to add, delete and list products (sorted by ID) and to save and load from a CSV file",
         "Graphical interface with a category drop-down and product details panel",
         "Shopping cart with the final price and applicable discounts",
-        "UML use case and class diagrams and a written test plan",
-        "Demo video"
+        "UML use case and class diagrams and a written test plan"
       ],
       "links": {
-        "youtube": "",
-        "github": "",
-        "writeup": "",
-        "demo": ""
+        "github": ""
       },
       "images": [],
       "thumbnail": "",
       "whatILearned": "The design came first: a use case diagram for what the user can do and a class diagram for how Product, Electronics, Clothing and ShoppingCart relate, then the code followed it. Inheritance let the two product types share common fields and add their own.\n\nThe test plan covered adding, deleting, ordered printing, saving to and loading from the CSV file, opening the GUI and exiting, each with expected results. Looking back, two things I would improve are highlighting low-stock items, which I did not finish, and replacing the manual test plan with automated unit tests and more consistent error handling.",
       "notes": "",
       "showcase": [
-        {
-          "kind": "video",
-          "title": "Demo video",
-          "brief": "Your existing YouTube demo (https://youtu.be/EZFL0dwEXKE) - paste it into links.youtube.",
-          "file": "(YouTube)",
-          "src": "",
-          "alt": "",
-          "caption": "",
-          "youtube": ""
-        },
         {
           "kind": "diagram",
           "title": "Class diagram",
@@ -912,10 +874,7 @@
         "Diagrams drawn in draw.io"
       ],
       "links": {
-        "youtube": "",
-        "github": "",
-        "writeup": "",
-        "demo": ""
+        "github": ""
       },
       "images": [],
       "thumbnail": "",
@@ -985,10 +944,7 @@
         "Mitigation advice for every finding"
       ],
       "links": {
-        "youtube": "",
-        "github": "",
-        "writeup": "",
-        "demo": ""
+        "github": ""
       },
       "images": [],
       "thumbnail": "",
@@ -1054,10 +1010,7 @@
         "Version-controlled with Git"
       ],
       "links": {
-        "youtube": "",
-        "github": "",
-        "writeup": "",
-        "demo": ""
+        "github": ""
       },
       "images": [],
       "thumbnail": "",
@@ -1112,10 +1065,7 @@
         "Saving the seating plan to a file as 0s and 1s"
       ],
       "links": {
-        "youtube": "",
-        "github": "",
-        "writeup": "",
-        "demo": ""
+        "github": ""
       },
       "images": [],
       "thumbnail": "",

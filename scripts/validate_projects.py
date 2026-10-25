@@ -7,14 +7,13 @@ from pathlib import Path
 
 PATH = Path(__file__).resolve().parent.parent / "data" / "projects.json"
 TYPES = {"mobile-app", "ai", "data", "algorithm", "systems", "backend", "database", "security", "early"}
-KINDS = {"screenshot", "code", "diagram", "video", "clip"}
+KINDS = {"screenshot", "code", "diagram", "clip"}
 CLIP_EXT = (".mp4", ".webm")
 MAX_CLIP_BYTES = 5 * 1024 * 1024  # a 6 second clip should be well under this
 THEMES = {"apple", "ai-graph", "terminal"}
-LINK_KEYS = {"youtube", "github", "writeup", "demo"}
+LINK_KEYS = {"github"}
 REQUIRED = ["id", "title", "type", "theme", "featured", "date", "summary", "tags", "features", "links"]
 ID_RE = re.compile(r"^[a-z0-9]+(-[a-z0-9]+)*$")
-YT_RE = re.compile(r"^([\w-]{11}|https://(www\.)?(youtube\.com|youtu\.be)/\S+)$")
 
 errors = []
 try:
@@ -50,13 +49,9 @@ for i, p in enumerate(projects):
     if not isinstance(links, dict) or set(links) - LINK_KEYS:
         errors.append(f"{name}: links may only contain {sorted(LINK_KEYS)}")
     else:
-        yt = links.get("youtube", "")
-        if yt and not YT_RE.match(yt):
-            errors.append(f"{name}: youtube must be a video ID or a YouTube link")
-        for key in ("github", "writeup", "demo"):
-            url = links.get(key, "")
-            if url and not (url.startswith("https://") or url.startswith("pages/")):
-                errors.append(f"{name}: links.{key} must be https:// or a local pages/ path")
+        url = links.get("github", "")
+        if url and not url.startswith("https://"):
+            errors.append(f"{name}: links.github must be an https:// link")
 
     images = p.get("images", [])
     if not isinstance(images, list):
@@ -98,9 +93,6 @@ for i, p in enumerate(projects):
                     errors.append(f"{name}: showcase {n} src must be an existing file under images/")
                 elif not item.get("alt"):
                     errors.append(f"{name}: showcase {n} needs 'alt' text")
-            yt = item.get("youtube", "")
-            if yt and not YT_RE.match(yt):
-                errors.append(f"{name}: showcase {n} youtube must be a video ID or a YouTube link")
     thumb = p.get("thumbnail", "")
     if thumb and not (thumb.startswith("images/") and (PATH.parent.parent / thumb).is_file()):
         errors.append(f"{name}: thumbnail must be an existing file under images/")

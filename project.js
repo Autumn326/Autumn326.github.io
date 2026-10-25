@@ -1,33 +1,10 @@
 const PROJECTS_URL = "data/projects.json";
-const YT_ID_RE = /^[\w-]{11}$/;
 
 function el(tag, className, text) {
     const node = document.createElement(tag);
     if (className) node.className = className;
     if (text !== undefined) node.textContent = text;
     return node;
-}
-
-// Accepts a bare 11-character ID or a youtube.com / youtu.be link.
-function youtubeId(value) {
-    if (!value) return null;
-    if (YT_ID_RE.test(value)) return value;
-    try {
-        const url = new URL(value);
-        if (url.hostname === "youtu.be") return url.pathname.slice(1).split("/")[0] || null;
-        if (/(^|\.)youtube\.com$/.test(url.hostname)) {
-            const id = url.searchParams.get("v") || url.pathname.split("/").pop();
-            return YT_ID_RE.test(id) ? id : null;
-        }
-    } catch (e) { /* not a URL */ }
-    return null;
-}
-
-// Only https links or local pages/ paths are allowed as hrefs.
-function safeHref(value) {
-    if (!value) return null;
-    if (value.startsWith("pages/") || value.startsWith("https://")) return value;
-    return null;
 }
 
 function section(title, id) {
@@ -51,31 +28,19 @@ function normaliseImages(project) {
 }
 
 
-// Showcase slots: planned highlights (screenshot, code snippet image, diagram, video).
+// Showcase slots: planned highlights (screenshot, code snippet image, diagram, short clip).
 // A slot with media is always shown; an empty slot only appears with ?preview=1 so
 // the live site never shows unfinished boxes.
-const SHOWCASE_KINDS = { screenshot: "Screenshot", code: "Code snippet", diagram: "Diagram", video: "Video", clip: "Short clip" };
+const SHOWCASE_KINDS = { screenshot: "Screenshot", code: "Code snippet", diagram: "Diagram", clip: "Short clip" };
 
 function renderShowcaseItem(item, project, preview) {
     const kind = SHOWCASE_KINDS[item.kind] ? item.kind : "screenshot";
-    const vid = kind === "video" ? youtubeId(item.youtube) : null;
-    const hasMedia = vid || (kind !== "video" && item.src);
+    const hasMedia = Boolean(item.src);
     const isClip = kind === "clip" && item.src;
     if (!hasMedia && !preview) return null;
 
     const fig = el("figure", `showcase-item showcase-${kind}`);
-    if (vid) {
-        const wrap = el("div", "video-frame");
-        const frame = document.createElement("iframe");
-        frame.src = `https://www.youtube-nocookie.com/embed/${vid}`;
-        frame.title = item.title || `${project.title} video`;
-        frame.loading = "lazy";
-        frame.allow = "encrypted-media; picture-in-picture";
-        frame.referrerPolicy = "strict-origin-when-cross-origin";
-        frame.allowFullscreen = true;
-        wrap.appendChild(frame);
-        fig.appendChild(wrap);
-    } else if (isClip) {
+    if (isClip) {
         // Short local clip (6 s max): muted, looping, native controls, no autoplay if reduced motion is on.
         const v = document.createElement("video");
         v.src = item.src;
@@ -133,23 +98,6 @@ function renderProject(project, root) {
         root.appendChild(s);
     }
 
-    // Video
-    const vid = youtubeId((project.links || {}).youtube);
-    if (vid) {
-        const s = section("Demo video", "video-title");
-        const wrap = el("div", "video-frame");
-        const frame = document.createElement("iframe");
-        frame.src = `https://www.youtube-nocookie.com/embed/${vid}`;
-        frame.title = `${project.title} demo video`;
-        frame.loading = "lazy";
-        frame.allow = "encrypted-media; picture-in-picture";
-        frame.referrerPolicy = "strict-origin-when-cross-origin";
-        frame.allowFullscreen = true;
-        wrap.appendChild(frame);
-        s.appendChild(wrap);
-        root.appendChild(s);
-    }
-
     // Features
     if (project.features && project.features.length) {
         const s = section("Key features", "features-title");
@@ -195,27 +143,6 @@ function renderProject(project, root) {
     if (project.whatILearned) {
         const s = section("What I learned", "learned-title");
         project.whatILearned.split(/\n{2,}/).forEach(p => s.appendChild(el("p", "", p)));
-        root.appendChild(s);
-    }
-
-    // Links: write-up and live demo (source repositories are not linked from project pages)
-    const writeup = safeHref((project.links || {}).writeup);
-    const demo = safeHref((project.links || {}).demo);
-    if (writeup || demo) {
-        const s = section("Links", "links-title");
-        const row = el("div", "hero-actions project-links");
-        if (writeup) {
-            const a = el("a", "button button-solid", "Read the write-up");
-            a.href = writeup;
-            row.appendChild(a);
-        }
-        if (demo) {
-            const a = el("a", "button button-solid", "Try the demo");
-            a.href = demo;
-            a.rel = "noopener";
-            row.appendChild(a);
-        }
-        s.appendChild(row);
         root.appendChild(s);
     }
 }

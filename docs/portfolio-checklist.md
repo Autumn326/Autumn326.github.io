@@ -1,6 +1,6 @@
 # Portfolio Site Checklist
 
-Static site for GitHub Pages (no login, no database). All projects come from `projects.json`. Rules: no full source code, no student ID anywhere, videos are YouTube embeds.
+Static site for GitHub Pages (no login, no database). All projects come from `projects.json`. Rules: no full source code, no student ID anywhere, short clips are local files (6 s max).
 
 ## Phase 1: Home page basics
 - [x] Choose site name, tagline and short intro
@@ -16,12 +16,12 @@ Static site for GitHub Pages (no login, no database). All projects come from `pr
 ## Phase 2: Shared template and data
 - [ ] You fill in `projects.json` (links, images, thumbnails, what I learned)
 - [x] One project page template that reads a project by id
-- [x] Optional sections hidden when empty: summary, features, tech tags, YouTube embed, screenshots, write-up link, what I learned
+- [x] Optional sections hidden when empty: summary, features, tech tags, highlights, screenshots, what I learned
 - [x] Reduced-motion and keyboard basics built in
 - [x] "Add a new project" steps written down (one JSON entry plus images)
 
 ## Phase 3: Content, one checklist per project
-Each project: [ ] confirm summary and dates  [ ] pick screenshots/diagrams  [ ] YouTube link  [ ] key features  [ ] "what I learned"  [ ] remove IDs/code  [ ] thumbnail
+Each project: [ ] confirm summary and dates  [ ] pick screenshots/diagrams  [ ] key features  [ ] "what I learned"  [ ] remove IDs/code  [ ] thumbnail
 
 ### Featured
 **Sign Finder (final year project)**
@@ -30,7 +30,7 @@ Each project: [ ] confirm summary and dates  [ ] pick screenshots/diagrams  [ ] 
 - [x] Model comparison (YOLOv2, MobileNet, YOLOv5) and result (up to 96%)
 - [ ] App screens: photo scan, live scan, sign info, settings (described in text; screenshots are Michael's)
 - [x] Limitations (far signs) and future work
-- [ ] Demo video (YouTube link is Michael's); report summarised as a write-up, not the full PDF (done)
+- [x] Report summarised as a write-up, not the full PDF (done)
 
 **Sudoku Solver**
 - [x] Explain propagation then backtracking in plain language
@@ -45,7 +45,7 @@ Each project: [ ] confirm summary and dates  [ ] pick screenshots/diagrams  [ ] 
 **iOS Weather App**
 - [x] Screens: current, hourly, daily, map, visited places
 - [x] Highlight your own enhancements (tap to recentre, swipe to refresh)
-- [x] Demo video if available
+- [x] Short clips if available
 
 ### AI and data
 - [x] Applied AI RNN: data pipeline, model, 85.3% accuracy, confusion matrix, video
@@ -53,8 +53,8 @@ Each project: [ ] confirm summary and dates  [ ] pick screenshots/diagrams  [ ] 
 - [x] R coursework: forecasting approach, clustering method, key plots
 
 ### Systems, backend, other
-- [x] Health System API: endpoints overview, demo video
-- [x] OOP shopping manager: UML diagrams, test plan, YouTube demo
+- [x] Health System API: endpoints overview
+- [x] OOP shopping manager: UML diagrams, test plan
 - [x] Database: ER diagram, design decisions
 - [x] Cyber security: methodology only, no sensitive targets or credentials
 - [x] Python grade progression (early work)

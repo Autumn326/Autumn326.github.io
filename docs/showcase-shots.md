@@ -2,7 +2,7 @@
 
 Generated from the `showcase` slots in `data/projects.json`. Preview empty slots on a project page with `?preview=1`, e.g. `project.html?id=sign-finder&preview=1`.
 
-Rules: images under about 500 KB. Code images show a short key idea only (about 6 to 20 lines), never a whole file. Clips (`kind: clip`) are 6 seconds max, muted, MP4 (H.264) or WebM, 720p or lower, under 5 MB, saved under `videos/<project>/`; they play muted and looped with controls, and do not autoplay when reduced motion is on. Full demos stay on YouTube (`kind: video`, paste the ID into `youtube`). Crop out any student ID, university name, IPs or credentials. When media is added, fill in `src`, `alt` and `caption` on the slot.
+Rules: images under about 500 KB. Code images show a short key idea only (about 6 to 20 lines), never a whole file. Clips (`kind: clip`) are 6 seconds max, muted, MP4 (H.264) or WebM, 720p or lower, under 5 MB, saved under `videos/<project>/`; they play muted and looped with controls, and do not autoplay when reduced motion is on. No YouTube or external video links. Crop out any student ID, university name, IPs or credentials. When media is added, fill in `src`, `alt` and `caption` on the slot.
 
 ## Sign Finder (`sign-finder`)
 - [ ] **clip: Clip: tap Scan and the boxes appear**. 6 s max, muted screen recording: pick a photo, tap Scan, boxes and labels appear. Save as `videos/sign-finder/scan.mp4`.
@@ -77,7 +77,6 @@ Rules: images under about 500 KB. Code images show a short key idea only (about 
 - [ ] **code: Building the lag matrix**. The few lines that create t-1..t-4 inputs from the exchange-rate column. About 8 lines. Save as `images/r-data-science/code-lag.png`.
 
 ## OOP: Shopping Manager (`oop-shopping-manager`)
-- [ ] **video: Demo video**. Your existing YouTube demo (https://youtu.be/EZFL0dwEXKE) - paste it into links.youtube. Save as `(YouTube)`.
 - [ ] **diagram: Class diagram**. OOP_Class_UML export as PNG (check no student ID in it). Save as `images/oop-shopping-manager/class-diagram.png`.
 - [ ] **diagram: Use case diagram**. OOP_Use_Case_UML export as PNG. Save as `images/oop-shopping-manager/use-case.png`.
 - [ ] **screenshot: GUI with cart and discount**. GUI with a category selected, items in the cart and the discounted total. Save as `images/oop-shopping-manager/gui.png`.
