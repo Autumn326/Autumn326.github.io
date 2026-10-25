@@ -8,7 +8,7 @@
       "featured": true,
       "date": "2024-2025",
       "course": "6COSC023W Final Year Project",
-      "summary": "iOS app that identifies road signs from photos or the live camera using an on-device machine learning model. Final year project.",
+      "summary": "An iOS app that identifies UK road signs from a photo or the live camera, built as my final year project. Everything runs on the device, so no image ever leaves the phone. In good conditions the model reached up to 96% accuracy.",
       "tags": [
         "Swift",
         "SwiftUI",
@@ -21,12 +21,12 @@
         "TensorFlow"
       ],
       "features": [
-        "Scan a road sign from a photo",
-        "Live camera scanning",
-        "Road sign information screen",
-        "Camera quality settings",
-        "Custom dataset merged from public sets plus own annotated images",
-        "Up to 96% accuracy in good conditions"
+        "Scan a road sign from a photo, with bounding boxes and confidence scores",
+        "Live camera scan that overlays boxes on the moving feed",
+        "Road sign information screen, grouped by sign type, for revision",
+        "Settings for camera quality and how often frames are analysed, to save battery",
+        "Fully offline and private: images are never stored or uploaded",
+        "Custom dataset merged from public sets plus my own annotated photos"
       ],
       "links": {
         "youtube": "",
@@ -36,7 +36,7 @@
       },
       "images": [],
       "thumbnail": "",
-      "whatILearned": "",
+      "whatILearned": "The problem: signs are easy to miss or misread, especially for learner drivers and tourists, and built-in sign recognition only exists in newer, expensive cars. I wanted a free tool that works on any iPhone, both as a quick \"what does that sign mean?\" helper and as a revision aid for the driving test.\n\nThe dataset: public datasets used different layouts (Pascal VOC XML, CSV) and some contained duplicate boxes or signs that do not exist in the UK. I wrote Python scripts to convert everything into one format, drop duplicates and filter out irrelevant classes, then added my own photos annotated by hand in LabelImg. Only datasets with reuse licences were used and they are credited in the report.\n\nThe models: I first trained a TensorFlow object detector, which scored above 90%, but converting it to Core ML with coremltools made accuracy drop badly. After researching lightweight options (SSD-MobileNet, YOLOv5 Nano, EfficientDet) I switched to Create ML, whose YOLOv2-style detector drops straight into Xcode, and that gave the reliable result I needed. Lesson learned: check the deployment path before committing to a training framework.\n\nThe app: SwiftUI for the screens, Vision and Core ML for inference, AVFoundation for the camera. The Scan button stays disabled until a photo is chosen, and the live camera never starts on launch, which came out of black-box testing.\n\nLimitations and future work: the model struggles with signs that are far away, at odd angles or in poor light, and rarer signs such as no-entry were sometimes mistaken for common ones like speed limits because the public data was unbalanced. A broader, more balanced set of photos taken in varied conditions is the clear next step, followed by more languages and theme options. The full report is summarised here rather than published.",
       "notes": ""
     },
     {
@@ -47,17 +47,18 @@
       "featured": true,
       "date": "2026",
       "course": null,
-      "summary": "Sudoku solver using constraint propagation first and backtracking search only when needed.",
+      "summary": "A Sudoku solver that deduces as much as it can with logic and only guesses when it has to. It solves the hardest puzzles in about 5 ms, and follows the approach from Peter Norvig's essay on solving every Sudoku puzzle.",
       "tags": [
         "Python",
         "unit testing"
       ],
       "features": [
-        "Constraint propagation",
-        "Backtracking with fewest-candidates heuristic",
-        "Small app with launcher",
-        "Unit tests",
-        "About 5 ms on the hardest known puzzle"
+        "Every square tracks the digits still possible there",
+        "Two rules cascade: a single-candidate square removes that digit from its 20 peers, and a digit with only one home in a row, column or box is placed",
+        "Backtracking search only when logic stalls, guessing in the square with the fewest candidates",
+        "Small desktop app with a one-click launcher",
+        "Unit tests check every row, column and box holds 1 to 9 exactly once",
+        "Timing: easy ~7 ms, hardest known puzzle ~5 ms, 17-clue puzzle ~4 ms"
       ],
       "links": {
         "youtube": "",
@@ -67,7 +68,7 @@
       },
       "images": [],
       "thumbnail": "",
-      "whatILearned": "",
+      "whatILearned": "Brute force would try 9^81 combinations, more than the atoms in the universe, so the interesting part is cutting the search space. Each square starts as \"any of 1 to 9\". Two rules then fire repeatedly: if a square is down to one digit, no peer can use it; if a digit fits in only one square of a row, column or box, it goes there. These rules cascade, so an easy puzzle collapses with no guessing at all.\n\nWhen logic stalls, the solver guesses in the square with the fewest options (a two-option guess is right half the time), propagates the consequences, and backs out if it hits a contradiction.\n\nResults: the easy puzzle is fully solved by logic alone, the \"hardest ever\" puzzle has 33 of 81 squares solved by logic before the search starts, and the 17-clue puzzle (the proven minimum) needs no guessing. The main limitation is that each guess copies the whole board; real solvers undo moves instead. Ideas for next time: a puzzle generator with unique solutions, a difficulty rating based on how far logic gets, and reading a puzzle from a photo with OCR.",
       "notes": ""
     },
     {
@@ -78,18 +79,19 @@
       "featured": true,
       "date": "2026",
       "course": null,
-      "summary": "Console theatre booking app, a C++ rewrite of an earlier Java coursework.",
+      "summary": "A console theatre booking app written in C++, rebuilt from my 2022 Java coursework to practise object-oriented design and unit testing in a different language.",
       "tags": [
         "C++",
         "Catch",
         "Git"
       ],
       "features": [
-        "Buy and cancel tickets",
-        "Seat map and available seats",
-        "Save and load seating",
-        "Ticket sorting",
-        "Unit tests"
+        "Menu to buy a ticket, cancel a ticket and list available seats",
+        "Seat map printed row by row, with booked seats marked",
+        "Save seating to a file and load it back",
+        "Print ticket information and total price, and sort tickets by price",
+        "Input validation for rows, seats and menu choices",
+        "Catch unit tests covering seats, rows, the auditorium, tickets and people"
       ],
       "links": {
         "youtube": "",
@@ -99,7 +101,7 @@
       },
       "images": [],
       "thumbnail": "",
-      "whatILearned": "",
+      "whatILearned": "Class design: Ticket holds the row, seat and price; Person holds the customer details; Row owns the state of each seat (free or booked, using an enum class); Auditorium owns the rows and their prices. Booking and cancelling go through Row so the rules live in one place, and the menu code in Main only talks to those classes.\n\nTesting: nine Catch test cases check that a new row starts free, booking a free seat works, double-booking fails, cancelling frees the seat, out-of-range seats are rejected, the auditorium is built with the expected rows and prices, and that tickets and people return the values they were created with.\n\nThe project began as the Java version (see the early work section). Porting it showed me what changes between languages: manual header files, const correctness, value versus reference semantics and no garbage collector, while the design carried over almost unchanged.",
       "notes": ""
     },
     {
@@ -110,7 +112,7 @@
       "featured": true,
       "date": "2024",
       "course": "6COSC021W Mobile Native",
-      "summary": "SwiftUI weather app with forecasts, a map of tourist attractions and saved places.",
+      "summary": "A SwiftUI weather app with current conditions, hourly and daily forecasts, air quality, a map of tourist attractions and a list of saved places. Built for a mobile development module, with two extra features of my own.",
       "tags": [
         "Swift",
         "SwiftUI",
@@ -118,11 +120,12 @@
         "REST APIs"
       ],
       "features": [
-        "Current, hourly and daily weather",
-        "Map of tourist attractions",
-        "Visited places list",
-        "Enhancement: tap an attraction to recentre the map",
-        "Enhancement: swipe a saved place to refresh its data"
+        "Current weather for the selected city, with air quality",
+        "Hourly and daily forecast screens",
+        "Map of tourist attractions around the chosen place",
+        "Visited places list with swipe actions",
+        "My enhancement: tap an attraction to recentre the map on it",
+        "My enhancement: swipe right on a saved place to refresh its weather"
       ],
       "links": {
         "youtube": "",
@@ -132,7 +135,7 @@
       },
       "images": [],
       "thumbnail": "",
-      "whatILearned": "",
+      "whatILearned": "The app is split into views (current, hourly, daily, forecast, map, visited places and a tab bar) and view models that fetch and decode data from the OpenWeatherMap forecast and air pollution services. Keeping networking out of the views made each screen small and easy to change.\n\nMy two enhancements aimed at everyday friction. Tapping an attraction in the list recentres the map on it, which helps when attractions are close together or hard to find. Swiping right on a saved place shows a button that pulls fresh data for that city, mirroring the familiar swipe-left-to-delete gesture.\n\nI learned SwiftUI state and navigation, MapKit annotations, decoding JSON into Swift models, and handling asynchronous loading so screens do not show stale data.",
       "notes": ""
     },
     {
@@ -143,7 +146,7 @@
       "featured": false,
       "date": "2024-2025",
       "course": "Applied AI",
-      "summary": "Simple RNN that classifies tweet sentiment, with written analysis of CNN and RNN approaches.",
+      "summary": "A simple recurrent neural network that classifies tweets as positive or negative, reaching 85.3% test accuracy, with a written comparison of CNN and RNN approaches to text and speech recognition.",
       "tags": [
         "Python",
         "Keras",
@@ -153,11 +156,11 @@
         "matplotlib"
       ],
       "features": [
-        "Text tokenising and padding",
-        "RNN model with embedding layer",
-        "85.3% test accuracy",
-        "Confusion matrix",
-        "Prediction function for new text"
+        "Data pipeline: load only the label and text columns, map labels to 0 and 1, tokenise to a 10,000 word vocabulary and pad to 100 tokens",
+        "Model: embedding layer, 32-unit simple RNN and a sigmoid output",
+        "85.3% test accuracy (loss 0.348) on a 70/30 train and test split",
+        "Confusion matrix showing where the model goes wrong",
+        "Prediction function that cleans and classifies any new sentence"
       ],
       "links": {
         "youtube": "",
@@ -167,7 +170,7 @@
       },
       "images": [],
       "thumbnail": "",
-      "whatILearned": "",
+      "whatILearned": "The data is a public tweet sentiment set labelled negative or positive. Cleaning it meant keeping the two useful columns, converting the labels to 0 and 1, turning words into integer tokens and padding every tweet to the same length so the network can process them in batches.\n\nThe model is deliberately small: an embedding layer that learns a vector per word, one simple RNN layer that reads the tweet in order, and a single sigmoid neuron for the probability of positive. It trained for five epochs and scored 85.3% on unseen tweets.\n\nThe confusion matrix showed a bias toward predicting negative, because the data I could download was imbalanced. Balancing by throwing away data would have cost more accuracy than it fixed. Natural improvements are an LSTM, which copes better with vanishing gradients, and a longer vocabulary and sequence length so long tweets do not lose words.",
       "notes": ""
     },
     {
@@ -178,17 +181,18 @@
       "featured": false,
       "date": "2024-2025",
       "course": "Applied Robotics",
-      "summary": "Reinforcement learning agent that learns to pick up and drop off passengers on a 5x5 grid.",
+      "summary": "A Q-learning agent that learns to pick up and drop off a passenger on a 5x5 taxi grid, plus a neural network trained to copy the learned policy.",
       "tags": [
         "Python",
         "Reinforcement learning",
         "matplotlib"
       ],
       "features": [
-        "Q-learning with epsilon decay",
-        "Reward design for shortest routes",
-        "Learning-curve graphs",
-        "Testing on random environments"
+        "Q-learning with learning rate 0.6, discount 0.8 and decaying exploration",
+        "Reward design: -1 per step, -10 for a wrong pick-up or drop-off, +20 for a correct drop-off",
+        "Learning curve showing rewards rise steeply then stabilise after about 250 episodes",
+        "Test functions that run the policy on 1000 random environments",
+        "Neural network (MLP classifier) trained on the optimal actions, with loss curve and confusion matrix"
       ],
       "links": {
         "youtube": "",
@@ -198,7 +202,7 @@
       },
       "images": [],
       "thumbnail": "",
-      "whatILearned": "",
+      "whatILearned": "Reward design is the lever. A small penalty on every step pushes the taxi to find the shortest route, a heavy penalty on wrong pick-ups and drop-offs stops it doing those at random, and a bonus for the correct drop-off gives it something to aim for.\n\nExploration is handled with epsilon: high at the start so the taxi maps out the grid, then decaying to a minimum so it increasingly uses what it learned. The learning curve rises quickly and levels off after about 250 episodes, which shows the policy has settled. I then tested it on 1000 random starting environments to check the average reward was consistent.\n\nIn part two I used the Q-table to build a dataset of 400 valid states with their best action and trained a neural network on an 80/20 split. It reached about 67% accuracy, which was only average: the confusion matrix showed it mixing up directions such as north and west. That taught me how much harder it is to imitate a policy than to learn one.",
       "notes": ""
     },
     {
@@ -209,7 +213,7 @@
       "featured": false,
       "date": "2024-05",
       "course": "Client-Server Architecture",
-      "summary": "Java REST API for a health system, built for a client-server architecture module.",
+      "summary": "A Java REST API for a health system, built with Jersey (JAX-RS) for a client-server architecture module. It manages doctors, patients, appointments, prescriptions, medical records and billing.",
       "tags": [
         "Java",
         "Maven",
@@ -217,8 +221,11 @@
         "NetBeans"
       ],
       "features": [
-        "REST endpoints",
-        "Demo video"
+        "Six resources: doctors, patients, appointments, prescriptions, medical records and billing",
+        "Create, read, update and delete endpoints for each resource, 32 in total",
+        "Endpoints that link records, such as an appointment between a patient and a doctor",
+        "Data access layer separate from the resource classes",
+        "Custom exceptions mapped to clear HTTP error responses for missing records and invalid input"
       ],
       "links": {
         "youtube": "",
@@ -228,7 +235,7 @@
       },
       "images": [],
       "thumbnail": "",
-      "whatILearned": "",
+      "whatILearned": "The structure is layered: model classes (a shared Person base for doctors and patients), data access classes that hold the data, and resource classes that expose it over HTTP. Keeping those apart meant I could change how data is stored without touching the endpoints.\n\nError handling was a focus: a not-found exception and a validation exception are each translated by an exception mapper into a proper HTTP response, so clients get a meaningful message instead of a stack trace.\n\nI learned how REST resources are designed around nouns, how path parameters tie related records together, and how to test an API with a client rather than a browser. The demo video shows the endpoints being called.",
       "notes": ""
     },
     {
@@ -239,7 +246,7 @@
       "featured": false,
       "date": "2024-04",
       "course": "5DATA002W",
-      "summary": "Neural network forecasting of USD/EUR exchange rates and partitioning clustering of white wine data.",
+      "summary": "Two data science tasks in R: forecasting the USD/EUR exchange rate with neural networks, and clustering white wines with k-means, with and without PCA.",
       "tags": [
         "R",
         "neuralnet",
@@ -248,10 +255,12 @@
         "PCA"
       ],
       "features": [
-        "Time-lagged input matrices for forecasting",
-        "Outlier removal with z-scores",
-        "Choosing cluster count with NbClust, elbow, gap and silhouette",
-        "Written report"
+        "Forecasting: lagged inputs from the previous days predict the next day's rate",
+        "Compared one- and two-hidden-layer networks using RMSE, MAE, MAPE and sMAPE",
+        "Clustering: z-score outlier removal, scaling, then k-means",
+        "Cluster count checked with four methods: NbClust, elbow, gap statistic and silhouette",
+        "PCA keeping components that explain at least 85% of variance (7 components)",
+        "Quality checked with silhouette width and the Calinski-Harabasz index"
       ],
       "links": {
         "youtube": "",
@@ -261,7 +270,7 @@
       },
       "images": [],
       "thumbnail": "",
-      "whatILearned": "",
+      "whatILearned": "Forecasting: a time series can be turned into a normal learning problem by giving the network the last few days as inputs. I normalised the data so no input dominated, trained several layouts and scored them with four error measures, because each one hides something the others show. A network with two hidden layers (10 and 8 nodes) beat the best single-layer one, and the predicted-versus-actual plot followed the trend closely with a few outliers.\n\nClustering: I removed outliers more than three standard deviations from the mean before scaling, since outliers stretch the scale. All four methods agreed that two clusters was the best choice. The clusters overlapped a little, and the average silhouette width was low (about 0.22) on the raw data. After PCA the silhouette score improved, which shows the compressed data separated the wines better.\n\nThe main takeaway was to judge a model with several measures and to be honest about what the plots show.",
       "notes": ""
     },
     {
@@ -272,17 +281,18 @@
       "featured": false,
       "date": "2024-01",
       "course": "5COSC019W",
-      "summary": "Java shopping manager with products, electronics, clothing and a shopping cart.",
+      "summary": "A Java shopping manager built around an object-oriented product hierarchy of electronics and clothing, with a console menu, a graphical interface and a shopping cart with discounts.",
       "tags": [
         "Java",
         "Maven",
         "UML"
       ],
       "features": [
-        "Product class hierarchy",
-        "Shopping cart",
-        "UML use case and class diagrams",
-        "Test plan",
+        "Product base class with Electronics and Clothing subclasses",
+        "Console menu to add, delete and list products (sorted by ID) and to save and load from a CSV file",
+        "Graphical interface with a category drop-down and product details panel",
+        "Shopping cart with the final price and applicable discounts",
+        "UML use case and class diagrams and a written test plan",
         "Demo video"
       ],
       "links": {
@@ -293,7 +303,7 @@
       },
       "images": [],
       "thumbnail": "",
-      "whatILearned": "",
+      "whatILearned": "The design came first: a use case diagram for what the user can do and a class diagram for how Product, Electronics, Clothing and ShoppingCart relate, then the code followed it. Inheritance let the two product types share common fields and add their own.\n\nThe test plan covered adding, deleting, ordered printing, saving to and loading from the CSV file, opening the GUI and exiting, each with expected results. Looking back, two things I would improve are highlighting low-stock items, which I did not finish, and replacing the manual test plan with automated unit tests and more consistent error handling.",
       "notes": ""
     },
     {
@@ -304,16 +314,18 @@
       "featured": false,
       "date": "2023-10",
       "course": "5COSC020W",
-      "summary": "Database design coursework with ER modelling and a second design part.",
+      "summary": "Database design coursework: an enhanced ER model for a holiday experience business, and a relational design for a cycling and food tour company.",
       "tags": [
         "SQL",
         "draw.io",
         "ER modelling"
       ],
       "features": [
-        "ER diagram",
-        "Part A report",
-        "Part B design"
+        "Part A: ER model covering customers, bookings, accommodation, meals, experiences and staff",
+        "Specialisation with mandatory/optional and or/and rules, for example apartments versus stand-alone rooms",
+        "Part B: relational design with primary and foreign keys and linking tables for many-to-many relationships",
+        "Staff, equipment, tour sessions and attractions modelled as separate entities",
+        "Diagrams drawn in draw.io"
       ],
       "links": {
         "youtube": "",
@@ -323,7 +335,7 @@
       },
       "images": [],
       "thumbnail": "",
-      "whatILearned": "",
+      "whatILearned": "Part A is an entity-relationship model for a business that sells accommodation, meals and experiences. The interesting part was specialisation: accommodation is either an apartment or a stand-alone room, meals are delivered or collective, and experiences are on-site (cooking, crafts, fitness) or off-site (hikes, excursions), each with its own attributes and the staff who oversee them.\n\nPart B turns a tour company into tables. Many-to-many relationships, such as which attractions a tour session covers or which equipment it needs, get their own linking tables with composite keys, and flags such as a food or walking session are stored on the session.\n\nI learned how cardinalities drive keys, when to split a table, and how to check a design against the real-world rules before writing any SQL. Note: the source diagrams contain my student number in their table names, so only redrawn or cleaned versions are suitable to publish.",
       "notes": ""
     },
     {
@@ -334,7 +346,7 @@
       "featured": false,
       "date": "2024-2025",
       "course": "Cyber Security",
-      "summary": "Penetration test write-up on a lab domain.",
+      "summary": "A methodology write-up from a penetration testing module, carried out against deliberately vulnerable lab machines that I was authorised to test. It follows the full path from reconnaissance to reporting.",
       "tags": [
         "Nmap",
         "Metasploit",
@@ -343,10 +355,12 @@
         "John the Ripper"
       ],
       "features": [
-        "OSINT and DNS enumeration",
-        "Port scanning",
-        "Exploitation",
-        "Written report"
+        "Passive reconnaissance: DNS enumeration, public pages and robots.txt",
+        "Active scanning: host discovery, SYN and connect scans, UDP scans, service and OS fingerprinting",
+        "Web vulnerability analysis: SQL injection, cross-site scripting and command injection in a training app",
+        "Password attacks: brute force and dictionary attacks, and recovering hashes",
+        "Social engineering and user weakness exercises",
+        "Mitigation advice for every finding"
       ],
       "links": {
         "youtube": "",
@@ -356,7 +370,7 @@
       },
       "images": [],
       "thumbnail": "",
-      "whatILearned": "",
+      "whatILearned": "This write-up is about method, not targets: all work was done in an isolated lab, and no real systems, addresses or credentials are shown here.\n\nI learned to work in stages. Passive reconnaissance first, because what you learn from public pages and DNS shapes which scans are worth running. Then active scanning, where the choice of scan matters: a ping sweep and half-open SYN scans are quieter than full connect scans, and I could explain the trade-off between stealth and reliability. Service and OS fingerprinting then turned open ports into specific, checkable findings.\n\nFor each weakness (information leaks, injection flaws, weak passwords, trusting users) I paired the attack with the control that prevents it: restricting DNS zone transfers, authentication instead of hiding paths in robots.txt, input validation and parameterised queries, rate limiting and strong password policy. The skill I value most is explaining risk to a non-specialist.",
       "notes": ""
     },
     {
@@ -367,15 +381,17 @@
       "featured": false,
       "date": "2022-11",
       "course": "First-year coursework",
-      "summary": "Early Python console program that sorts student credits into progression outcomes.",
+      "summary": "My first-year Python console program that takes a student's pass, defer and fail credits and works out their progression outcome.",
       "tags": [
         "Python",
         "Git"
       ],
       "features": [
-        "Input validation",
-        "Progress, Trailer, Retriever and Excluded outcomes",
-        "Summary output"
+        "Input validation: only whole numbers from the allowed set 0 to 120 in steps of 20",
+        "Checks that the credits add up to 120",
+        "Outcomes: Progress, Progress (module trailer), Do not progress (module retriever) and Exclude",
+        "Saves every entry to a text file and prints a histogram-style summary of the outcomes",
+        "Version-controlled with Git"
       ],
       "links": {
         "youtube": "",
@@ -385,7 +401,7 @@
       },
       "images": [],
       "thumbnail": "",
-      "whatILearned": "",
+      "whatILearned": "This was one of my first complete programs. It taught me loops, input validation with try and except so a typo cannot crash the program, dictionaries and lists for storing results, and writing to and reading from files.\n\nLooking back, the code is one long script with repeated blocks. Today I would split it into small functions and add tests, which is something I later did in the Sudoku and theatre projects.",
       "notes": ""
     },
     {
@@ -396,15 +412,15 @@
       "featured": false,
       "date": "2022-2023",
       "course": "Software Development",
-      "summary": "Original Java console version of the theatre booking system.",
+      "summary": "The original Java console version of the theatre booking system from my 2022-23 software development module, which I later rebuilt in C++.",
       "tags": [
         "Java"
       ],
       "features": [
-        "Buy ticket",
+        "Buy a ticket by choosing a row and seat, with the price set by row",
         "Seating area display",
         "Ticket list",
-        "File saving"
+        "Saving the seating plan to a file as 0s and 1s"
       ],
       "links": {
         "youtube": "",
@@ -414,7 +430,7 @@
       },
       "images": [],
       "thumbnail": "",
-      "whatILearned": "",
+      "whatILearned": "This version used arrays and ArrayLists to hold seats and tickets and a plain text file for saving. It worked, but the logic was spread across a few large methods.\n\nThat is why the C++ rewrite moved the rules into Ticket, Person, Row and Auditorium classes with unit tests. Comparing the two is a good measure of how much my design skills improved in a year.",
       "notes": ""
     }
   ]

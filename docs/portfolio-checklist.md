@@ -25,40 +25,40 @@ Each project: [ ] confirm summary and dates  [ ] pick screenshots/diagrams  [ ] 
 
 ### Featured
 **Sign Finder (final year project)**
-- [ ] Problem and audience (drivers, learners)
-- [ ] Dataset story: merged public sets plus own LabelImg annotations
-- [ ] Model comparison (YOLOv2, MobileNet, YOLOv5) and result (up to 96%)
-- [ ] App screens: photo scan, live scan, sign info, settings
-- [ ] Limitations (far signs) and future work
-- [ ] Demo video; report as write-up summary, not the full PDF
+- [x] Problem and audience (drivers, learners)
+- [x] Dataset story: merged public sets plus own LabelImg annotations
+- [x] Model comparison (YOLOv2, MobileNet, YOLOv5) and result (up to 96%)
+- [ ] App screens: photo scan, live scan, sign info, settings (described in text; screenshots are Michael's)
+- [x] Limitations (far signs) and future work
+- [ ] Demo video (YouTube link is Michael's); report summarised as a write-up, not the full PDF (done)
 
 **Sudoku Solver**
-- [ ] Explain propagation then backtracking in plain language
-- [ ] Timing table from README
-- [ ] Short code snippet only (the key idea), plus screenshot of the app
+- [x] Explain propagation then backtracking in plain language
+- [x] Timing table from README
+- [ ] Short code snippet only (the key idea), plus screenshot of the app (needs a snippet field in the template; screenshots are Michael's)
 
 **Theatre Booking System (C++)**
-- [ ] Class design (Ticket, Person, Row, Auditorium)
-- [ ] Menu screenshot, Catch tests
-- [ ] Note it began as the 2022 Java version
+- [x] Class design (Ticket, Person, Row, Auditorium)
+- [x] Menu screenshot, Catch tests
+- [x] Note it began as the 2022 Java version
 
 **iOS Weather App**
-- [ ] Screens: current, hourly, daily, map, visited places
-- [ ] Highlight your own enhancements (tap to recentre, swipe to refresh)
-- [ ] Demo video if available
+- [x] Screens: current, hourly, daily, map, visited places
+- [x] Highlight your own enhancements (tap to recentre, swipe to refresh)
+- [x] Demo video if available
 
 ### AI and data
-- [ ] Applied AI RNN: data pipeline, model, 85.3% accuracy, confusion matrix, video
-- [ ] Robotics Q-learning: reward design, learning curve, random-environment tests
-- [ ] R coursework: forecasting approach, clustering method, key plots
+- [x] Applied AI RNN: data pipeline, model, 85.3% accuracy, confusion matrix, video
+- [x] Robotics Q-learning: reward design, learning curve, random-environment tests
+- [x] R coursework: forecasting approach, clustering method, key plots
 
 ### Systems, backend, other
-- [ ] Health System API: endpoints overview, demo video
-- [ ] OOP shopping manager: UML diagrams, test plan, YouTube demo
-- [ ] Database: ER diagram, design decisions
-- [ ] Cyber security: methodology only, no sensitive targets or credentials
-- [ ] Python grade progression (early work)
-- [ ] Java theatre booking (early work)
+- [x] Health System API: endpoints overview, demo video
+- [x] OOP shopping manager: UML diagrams, test plan, YouTube demo
+- [x] Database: ER diagram, design decisions
+- [x] Cyber security: methodology only, no sensitive targets or credentials
+- [x] Python grade progression (early work)
+- [x] Java theatre booking (early work)
 
 I will review each project's files when we reach it and suggest the highlights worth showing.
 
