@@ -7,11 +7,13 @@ from pathlib import Path
 
 PATH = Path(__file__).resolve().parent.parent / "data" / "projects.json"
 TYPES = {"mobile-app", "ai", "data", "algorithm", "systems", "backend", "database", "security", "early"}
+KINDS = {"screenshot", "code", "diagram", "clip"}
+CLIP_EXT = (".mp4", ".webm")
+MAX_CLIP_BYTES = 5 * 1024 * 1024  # a 6 second clip should be well under this
 THEMES = {"apple", "ai-graph", "terminal"}
-LINK_KEYS = {"youtube", "github", "writeup", "demo"}
+LINK_KEYS = {"github"}
 REQUIRED = ["id", "title", "type", "theme", "featured", "date", "summary", "tags", "features", "links"]
 ID_RE = re.compile(r"^[a-z0-9]+(-[a-z0-9]+)*$")
-YT_RE = re.compile(r"^([\w-]{11}|https://(www\.)?(youtube\.com|youtu\.be)/\S+)$")
 
 errors = []
 try:
@@ -47,13 +49,9 @@ for i, p in enumerate(projects):
     if not isinstance(links, dict) or set(links) - LINK_KEYS:
         errors.append(f"{name}: links may only contain {sorted(LINK_KEYS)}")
     else:
-        yt = links.get("youtube", "")
-        if yt and not YT_RE.match(yt):
-            errors.append(f"{name}: youtube must be a video ID or a YouTube link")
-        for key in ("github", "writeup", "demo"):
-            url = links.get(key, "")
-            if url and not (url.startswith("https://") or url.startswith("pages/")):
-                errors.append(f"{name}: links.{key} must be https:// or a local pages/ path")
+        url = links.get("github", "")
+        if url and not url.startswith("https://"):
+            errors.append(f"{name}: links.github must be an https:// link")
 
     images = p.get("images", [])
     if not isinstance(images, list):
@@ -69,6 +67,32 @@ for i, p in enumerate(projects):
                 errors.append(f"{name}: image file not found: {src}")
             elif isinstance(img, dict) and not img.get("alt"):
                 errors.append(f"{name}: image {n} needs 'alt' text")
+    showcase = p.get("showcase", [])
+    if not isinstance(showcase, list):
+        errors.append(f"{name}: 'showcase' must be a list")
+    else:
+        for n, item in enumerate(showcase, 1):
+            if not isinstance(item, dict) or item.get("kind") not in KINDS:
+                errors.append(f"{name}: showcase {n} needs a 'kind' of {sorted(KINDS)}")
+                continue
+            src = item.get("src", "")
+            if item.get("kind") == "clip":
+                if src:
+                    f = PATH.parent.parent / src
+                    if not (src.startswith("videos/") and src.lower().endswith(CLIP_EXT) and f.is_file()):
+                        errors.append(f"{name}: showcase {n} clip src must be an existing .mp4/.webm under videos/")
+                    elif f.stat().st_size > MAX_CLIP_BYTES:
+                        errors.append(f"{name}: showcase {n} clip is over 5 MB; trim to 6 s or lower the resolution")
+                    elif not item.get("alt"):
+                        errors.append(f"{name}: showcase {n} needs 'alt' text describing the clip")
+                poster = item.get("poster", "")
+                if poster and not (poster.startswith("images/") and (PATH.parent.parent / poster).is_file()):
+                    errors.append(f"{name}: showcase {n} poster must be an existing file under images/")
+            elif src:
+                if not src.startswith("images/") or not (PATH.parent.parent / src).is_file():
+                    errors.append(f"{name}: showcase {n} src must be an existing file under images/")
+                elif not item.get("alt"):
+                    errors.append(f"{name}: showcase {n} needs 'alt' text")
     thumb = p.get("thumbnail", "")
     if thumb and not (thumb.startswith("images/") and (PATH.parent.parent / thumb).is_file()):
         errors.append(f"{name}: thumbnail must be an existing file under images/")

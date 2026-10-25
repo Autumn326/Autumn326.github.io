@@ -1,6 +1,6 @@
 # Portfolio Site Checklist
 
-Static site for GitHub Pages (no login, no database). All projects come from `projects.json`. Rules: no full source code, no student ID anywhere, videos are YouTube embeds.
+Static site for GitHub Pages (no login, no database). All projects come from `projects.json`. Rules: no full source code, no student ID anywhere, short clips are local files (6 s max).
 
 ## Phase 1: Home page basics
 - [x] Choose site name, tagline and short intro
@@ -16,49 +16,49 @@ Static site for GitHub Pages (no login, no database). All projects come from `pr
 ## Phase 2: Shared template and data
 - [ ] You fill in `projects.json` (links, images, thumbnails, what I learned)
 - [x] One project page template that reads a project by id
-- [x] Optional sections hidden when empty: summary, features, tech tags, YouTube embed, screenshots, write-up link, what I learned
+- [x] Optional sections hidden when empty: summary, features, tech tags, highlights, screenshots, what I learned
 - [x] Reduced-motion and keyboard basics built in
 - [x] "Add a new project" steps written down (one JSON entry plus images)
 
 ## Phase 3: Content, one checklist per project
-Each project: [ ] confirm summary and dates  [ ] pick screenshots/diagrams  [ ] YouTube link  [ ] key features  [ ] "what I learned"  [ ] remove IDs/code  [ ] thumbnail
+Each project: [ ] confirm summary and dates  [ ] pick screenshots/diagrams  [ ] key features  [ ] "what I learned"  [ ] remove IDs/code  [ ] thumbnail
 
 ### Featured
 **Sign Finder (final year project)**
-- [ ] Problem and audience (drivers, learners)
-- [ ] Dataset story: merged public sets plus own LabelImg annotations
-- [ ] Model comparison (YOLOv2, MobileNet, YOLOv5) and result (up to 96%)
-- [ ] App screens: photo scan, live scan, sign info, settings
-- [ ] Limitations (far signs) and future work
-- [ ] Demo video; report as write-up summary, not the full PDF
+- [x] Problem and audience (drivers, learners)
+- [x] Dataset story: merged public sets plus own LabelImg annotations
+- [x] Model comparison (YOLOv2, MobileNet, YOLOv5) and result (up to 96%)
+- [ ] App screens: photo scan, live scan, sign info, settings (described in text; screenshots are Michael's)
+- [x] Limitations (far signs) and future work
+- [x] Report summarised as a write-up, not the full PDF (done)
 
 **Sudoku Solver**
-- [ ] Explain propagation then backtracking in plain language
-- [ ] Timing table from README
-- [ ] Short code snippet only (the key idea), plus screenshot of the app
+- [x] Explain propagation then backtracking in plain language
+- [x] Timing table from README
+- [ ] Short code snippet only (the key idea), plus screenshot of the app (needs a snippet field in the template; screenshots are Michael's)
 
 **Theatre Booking System (C++)**
-- [ ] Class design (Ticket, Person, Row, Auditorium)
-- [ ] Menu screenshot, Catch tests
-- [ ] Note it began as the 2022 Java version
+- [x] Class design (Ticket, Person, Row, Auditorium)
+- [x] Menu screenshot, Catch tests
+- [x] Note it began as the 2022 Java version
 
 **iOS Weather App**
-- [ ] Screens: current, hourly, daily, map, visited places
-- [ ] Highlight your own enhancements (tap to recentre, swipe to refresh)
-- [ ] Demo video if available
+- [x] Screens: current, hourly, daily, map, visited places
+- [x] Highlight your own enhancements (tap to recentre, swipe to refresh)
+- [x] Short clips if available
 
 ### AI and data
-- [ ] Applied AI RNN: data pipeline, model, 85.3% accuracy, confusion matrix, video
-- [ ] Robotics Q-learning: reward design, learning curve, random-environment tests
-- [ ] R coursework: forecasting approach, clustering method, key plots
+- [x] Applied AI RNN: data pipeline, model, 85.3% accuracy, confusion matrix, video
+- [x] Robotics Q-learning: reward design, learning curve, random-environment tests
+- [x] R coursework: forecasting approach, clustering method, key plots
 
 ### Systems, backend, other
-- [ ] Health System API: endpoints overview, demo video
-- [ ] OOP shopping manager: UML diagrams, test plan, YouTube demo
-- [ ] Database: ER diagram, design decisions
-- [ ] Cyber security: methodology only, no sensitive targets or credentials
-- [ ] Python grade progression (early work)
-- [ ] Java theatre booking (early work)
+- [x] Health System API: endpoints overview
+- [x] OOP shopping manager: UML diagrams, test plan
+- [x] Database: ER diagram, design decisions
+- [x] Cyber security: methodology only, no sensitive targets or credentials
+- [x] Python grade progression (early work)
+- [x] Java theatre booking (early work)
 
 I will review each project's files when we reach it and suggest the highlights worth showing.
 

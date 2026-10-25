@@ -19,4 +19,4 @@ then visit `http://localhost:8000`.
 
 ## Rules
 
-No full source code, no student ID anywhere, videos are YouTube embeds.
+No full source code, no student ID anywhere, short clips are local files (6 s max), no YouTube or external links.
