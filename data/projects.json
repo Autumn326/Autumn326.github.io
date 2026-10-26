@@ -50,72 +50,77 @@
           "title": "Live scan",
           "brief": "Live Scan tab with a box drawn on a sign in the camera feed.",
           "file": "images/sign-finder/live-scan.png",
-          "src": "",
-          "alt": "",
-          "caption": ""
+          "src": "images/sign-finder/live-scan.png",
+          "alt": "Placeholder cartoon of a cat sleeping on a laptop, standing in for: Live scan",
+          "caption": "Placeholder: Live scan",
+          "placeholder": true
         },
         {
           "kind": "screenshot",
           "title": "Sign info and settings",
           "brief": "Info tab with a category expanded, and the Settings picker for quality and frame interval (side by side in one image).",
           "file": "images/sign-finder/info-settings.png",
-          "src": "",
-          "alt": "",
-          "caption": ""
+          "src": "images/sign-finder/info-settings.png",
+          "alt": "Placeholder cartoon of a cat sleeping on a laptop, standing in for: Sign info and settings",
+          "caption": "Placeholder: Sign info and settings",
+          "placeholder": true
         },
         {
           "kind": "diagram",
           "title": "Pipeline: data to app",
           "brief": "Simple redrawn flow: public datasets + own LabelImg photos -> Python merge/convert -> Create ML (YOLOv2) -> Core ML in SwiftUI. Redraw rather than using report figures that carry report headers.",
           "file": "images/sign-finder/pipeline.png",
-          "src": "",
-          "alt": "",
-          "caption": ""
+          "src": "images/sign-finder/pipeline.png",
+          "alt": "Placeholder cartoon of a cat sleeping on a laptop, standing in for: Pipeline: data to app",
+          "caption": "Placeholder: Pipeline: data to app",
+          "placeholder": true
         },
         {
           "kind": "screenshot",
           "title": "Annotating in LabelImg",
           "brief": "LabelImg with boxes drawn on one of your own photos (shows the dataset work).",
           "file": "images/sign-finder/labelimg.png",
-          "src": "",
-          "alt": "",
-          "caption": ""
+          "src": "images/sign-finder/labelimg.png",
+          "alt": "Placeholder cartoon of a cat sleeping on a laptop, standing in for: Annotating in LabelImg",
+          "caption": "Placeholder: Annotating in LabelImg",
+          "placeholder": true
         },
         {
           "kind": "screenshot",
           "title": "Model evaluation",
           "brief": "Create ML evaluation/test-scan view or the CNN confusion matrix, cropped to the chart only.",
           "file": "images/sign-finder/evaluation.png",
-          "src": "",
-          "alt": "",
-          "caption": ""
+          "src": "images/sign-finder/evaluation.png",
+          "alt": "Placeholder cartoon of a cat sleeping on a laptop, standing in for: Model evaluation",
+          "caption": "Placeholder: Model evaluation",
+          "placeholder": true
         },
         {
           "kind": "code",
           "title": "Run the model on every Nth frame",
           "brief": "ScanView/LiveScanViewModel: the frameCounter % frameProcessingInterval guard plus the VNCoreMLRequest. About 12 lines. Shows how battery use is controlled.",
           "file": "images/sign-finder/code-live-frames.png",
-          "src": "",
-          "alt": "",
-          "caption": ""
+          "src": "images/sign-finder/code-live-frames.png",
+          "alt": "Swift code from LiveScanViewModel: a frame counter modulo the processing interval, a weak-self Vision request and a background queue",
+          "caption": "Run the model on every Nth frame, off the main thread."
         },
         {
           "kind": "code",
           "title": "Boxes in the right place",
           "brief": "The GeometryReader + ZStack block in ScanView that converts Vision's normalised boxes to screen coordinates. About 15 lines.",
           "file": "images/sign-finder/code-boxes.png",
-          "src": "",
-          "alt": "",
-          "caption": ""
+          "src": "images/sign-finder/code-boxes.png",
+          "alt": "Swift code from ScanView that scales Vision's normalised boxes to the on-screen image and flips the y axis",
+          "caption": "Turning Vision's 0-to-1 boxes into screen rectangles."
         },
         {
           "kind": "code",
-          "title": "Pascal VOC to Create ML boxes",
-          "brief": "The small conversion from corner coordinates to centre + width/height. About 8 lines.",
+          "title": "Reading Pascal VOC boxes",
+          "brief": "Reads one Pascal VOC XML file into the common (label, box) format.",
           "file": "images/sign-finder/code-convert.png",
-          "src": "",
-          "alt": "",
-          "caption": ""
+          "src": "images/sign-finder/code-convert.png",
+          "alt": "Python function that reads a Pascal VOC XML file and returns the image path with each label and its four box coordinates",
+          "caption": "Reading Pascal VOC annotations into one common format."
         },
         {
           "kind": "clip",
@@ -126,6 +131,129 @@
           "alt": "Live Scan screen: tapping Start Scanning, then the camera finds a No Entry sign and draws a green box with a label",
           "caption": "Live scan: start the camera and the sign is boxed and labelled in real time.",
           "poster": ""
+        }
+      ],
+      "story": [
+        {
+          "id": "problem",
+          "label": "Problem",
+          "title": "Why this app exists",
+          "body": [
+            "Road signs are easy to miss or misread, especially for learner drivers and visitors, and built-in sign recognition only exists in newer, expensive cars. I wanted a free tool that works on any iPhone, both as a quick \"what does that sign mean?\" helper and as a revision aid for the driving test.",
+            "That gave me three design rules that shaped everything else: it has to work from a single photo, it has to work live through the camera, and it has to be private, so every image is processed on the phone and never stored or uploaded."
+          ]
+        },
+        {
+          "id": "data",
+          "label": "Data",
+          "title": "Building the dataset",
+          "body": [
+            "Public datasets used different layouts (Pascal VOC XML, CSV), some had duplicate boxes, and some contained signs that do not exist in the UK. I wrote Python scripts to convert everything into one format, drop duplicates and filter out irrelevant classes, then added my own photos annotated by hand in LabelImg. Only datasets with reuse licences were used.",
+            "The first job of every script is the same: read an annotation file and return the image plus a list of labelled boxes."
+          ],
+          "media": [
+            "images/sign-finder/pipeline.png",
+            "images/sign-finder/labelimg.png",
+            "images/sign-finder/code-convert.png"
+          ],
+          "notes": [
+            {
+              "title": "Why Pascal VOC as the common format?",
+              "text": "LabelImg saves in Pascal VOC, so my own photos already matched it. Converting the other datasets into the same shape meant the rest of the pipeline only ever had to understand one format."
+            },
+            {
+              "title": "Why return the filename and a list of tuples?",
+              "text": "Each image can hold several signs, so an image maps to a list of (label, box) pairs. Keeping the label and the four corner coordinates together made it easy to build the label list and the multi-sign training matrix afterwards."
+            },
+            {
+              "title": "Why read the filename from the XML?",
+              "text": "The annotation is the source of truth for which image it describes, so pairing the two never depends on files being sorted the same way in two folders."
+            }
+          ]
+        },
+        {
+          "id": "model",
+          "label": "Model",
+          "title": "Choosing a model that can ship",
+          "body": [
+            "I first trained a TensorFlow convolutional network: three convolution and pooling stages (32, 64 and 128 filters), a dropout layer to reduce overfitting and a sigmoid output so one image can contain several signs. It scored above 90%, but converting it to Core ML with coremltools made the accuracy drop badly.",
+            "After researching lightweight options (SSD-MobileNet, YOLOv5 Nano, EfficientDet) I switched to Create ML, whose YOLOv2-style detector drops straight into Xcode. The lesson was to check the deployment path before committing to a training framework. The final model reached up to 96% accuracy in good conditions."
+          ],
+          "media": [
+            "images/sign-finder/evaluation.png"
+          ]
+        },
+        {
+          "id": "photo",
+          "label": "Photo scan",
+          "title": "Photo scan: boxes in the right place",
+          "body": [
+            "The scan screen lets you pick a photo, runs the model through Vision, and draws a labelled box over every sign it finds with the confidence score underneath. The Scan button stays disabled until a photo is chosen, which came out of black-box testing: pressing it with nothing selected used to be a dead end."
+          ],
+          "media": [
+            "images/sign-finder/scan.jpg",
+            "images/sign-finder/code-boxes.png"
+          ],
+          "notes": [
+            {
+              "title": "Why a GeometryReader?",
+              "text": "Vision returns each box as fractions of the image (0 to 1). The image is shown at whatever size fits, so I read the real width and height from the GeometryReader and multiply, which keeps the boxes on the signs on any screen."
+            },
+            {
+              "title": "Why 1 minus y minus height?",
+              "text": "Vision measures from the bottom-left corner but SwiftUI measures from the top-left. Flipping the y value is what stops the boxes appearing upside down."
+            },
+            {
+              "title": "Why a ZStack?",
+              "text": "The image, the box outline and the label need to sit on top of one another at exact positions, so each box and its label are positioned inside the same ZStack as the picture."
+            },
+            {
+              "title": "Why a guard on the image conversion?",
+              "text": "Converting between UIImage and CGImage can fail, and a guard turns that into a readable message instead of a crash."
+            }
+          ]
+        },
+        {
+          "id": "live",
+          "label": "Live scan",
+          "title": "Live scan without draining the battery",
+          "body": [
+            "The live tab reads frames from the camera and overlays boxes on the moving feed. Running a neural network on all 30 or more frames a second would heat the phone and drain the battery, so the design is about doing less work: analyse every Nth frame, keep the heavy work off the main thread, and only start the camera when the user presses start."
+          ],
+          "media": [
+            "videos/sign-finder/live-scan.mp4",
+            "images/sign-finder/live-scan.png",
+            "images/sign-finder/code-live-frames.png"
+          ],
+          "notes": [
+            {
+              "title": "Why every Nth frame?",
+              "text": "A counter and a modulo check let the app skip most frames. The interval is a setting, so a user can trade smoothness for battery life."
+            },
+            {
+              "title": "Why a separate queue for the model?",
+              "text": "Inference is slow compared with drawing. Running it on its own background queue keeps the camera preview and the buttons responsive, and results are sent back to the main thread only to update the boxes."
+            },
+            {
+              "title": "Why [weak self]?",
+              "text": "The Vision callback can fire after the screen has gone. A weak reference stops the callback from keeping the view model alive after the user leaves."
+            },
+            {
+              "title": "Why scaleFill?",
+              "text": "The model expects a fixed input size, so each frame is scaled to fill it rather than cropped, which keeps signs near the edges in view."
+            }
+          ]
+        },
+        {
+          "id": "info",
+          "label": "Info and settings",
+          "title": "Revision screen and settings",
+          "body": [
+            "A recognised sign is only useful if you know what it means, so the info tab lists signs grouped by type for revision. The settings screen exposes the two choices that matter most on a phone: camera quality and how often frames are analysed. Both feed straight into the live scan, so a user on an older phone can lower them."
+          ],
+          "media": [
+            "images/sign-finder/info-settings.png"
+          ]
         }
       ]
     },
@@ -163,55 +291,156 @@
           "title": "The app solving a puzzle",
           "brief": "App window with the hardest puzzle entered and solved.",
           "file": "images/sudoku-solver/app.png",
-          "src": "",
-          "alt": "",
-          "caption": ""
+          "src": "images/sudoku-solver/app.png",
+          "alt": "Placeholder cartoon of a cat sleeping on a laptop, standing in for: The app solving a puzzle",
+          "caption": "Placeholder: The app solving a puzzle",
+          "placeholder": true
         },
         {
           "kind": "code",
           "title": "Eliminate: the cascade",
           "brief": "solver.py eliminate(): the two rules (single candidate removes from peers; one home for a digit places it). About 20 lines, the core idea.",
           "file": "images/sudoku-solver/code-eliminate.png",
-          "src": "",
-          "alt": "",
-          "caption": ""
+          "src": "images/sudoku-solver/code-eliminate.png",
+          "alt": "Python eliminate function: remove a candidate, then apply the single-candidate rule and the only-place-left rule recursively",
+          "caption": "Eliminate: the two rules that cascade."
         },
         {
           "kind": "code",
           "title": "Search: fewest candidates first",
           "brief": "solver.py search(): choose the square with the fewest options, try each on a copy. About 12 lines.",
           "file": "images/sudoku-solver/code-search.png",
-          "src": "",
-          "alt": "",
-          "caption": ""
+          "src": "images/sudoku-solver/code-search.png",
+          "alt": "Python search function: pick the square with the fewest candidates, try each on a copy and backtrack on failure",
+          "caption": "Search: fewest candidates first."
         },
         {
           "kind": "screenshot",
           "title": "Tests passing and timing",
           "brief": "Terminal after `python3 test_solver.py` showing tests pass and the timings table.",
           "file": "images/sudoku-solver/tests.png",
-          "src": "",
-          "alt": "",
-          "caption": ""
+          "src": "images/sudoku-solver/tests.png",
+          "alt": "Placeholder cartoon of a cat sleeping on a laptop, standing in for: Tests passing and timing",
+          "caption": "Placeholder: Tests passing and timing",
+          "placeholder": true
         },
         {
           "kind": "diagram",
           "title": "Candidates before and after propagation",
           "brief": "Two grids side by side for one puzzle: all candidates at the start, remaining candidates after propagation (even a hand-made image works).",
           "file": "images/sudoku-solver/propagation.png",
-          "src": "",
-          "alt": "",
-          "caption": ""
+          "src": "images/sudoku-solver/propagation.png",
+          "alt": "Placeholder cartoon of a cat sleeping on a laptop, standing in for: Candidates before and after propagation",
+          "caption": "Placeholder: Candidates before and after propagation",
+          "placeholder": true
         },
         {
           "kind": "clip",
           "title": "Clip: solve the hardest puzzle",
           "brief": "6 s max: enter the puzzle and press Solve.",
           "file": "videos/sudoku-solver/solve.mp4",
-          "src": "",
-          "alt": "",
-          "caption": "",
-          "poster": ""
+          "src": "videos/sudoku-solver/solve.mp4",
+          "alt": "Placeholder clip of a cat snoring, standing in for: Clip: solve the hardest puzzle",
+          "caption": "Placeholder: Clip: solve the hardest puzzle",
+          "poster": "",
+          "placeholder": true
+        }
+      ],
+      "story": [
+        {
+          "id": "idea",
+          "label": "Idea",
+          "title": "Cut the search space, do not brute force it",
+          "body": [
+            "Brute force would try 9 to the power of 81 combinations, more than the atoms in the universe, so the interesting part is cutting the search space. I followed the approach from Peter Norvig's essay: let logic do as much work as possible and only guess when logic stalls."
+          ],
+          "media": [
+            "images/sudoku-solver/app.png",
+            "videos/sudoku-solver/solve.mp4"
+          ]
+        },
+        {
+          "id": "board",
+          "label": "Board",
+          "title": "Representing the board",
+          "body": [
+            "Squares are named A1 to I9. Every row, column and 3x3 box is a unit, giving 27 units of 9 squares, and each square has exactly 20 peers that share a unit with it. These are built once, up front, so the solving code never has to work out neighbours again.",
+            "Each square stores a string of the digits still possible there. An empty square starts as 123456789 and a solved one is a single digit, so the same structure holds both the clues and the working."
+          ]
+        },
+        {
+          "id": "eliminate",
+          "label": "Logic",
+          "title": "Eliminate: two rules that cascade",
+          "body": [
+            "Eliminating a digit from a square can trigger two consequences. If a square is down to one digit, no peer can use it. If a digit only fits in one square of a row, column or box, it must go there. Each rule can trigger the other, so an easy puzzle collapses with no guessing at all."
+          ],
+          "media": [
+            "images/sudoku-solver/propagation.png",
+            "images/sudoku-solver/code-eliminate.png"
+          ],
+          "notes": [
+            {
+              "title": "Why store candidates as a string?",
+              "text": "Removing a digit is one replace call and the length tells me how many options remain. A string is also easy to print for debugging."
+            },
+            {
+              "title": "Why return False on an empty square?",
+              "text": "A square with no candidates is a contradiction. Returning False up the chain tells the search that its last guess was wrong, so it can back out."
+            },
+            {
+              "title": "Why recursion?",
+              "text": "Each elimination can cause further eliminations. Recursion lets the consequences ripple through the board until nothing changes, with no need for a separate loop."
+            },
+            {
+              "title": "Why check each unit for one place left?",
+              "text": "This is the rule people use by hand: if only one square in a row can hold a 7, it must be a 7. Without it, the solver would need many more guesses."
+            }
+          ]
+        },
+        {
+          "id": "search",
+          "label": "Search",
+          "title": "Search only when logic stalls",
+          "body": [
+            "When logic runs out, the solver guesses. It picks the unsolved square with the fewest options, because a two-option guess is right half the time, tries each digit on a copy of the board, propagates the consequences and backs out if it hits a contradiction."
+          ],
+          "media": [
+            "images/sudoku-solver/code-search.png"
+          ],
+          "notes": [
+            {
+              "title": "Why the fewest candidates first?",
+              "text": "A square with two options halves the work immediately, while a square with nine would barely cut anything. Fewest-first keeps the search tree narrow."
+            },
+            {
+              "title": "Why copy the values?",
+              "text": "Each guess changes the board. Working on a copy means a wrong guess can be thrown away without having to undo any moves, at the cost of copying the board each time."
+            },
+            {
+              "title": "Why does it return the first success?",
+              "text": "Valid Sudoku puzzles have one solution, so as soon as one branch reaches a full board the search can stop."
+            }
+          ]
+        },
+        {
+          "id": "tests",
+          "label": "Testing",
+          "title": "Proving it is correct and fast",
+          "body": [
+            "The tests check the structure first (81 squares, 27 units, 20 peers each), then solve an easy puzzle, the hardest known puzzle and the 17-clue minimum puzzle, and verify that every row, column and box holds 1 to 9 exactly once. Timings are printed too: roughly 7 ms for easy, 5 ms for the hardest and 4 ms for the 17-clue puzzle, and the test also reports how many squares propagation alone filled before any guessing."
+          ],
+          "media": [
+            "images/sudoku-solver/tests.png"
+          ]
+        },
+        {
+          "id": "app",
+          "label": "App",
+          "title": "A small desktop app on top",
+          "body": [
+            "A Tkinter window gives a 9x9 grid of entry boxes with thicker borders around each box, key-by-key validation so only digits are accepted, and a one-click launcher. Before solving, the app checks the clues for duplicates so it can tell the difference between invalid input and a puzzle with no solution, and says which row, column or box is wrong."
+          ]
         }
       ]
     },
@@ -250,64 +479,151 @@
           "title": "Main menu",
           "brief": "Console showing the numbered menu (buy, seat map, cancel, list, save, load, tickets, sort, quit).",
           "file": "images/theatre-booking-cpp/menu.png",
-          "src": "",
-          "alt": "",
-          "caption": ""
+          "src": "images/theatre-booking-cpp/menu.png",
+          "alt": "Placeholder cartoon of a cat sleeping on a laptop, standing in for: Main menu",
+          "caption": "Placeholder: Main menu",
+          "placeholder": true
         },
         {
           "kind": "screenshot",
           "title": "Seat map with bookings",
           "brief": "Seat map after booking a few seats, in the console.",
           "file": "images/theatre-booking-cpp/seat-map.png",
-          "src": "",
-          "alt": "",
-          "caption": ""
+          "src": "images/theatre-booking-cpp/seat-map.png",
+          "alt": "Placeholder cartoon of a cat sleeping on a laptop, standing in for: Seat map with bookings",
+          "caption": "Placeholder: Seat map with bookings",
+          "placeholder": true
         },
         {
           "kind": "screenshot",
           "title": "Catch tests passing",
           "brief": "Terminal output of run_tests showing all 9 test cases passing.",
           "file": "images/theatre-booking-cpp/tests.png",
-          "src": "",
-          "alt": "",
-          "caption": ""
+          "src": "images/theatre-booking-cpp/tests.png",
+          "alt": "Placeholder cartoon of a cat sleeping on a laptop, standing in for: Catch tests passing",
+          "caption": "Placeholder: Catch tests passing",
+          "placeholder": true
         },
         {
           "kind": "diagram",
           "title": "Class diagram",
           "brief": "Boxes for Ticket, Person, Row, Auditorium and the SeatState enum with their relationships (draw.io is fine).",
           "file": "images/theatre-booking-cpp/classes.png",
-          "src": "",
-          "alt": "",
-          "caption": ""
+          "src": "images/theatre-booking-cpp/classes.png",
+          "alt": "Placeholder cartoon of a cat sleeping on a laptop, standing in for: Class diagram",
+          "caption": "Placeholder: Class diagram",
+          "placeholder": true
         },
         {
           "kind": "code",
           "title": "Row::book and cancel",
           "brief": "Row.cpp book() and cancel(): rules live in one place. About 10 lines.",
           "file": "images/theatre-booking-cpp/code-row.png",
-          "src": "",
-          "alt": "",
-          "caption": ""
+          "src": "images/theatre-booking-cpp/code-row.png",
+          "alt": "C++ Row class methods isFree, book and cancel with bounds checks on a one-indexed seat number",
+          "caption": "Row owns the booking rules."
         },
         {
           "kind": "code",
           "title": "A Catch test",
           "brief": "One test, for example booking an already-booked seat fails. About 8 lines.",
           "file": "images/theatre-booking-cpp/code-test.png",
-          "src": "",
-          "alt": "",
-          "caption": ""
+          "src": "images/theatre-booking-cpp/code-test.png",
+          "alt": "Catch test cases showing a free seat can be booked and an already booked seat cannot",
+          "caption": "Tests written as plain sentences."
         },
         {
           "kind": "clip",
           "title": "Clip: buy a ticket and see the seat update",
           "brief": "6 s max: buy a ticket, then print the seat map showing it booked.",
           "file": "videos/theatre-booking-cpp/buy.mp4",
-          "src": "",
-          "alt": "",
-          "caption": "",
-          "poster": ""
+          "src": "videos/theatre-booking-cpp/buy.mp4",
+          "alt": "Placeholder clip of a cat snoring, standing in for: Clip: buy a ticket and see the seat update",
+          "caption": "Placeholder: Clip: buy a ticket and see the seat update",
+          "poster": "",
+          "placeholder": true
+        }
+      ],
+      "story": [
+        {
+          "id": "classes",
+          "label": "Design",
+          "title": "Four classes, each with one job",
+          "body": [
+            "The project started as a Java coursework and I rebuilt it in C++ to practise object-oriented design and unit testing in a different language. Ticket holds the row, seat and price and a Person; Person holds the customer details; Row owns the state of each seat; Auditorium owns the rows and their prices.",
+            "The menu code in Main only talks to those classes, so the booking rules live in one place."
+          ],
+          "media": [
+            "images/theatre-booking-cpp/classes.png"
+          ]
+        },
+        {
+          "id": "row",
+          "label": "Rules",
+          "title": "Row owns the booking rules",
+          "body": [
+            "Booking and cancelling go through Row. A seat is either free or booked, and nothing outside Row can put a seat into a state the rules do not allow."
+          ],
+          "media": [
+            "images/theatre-booking-cpp/code-row.png"
+          ],
+          "notes": [
+            {
+              "title": "Why an enum class for seat state?",
+              "text": "SeatState has two values, Free and Booked. An enum class cannot be mixed up with an int or another enum, so a seat can never hold an invalid state."
+            },
+            {
+              "title": "Why does isFree check the range?",
+              "text": "The bounds check and the state check sit in one function, so out-of-range seats are simply never free and book() cannot touch memory outside the vector."
+            },
+            {
+              "title": "Why does book return a bool?",
+              "text": "The caller needs to know whether it worked so the menu can say seat taken instead of printing a ticket for a seat that was already booked."
+            },
+            {
+              "title": "Why seat minus one?",
+              "text": "People count seats from 1 but the vector counts from 0. Converting in one place inside Row keeps the rest of the program in human numbering."
+            }
+          ]
+        },
+        {
+          "id": "auditorium",
+          "label": "Layout",
+          "title": "Auditorium, tickets and the menu",
+          "body": [
+            "The auditorium is built with three rows of 12, 16 and 20 seats priced at 3, 6 and 9 pounds. The menu lets you buy a ticket, cancel one, print the seat map row by row with booked seats marked, list tickets with the total price, sort them by price, and save the seating to a file and load it back. Every input is validated for row, seat and menu choice."
+          ],
+          "media": [
+            "images/theatre-booking-cpp/menu.png",
+            "images/theatre-booking-cpp/seat-map.png",
+            "videos/theatre-booking-cpp/buy.mp4"
+          ]
+        },
+        {
+          "id": "tests",
+          "label": "Testing",
+          "title": "Tests written as sentences",
+          "body": [
+            "Nine Catch test cases cover rows, the auditorium, tickets and people. Each test name reads as a sentence about behaviour, so the test output doubles as a specification."
+          ],
+          "media": [
+            "images/theatre-booking-cpp/tests.png",
+            "images/theatre-booking-cpp/code-test.png"
+          ],
+          "notes": [
+            {
+              "title": "Why test names as sentences?",
+              "text": "When one fails, the name says what rule broke, such as booking an already booked seat fails, without opening the code."
+            },
+            {
+              "title": "Why does every test build its own Row?",
+              "text": "Tests that share no state cannot affect each other, so they pass or fail for one reason and can run in any order."
+            },
+            {
+              "title": "Why test the failure case?",
+              "text": "Double booking is the bug that matters most in a booking system, so there is a test that tries to book the same seat twice and expects it to be refused."
+            }
+          ]
         }
       ]
     },
@@ -347,74 +663,156 @@
           "title": "Clip: tap an attraction, map recentres",
           "brief": "6 s max: tap an attraction in the list and the map recentres on it.",
           "file": "videos/ios-weather-app/recentre.mp4",
-          "src": "",
-          "alt": "",
-          "caption": "",
-          "poster": ""
+          "src": "videos/ios-weather-app/recentre.mp4",
+          "alt": "Placeholder clip of a cat snoring, standing in for: Clip: tap an attraction, map recentres",
+          "caption": "Placeholder: Clip: tap an attraction, map recentres",
+          "poster": "",
+          "placeholder": true
         },
         {
           "kind": "screenshot",
           "title": "Current weather and air quality",
           "brief": "Current weather screen.",
           "file": "images/ios-weather-app/current.png",
-          "src": "",
-          "alt": "",
-          "caption": ""
+          "src": "images/ios-weather-app/current.png",
+          "alt": "Placeholder cartoon of a cat sleeping on a laptop, standing in for: Current weather and air quality",
+          "caption": "Placeholder: Current weather and air quality",
+          "placeholder": true
         },
         {
           "kind": "screenshot",
           "title": "Hourly and daily forecast",
           "brief": "Forecast screens side by side.",
           "file": "images/ios-weather-app/forecast.png",
-          "src": "",
-          "alt": "",
-          "caption": ""
+          "src": "images/ios-weather-app/forecast.png",
+          "alt": "Placeholder cartoon of a cat sleeping on a laptop, standing in for: Hourly and daily forecast",
+          "caption": "Placeholder: Hourly and daily forecast",
+          "placeholder": true
         },
         {
           "kind": "screenshot",
           "title": "Map of attractions",
           "brief": "Map with annotations and the attraction list.",
           "file": "images/ios-weather-app/map.png",
-          "src": "",
-          "alt": "",
-          "caption": ""
+          "src": "images/ios-weather-app/map.png",
+          "alt": "Placeholder cartoon of a cat sleeping on a laptop, standing in for: Map of attractions",
+          "caption": "Placeholder: Map of attractions",
+          "placeholder": true
         },
         {
           "kind": "screenshot",
           "title": "Visited places with swipe action",
           "brief": "Visited places list with the blue swipe-to-refresh button showing.",
           "file": "images/ios-weather-app/visited-swipe.png",
-          "src": "",
-          "alt": "",
-          "caption": ""
+          "src": "images/ios-weather-app/visited-swipe.png",
+          "alt": "Placeholder cartoon of a cat sleeping on a laptop, standing in for: Visited places with swipe action",
+          "caption": "Placeholder: Visited places with swipe action",
+          "placeholder": true
         },
         {
           "kind": "code",
           "title": "Tap to recentre the map (my enhancement)",
           "brief": "The tap gesture in the map/list view that updates the map region. About 8 lines.",
           "file": "images/ios-weather-app/code-recentre.png",
-          "src": "",
-          "alt": "",
-          "caption": ""
+          "src": "images/ios-weather-app/code-recentre.png",
+          "alt": "SwiftUI list of tourist attractions where tapping a row sets the map region's centre to that place",
+          "caption": "My enhancement: tap an attraction and the map recentres."
         },
         {
           "kind": "code",
           "title": "Swipe to refresh a saved place (my enhancement)",
           "brief": "The swipeActions block in VisitedPlacesView. About 10 lines.",
           "file": "images/ios-weather-app/code-swipe.png",
-          "src": "",
-          "alt": "",
-          "caption": ""
+          "src": "images/ios-weather-app/code-swipe.png",
+          "alt": "SwiftUI leading swipe action on a saved place that sets the city and asynchronously loads its coordinates and weather",
+          "caption": "My enhancement: swipe right to load a saved place."
         },
         {
           "kind": "clip",
           "title": "Clip: swipe a saved place to refresh",
           "brief": "6 s max: swipe right on a saved place and tap the blue refresh button.",
           "file": "videos/ios-weather-app/swipe-refresh.mp4",
-          "src": "",
-          "alt": "",
-          "caption": "",
-          "poster": ""
+          "src": "videos/ios-weather-app/swipe-refresh.mp4",
+          "alt": "Placeholder clip of a cat snoring, standing in for: Clip: swipe a saved place to refresh",
+          "caption": "Placeholder: Clip: swipe a saved place to refresh",
+          "poster": "",
+          "placeholder": true
+        }
+      ],
+      "story": [
+        {
+          "id": "structure",
+          "label": "Structure",
+          "title": "Views, view models and models",
+          "body": [
+            "The app is split into views (current, hourly, daily, forecast, map, visited places and a tab bar), a view model that fetches and prepares the data, and model structs that match the JSON from the weather services. Keeping networking out of the views made each screen small and easy to change."
+          ],
+          "media": [
+            "images/ios-weather-app/current.png",
+            "images/ios-weather-app/forecast.png"
+          ]
+        },
+        {
+          "id": "data",
+          "label": "Data",
+          "title": "From a city name to a forecast",
+          "body": [
+            "Typing a city triggers a chain: the city is geocoded into coordinates, those coordinates are used to request the forecast and the air quality from OpenWeatherMap, the JSON is decoded into Swift models, and finally nearby tourist attractions are searched for. Each step is async and the HTTP status is checked before decoding, so a failed request does not show stale or broken data. Results are published back on the main thread so SwiftUI updates the screens."
+          ]
+        },
+        {
+          "id": "map",
+          "label": "Map",
+          "title": "A map that helps you find attractions",
+          "body": [
+            "The map shows the five top tourist attractions around the chosen place, found with a local map search over a small region. Under the map is a list of the same places. My first enhancement makes the list useful: tap an attraction and the map recentres on it, which helps when attractions are close together or hard to spot."
+          ],
+          "media": [
+            "images/ios-weather-app/map.png",
+            "videos/ios-weather-app/recentre.mp4",
+            "images/ios-weather-app/code-recentre.png"
+          ],
+          "notes": [
+            {
+              "title": "Why is the map region state?",
+              "text": "The map is bound to a region value. Changing the region's centre in the tap handler is all that is needed for SwiftUI to move the map."
+            },
+            {
+              "title": "Why change only the centre?",
+              "text": "Keeping the zoom as it was means the map pans to the place rather than jumping to a different scale, which feels more natural."
+            },
+            {
+              "title": "Why attach the tap to each row?",
+              "text": "The whole row is the tap target, not just the pin, which is easier to hit on a phone."
+            }
+          ]
+        },
+        {
+          "id": "places",
+          "label": "Saved places",
+          "title": "Visited places and a swipe to reload",
+          "body": [
+            "Saved places are stored with SwiftData and shown in a list. Swiping left deletes a place, which is the gesture people already know. My second enhancement adds the opposite swipe: swiping right on a saved place loads its weather again, so the other tabs update without typing the city name."
+          ],
+          "media": [
+            "images/ios-weather-app/visited-swipe.png",
+            "videos/ios-weather-app/swipe-refresh.mp4",
+            "images/ios-weather-app/code-swipe.png"
+          ],
+          "notes": [
+            {
+              "title": "Why the leading edge?",
+              "text": "Trailing swipes are for destructive actions like delete. Putting the safe action on the opposite side stops people deleting a place by accident."
+            },
+            {
+              "title": "Why a Task?",
+              "text": "Loading the place is async. A Task lets the button call await code without blocking the interface."
+            },
+            {
+              "title": "Why set the city on the view model?",
+              "text": "The view model is shared by every tab, so setting the city and reloading updates the current, hourly, daily and map screens together."
+            }
+          ]
         }
       ]
     },
@@ -455,45 +853,120 @@
           "title": "RNN diagram",
           "brief": "Your compact and expanded RNN diagrams from the notebook, as one image.",
           "file": "images/applied-ai-rnn/rnn-diagram.png",
-          "src": "",
-          "alt": "",
-          "caption": ""
+          "src": "images/applied-ai-rnn/rnn-diagram.png",
+          "alt": "Placeholder cartoon of a cat sleeping on a laptop, standing in for: RNN diagram",
+          "caption": "Placeholder: RNN diagram",
+          "placeholder": true
         },
         {
           "kind": "code",
           "title": "Model definition",
           "brief": "The Sequential model: Embedding, SimpleRNN(32), Dense sigmoid. About 6 lines.",
           "file": "images/applied-ai-rnn/code-model.png",
-          "src": "",
-          "alt": "",
-          "caption": ""
+          "src": "images/applied-ai-rnn/code-model.png",
+          "alt": "Keras code defining an Embedding layer, a 32-unit SimpleRNN and a sigmoid Dense output, then compiling with Adam and binary cross-entropy",
+          "caption": "The whole model in a few lines."
         },
         {
           "kind": "screenshot",
           "title": "Training output",
           "brief": "Epoch log showing accuracy and loss rising/falling.",
           "file": "images/applied-ai-rnn/training.png",
-          "src": "",
-          "alt": "",
-          "caption": ""
+          "src": "images/applied-ai-rnn/training.png",
+          "alt": "Placeholder cartoon of a cat sleeping on a laptop, standing in for: Training output",
+          "caption": "Placeholder: Training output",
+          "placeholder": true
         },
         {
           "kind": "screenshot",
           "title": "Confusion matrix",
           "brief": "Cropped matrix plot showing the bias toward negative.",
           "file": "images/applied-ai-rnn/confusion.png",
-          "src": "",
-          "alt": "",
-          "caption": ""
+          "src": "images/applied-ai-rnn/confusion.png",
+          "alt": "Placeholder cartoon of a cat sleeping on a laptop, standing in for: Confusion matrix",
+          "caption": "Placeholder: Confusion matrix",
+          "placeholder": true
         },
         {
           "kind": "screenshot",
           "title": "Predicting new text",
           "brief": "predict_sentiment on two or three sentences with outputs.",
           "file": "images/applied-ai-rnn/predict.png",
-          "src": "",
-          "alt": "",
-          "caption": ""
+          "src": "images/applied-ai-rnn/predict.png",
+          "alt": "Placeholder cartoon of a cat sleeping on a laptop, standing in for: Predicting new text",
+          "caption": "Placeholder: Predicting new text",
+          "placeholder": true
+        }
+      ],
+      "story": [
+        {
+          "id": "data",
+          "label": "Data",
+          "title": "A tweet sentiment dataset",
+          "body": [
+            "The data is a public tweet sentiment set labelled negative or positive. Cleaning it meant keeping only the two useful columns (the label and the text), reading the file with the right encoding, and turning the labels into 0 and 1."
+          ]
+        },
+        {
+          "id": "tokens",
+          "label": "Text to numbers",
+          "title": "Turning words into numbers",
+          "body": [
+            "A network cannot read words, so each tweet becomes a list of integers. A tokenizer keeps the 10,000 most common words and maps anything else to an out-of-vocabulary token, then every tweet is padded to 100 tokens so they can be processed in batches. The data was split 70/30 into training and test sets with a fixed random seed so results are repeatable."
+          ]
+        },
+        {
+          "id": "model",
+          "label": "Model",
+          "title": "A deliberately small model",
+          "body": [
+            "The model is one embedding layer that learns a vector for each word, one simple RNN layer that reads the tweet in order, and a single sigmoid neuron that outputs the probability of positive."
+          ],
+          "media": [
+            "images/applied-ai-rnn/rnn-diagram.png",
+            "images/applied-ai-rnn/code-model.png"
+          ],
+          "notes": [
+            {
+              "title": "Why an embedding layer?",
+              "text": "One-hot vectors for 10,000 words would be huge and say nothing about similarity. An embedding learns a small vector (32 numbers) per word, and similar words end up with similar vectors."
+            },
+            {
+              "title": "Why a RNN?",
+              "text": "The meaning of a tweet depends on word order, such as not good versus good, and a recurrent layer reads the words in sequence while carrying a memory."
+            },
+            {
+              "title": "Why return only the last output?",
+              "text": "I only need one decision per tweet, so the layer passes on its final state rather than an output for every word."
+            },
+            {
+              "title": "Why sigmoid and binary cross-entropy?",
+              "text": "There are two classes. Sigmoid gives a probability between 0 and 1, and binary cross-entropy is the matching loss."
+            }
+          ]
+        },
+        {
+          "id": "results",
+          "label": "Results",
+          "title": "85.3% accuracy and what it hides",
+          "body": [
+            "It trained for five epochs with a batch size of 64 and scored 85.3% (loss 0.348) on unseen tweets. The confusion matrix showed a bias toward predicting negative, because the data I could download was imbalanced. Balancing by throwing away data would have cost more accuracy than it fixed. A natural improvement is an LSTM, which copes better with vanishing gradients, plus a longer vocabulary and sequence length so long tweets do not lose words."
+          ],
+          "media": [
+            "images/applied-ai-rnn/training.png",
+            "images/applied-ai-rnn/confusion.png"
+          ]
+        },
+        {
+          "id": "use",
+          "label": "Using it",
+          "title": "Classifying a new sentence",
+          "body": [
+            "A small function applies the same cleaning steps to any new sentence and returns Positive or Negative, so the model can be used outside the notebook."
+          ],
+          "media": [
+            "images/applied-ai-rnn/predict.png"
+          ]
         }
       ]
     },
@@ -531,54 +1004,119 @@
           "title": "Learning curve",
           "brief": "Total reward per episode plot, rising then flattening near episode 250.",
           "file": "images/applied-robotics-qlearning/learning-curve.png",
-          "src": "",
-          "alt": "",
-          "caption": ""
+          "src": "images/applied-robotics-qlearning/learning-curve.png",
+          "alt": "Placeholder cartoon of a cat sleeping on a laptop, standing in for: Learning curve",
+          "caption": "Placeholder: Learning curve",
+          "placeholder": true
         },
         {
           "kind": "screenshot",
           "title": "Taxi grid in action",
           "brief": "env.render() frame of the 5x5 grid mid-route (or a short GIF if under 500 KB).",
           "file": "images/applied-robotics-qlearning/grid.png",
-          "src": "",
-          "alt": "",
-          "caption": ""
+          "src": "images/applied-robotics-qlearning/grid.png",
+          "alt": "Placeholder cartoon of a cat sleeping on a laptop, standing in for: Taxi grid in action",
+          "caption": "Placeholder: Taxi grid in action",
+          "placeholder": true
         },
         {
           "kind": "code",
           "title": "The Q-update and reward values",
           "brief": "The Bellman update line plus the alpha/gamma/epsilon settings. About 10 lines.",
           "file": "images/applied-robotics-qlearning/code-qupdate.png",
-          "src": "",
-          "alt": "",
-          "caption": ""
+          "src": "images/applied-robotics-qlearning/code-qupdate.png",
+          "alt": "Placeholder cartoon of a cat sleeping on a laptop, standing in for: The Q-update and reward values",
+          "caption": "Placeholder: The Q-update and reward values",
+          "placeholder": true
         },
         {
           "kind": "screenshot",
           "title": "Neural network loss curve",
           "brief": "Loss curve of the MLP imitating the policy.",
           "file": "images/applied-robotics-qlearning/loss.png",
-          "src": "",
-          "alt": "",
-          "caption": ""
+          "src": "images/applied-robotics-qlearning/loss.png",
+          "alt": "Placeholder cartoon of a cat sleeping on a laptop, standing in for: Neural network loss curve",
+          "caption": "Placeholder: Neural network loss curve",
+          "placeholder": true
         },
         {
           "kind": "screenshot",
           "title": "Neural network confusion matrix",
           "brief": "Matrix showing north/west and south/east confusions.",
           "file": "images/applied-robotics-qlearning/confusion.png",
-          "src": "",
-          "alt": "",
-          "caption": ""
+          "src": "images/applied-robotics-qlearning/confusion.png",
+          "alt": "Placeholder cartoon of a cat sleeping on a laptop, standing in for: Neural network confusion matrix",
+          "caption": "Placeholder: Neural network confusion matrix",
+          "placeholder": true
         },
         {
           "kind": "screenshot",
           "title": "1000 random environments test",
           "brief": "Output of testMultipleEnvs with the average reward.",
           "file": "images/applied-robotics-qlearning/random-envs.png",
-          "src": "",
-          "alt": "",
-          "caption": ""
+          "src": "images/applied-robotics-qlearning/random-envs.png",
+          "alt": "Placeholder cartoon of a cat sleeping on a laptop, standing in for: 1000 random environments test",
+          "caption": "Placeholder: 1000 random environments test",
+          "placeholder": true
+        }
+      ],
+      "story": [
+        {
+          "id": "setup",
+          "label": "Setup",
+          "title": "A taxi on a 5x5 grid",
+          "body": [
+            "The task is to teach a taxi to pick up a passenger and drop them off using Q-learning. The agent starts knowing nothing, tries actions, and learns a table of how good each action is in each state."
+          ],
+          "media": [
+            "images/applied-robotics-qlearning/grid.png"
+          ]
+        },
+        {
+          "id": "rewards",
+          "label": "Rewards",
+          "title": "Reward design is the lever",
+          "body": [
+            "A small penalty (-1) on every step pushes the taxi to find the shortest route. A heavy penalty (-10) on wrong pick-ups and drop-offs stops it doing those at random, and a +20 bonus for the correct drop-off gives it something to aim for.",
+            "The learning rate is 0.6 and the discount factor is 0.8, so the taxi values rewards that are close but still plans a few steps ahead."
+          ],
+          "media": [
+            "images/applied-robotics-qlearning/code-qupdate.png"
+          ]
+        },
+        {
+          "id": "explore",
+          "label": "Learning",
+          "title": "Exploring first, exploiting later",
+          "body": [
+            "Exploration is handled with epsilon: high at the start so the taxi maps out the grid, then decaying to a minimum so it increasingly uses what it learned. The learning curve rises quickly and levels off after about 250 episodes, which shows the policy has settled."
+          ],
+          "media": [
+            "images/applied-robotics-qlearning/learning-curve.png"
+          ]
+        },
+        {
+          "id": "test",
+          "label": "Testing",
+          "title": "Does it work from any start?",
+          "body": [
+            "A policy that works from one start proves little, so I tested it on 1000 random starting environments and checked the average reward was consistent."
+          ],
+          "media": [
+            "images/applied-robotics-qlearning/random-envs.png"
+          ]
+        },
+        {
+          "id": "imitate",
+          "label": "Part two",
+          "title": "Teaching a neural network the policy",
+          "body": [
+            "In part two I used the Q-table to build a dataset of 400 valid states with their best action and trained a neural network on an 80/20 split. It reached about 67% accuracy, which was only average: the confusion matrix showed it mixing up directions such as north and west. That showed me how much harder it is to imitate a policy than to learn one."
+          ],
+          "media": [
+            "images/applied-robotics-qlearning/loss.png",
+            "images/applied-robotics-qlearning/confusion.png"
+          ]
         }
       ]
     },
@@ -617,64 +1155,150 @@
           "title": "Clip: one request and its JSON response",
           "brief": "6 s max: send a request in the client and show the response.",
           "file": "videos/health-system-api/request.mp4",
-          "src": "",
-          "alt": "",
-          "caption": "",
-          "poster": ""
+          "src": "videos/health-system-api/request.mp4",
+          "alt": "Placeholder clip of a cat snoring, standing in for: Clip: one request and its JSON response",
+          "caption": "Placeholder: Clip: one request and its JSON response",
+          "poster": "",
+          "placeholder": true
         },
         {
           "kind": "screenshot",
           "title": "Calling an endpoint",
           "brief": "A client (Postman or similar) calling GET all doctors and a create call, showing the JSON.",
           "file": "images/health-system-api/request.png",
-          "src": "",
-          "alt": "",
-          "caption": ""
+          "src": "images/health-system-api/request.png",
+          "alt": "Placeholder cartoon of a cat sleeping on a laptop, standing in for: Calling an endpoint",
+          "caption": "Placeholder: Calling an endpoint",
+          "placeholder": true
         },
         {
           "kind": "diagram",
           "title": "Resource map",
           "brief": "A table or diagram of the 6 resources and their create/read/update/delete paths.",
           "file": "images/health-system-api/resources.png",
-          "src": "",
-          "alt": "",
-          "caption": ""
+          "src": "images/health-system-api/resources.png",
+          "alt": "Placeholder cartoon of a cat sleeping on a laptop, standing in for: Resource map",
+          "caption": "Placeholder: Resource map",
+          "placeholder": true
         },
         {
           "kind": "diagram",
           "title": "Layers",
           "brief": "Resource -> DAO -> model, with exception mappers on the side.",
           "file": "images/health-system-api/layers.png",
-          "src": "",
-          "alt": "",
-          "caption": ""
+          "src": "images/health-system-api/layers.png",
+          "alt": "Placeholder cartoon of a cat sleeping on a laptop, standing in for: Layers",
+          "caption": "Placeholder: Layers",
+          "placeholder": true
         },
         {
           "kind": "code",
           "title": "A resource method",
           "brief": "One JAX-RS method from DoctorResource: annotations, path parameter, response. About 12 lines.",
           "file": "images/health-system-api/code-resource.png",
-          "src": "",
-          "alt": "",
-          "caption": ""
+          "src": "images/health-system-api/code-resource.png",
+          "alt": "Java JAX-RS resource method that returns an appointment as JSON or throws a not-found exception",
+          "caption": "A resource method: look up, return or throw."
         },
         {
           "kind": "code",
           "title": "Exception mapper",
           "brief": "ResourceNotFoundExceptionMapper turning an exception into a 404 response. About 10 lines.",
           "file": "images/health-system-api/code-mapper.png",
-          "src": "",
-          "alt": "",
-          "caption": ""
+          "src": "images/health-system-api/code-mapper.png",
+          "alt": "Java ExceptionMapper that turns a not-found exception into an HTTP 404 response with a plain text message",
+          "caption": "Exceptions become proper HTTP responses."
         },
         {
           "kind": "screenshot",
           "title": "Error response",
           "brief": "Client showing the 404 JSON for a missing record.",
           "file": "images/health-system-api/error.png",
-          "src": "",
-          "alt": "",
-          "caption": ""
+          "src": "images/health-system-api/error.png",
+          "alt": "Placeholder cartoon of a cat sleeping on a laptop, standing in for: Error response",
+          "caption": "Placeholder: Error response",
+          "placeholder": true
+        }
+      ],
+      "story": [
+        {
+          "id": "layers",
+          "label": "Layers",
+          "title": "Models, data access and resources",
+          "body": [
+            "The structure is layered: model classes (a shared Person base for doctors and patients), data access classes that hold the data, and resource classes that expose it over HTTP. Keeping those apart meant I could change how data is stored without touching the endpoints. There are six resources (doctors, patients, appointments, prescriptions, medical records and billing) with 32 endpoints in total."
+          ],
+          "media": [
+            "images/health-system-api/layers.png",
+            "images/health-system-api/resources.png"
+          ]
+        },
+        {
+          "id": "resource",
+          "label": "Endpoints",
+          "title": "A resource method, step by step",
+          "body": [
+            "REST resources are designed around nouns, with the HTTP verb saying what to do. Each resource follows the same pattern so that once one makes sense, all of them do."
+          ],
+          "media": [
+            "images/health-system-api/code-resource.png"
+          ],
+          "notes": [
+            {
+              "title": "Why path parameters?",
+              "text": "The id is part of the address, so an appointment lives at a stable URL that a client can store or share."
+            },
+            {
+              "title": "Why produce JSON?",
+              "text": "The annotation tells the framework to turn the returned object into JSON, so there is no manual formatting."
+            },
+            {
+              "title": "Why throw instead of returning null?",
+              "text": "A missing record is a normal outcome, but returning null would end as a blank response or a crash. Throwing a named exception lets one handler decide the response."
+            },
+            {
+              "title": "Why log in every method?",
+              "text": "A line per request makes it possible to see in the server log what the client asked for when something goes wrong."
+            }
+          ]
+        },
+        {
+          "id": "errors",
+          "label": "Errors",
+          "title": "Errors as proper HTTP responses",
+          "body": [
+            "Error handling was a focus. A not-found exception and a validation exception are each translated by an exception mapper into a proper HTTP response, so clients get a meaningful message and the right status code instead of a stack trace."
+          ],
+          "media": [
+            "images/health-system-api/code-mapper.png",
+            "images/health-system-api/error.png"
+          ],
+          "notes": [
+            {
+              "title": "Why a mapper?",
+              "text": "The resource methods stay about the happy path and just throw. One mapper per exception type decides the response, so every endpoint reports a missing record the same way."
+            },
+            {
+              "title": "Why status 404?",
+              "text": "404 tells the client the thing it asked for does not exist. A plain text message with the id says exactly which record was missing."
+            },
+            {
+              "title": "Why log the error too?",
+              "text": "The client sees a short message, while the server log keeps the full detail for debugging."
+            }
+          ]
+        },
+        {
+          "id": "data",
+          "label": "Data",
+          "title": "Data access and linking records",
+          "body": [
+            "The data access classes hold the records in memory, hand out the next free id, and offer the same set of methods for each resource: get all, get by id, add, update and delete. Related records are linked through the address, such as creating an appointment between a patient and a doctor by putting both ids in the path. Because the API is separate from storage, swapping the in-memory lists for a database would not change any endpoint."
+          ],
+          "media": [
+            "images/health-system-api/request.png",
+            "videos/health-system-api/request.mp4"
+          ]
         }
       ]
     },
@@ -715,54 +1339,125 @@
           "title": "Choosing the number of clusters",
           "brief": "Elbow, gap statistic and silhouette plots together, all pointing to 2.",
           "file": "images/r-data-science/cluster-count.png",
-          "src": "",
-          "alt": "",
-          "caption": ""
+          "src": "images/r-data-science/cluster-count.png",
+          "alt": "Placeholder cartoon of a cat sleeping on a laptop, standing in for: Choosing the number of clusters",
+          "caption": "Placeholder: Choosing the number of clusters",
+          "placeholder": true
         },
         {
           "kind": "screenshot",
           "title": "Clusters plotted",
           "brief": "The 2-cluster k-means plot (before or after PCA).",
           "file": "images/r-data-science/clusters.png",
-          "src": "",
-          "alt": "",
-          "caption": ""
+          "src": "images/r-data-science/clusters.png",
+          "alt": "Placeholder cartoon of a cat sleeping on a laptop, standing in for: Clusters plotted",
+          "caption": "Placeholder: Clusters plotted",
+          "placeholder": true
         },
         {
           "kind": "screenshot",
           "title": "Silhouette plot before and after PCA",
           "brief": "Side by side to show the improvement.",
           "file": "images/r-data-science/silhouette.png",
-          "src": "",
-          "alt": "",
-          "caption": ""
+          "src": "images/r-data-science/silhouette.png",
+          "alt": "Placeholder cartoon of a cat sleeping on a laptop, standing in for: Silhouette plot before and after PCA",
+          "caption": "Placeholder: Silhouette plot before and after PCA",
+          "placeholder": true
         },
         {
           "kind": "screenshot",
           "title": "Predicted versus actual exchange rate",
           "brief": "Scatter plot for the best network (10 and 8 nodes).",
           "file": "images/r-data-science/forecast.png",
-          "src": "",
-          "alt": "",
-          "caption": ""
+          "src": "images/r-data-science/forecast.png",
+          "alt": "Placeholder cartoon of a cat sleeping on a laptop, standing in for: Predicted versus actual exchange rate",
+          "caption": "Placeholder: Predicted versus actual exchange rate",
+          "placeholder": true
         },
         {
           "kind": "screenshot",
           "title": "Neural network model comparison",
           "brief": "The comparison table of RMSE, MAE, MAPE and sMAPE (crop out any ID).",
           "file": "images/r-data-science/nn-table.png",
-          "src": "",
-          "alt": "",
-          "caption": ""
+          "src": "images/r-data-science/nn-table.png",
+          "alt": "Placeholder cartoon of a cat sleeping on a laptop, standing in for: Neural network model comparison",
+          "caption": "Placeholder: Neural network model comparison",
+          "placeholder": true
         },
         {
           "kind": "code",
           "title": "Building the lag matrix",
           "brief": "The few lines that create t-1..t-4 inputs from the exchange-rate column. About 8 lines.",
           "file": "images/r-data-science/code-lag.png",
-          "src": "",
-          "alt": "",
-          "caption": ""
+          "src": "images/r-data-science/code-lag.png",
+          "alt": "R loop that builds a lagged matrix: each row holds five consecutive exchange rates and the next day's rate as the expected value",
+          "caption": "Building the lagged inputs for the forecast."
+        }
+      ],
+      "story": [
+        {
+          "id": "forecast",
+          "label": "Forecasting",
+          "title": "Turning a time series into a learning problem",
+          "body": [
+            "The first task forecasts the next day's USD/EUR exchange rate. A time series becomes a normal learning problem by giving the network the last few days as inputs, and I compared three window sizes (five, four and three input days)."
+          ],
+          "media": [
+            "images/r-data-science/code-lag.png"
+          ],
+          "notes": [
+            {
+              "title": "Why lagged columns?",
+              "text": "A network predicts one row at a time, so each row needs the history that matters: today and the days before it as inputs, and tomorrow's rate as the answer."
+            },
+            {
+              "title": "Why does the loop start at row 6?",
+              "text": "The first five days have nothing before them to use, so the first usable row is the sixth. Each shorter window starts one row earlier."
+            },
+            {
+              "title": "Why three window sizes?",
+              "text": "I did not know how much history helps. Trying five, four and three days showed that the smallest window was enough."
+            },
+            {
+              "title": "Why split by time, not randomly?",
+              "text": "The first 400 rows train and the remaining rows test, so the model is always tested on days that come after the ones it learned from, like real forecasting."
+            }
+          ]
+        },
+        {
+          "id": "nn",
+          "label": "Networks",
+          "title": "Comparing networks fairly",
+          "body": [
+            "I normalised the data so no input dominated, trained several layouts and scored them with four error measures (RMSE, MAE, MAPE and sMAPE), because each hides something the others show. A network with two hidden layers (10 and 8 nodes) beat the best single-layer one, and the predicted-versus-actual plot followed the trend closely with a few outliers."
+          ],
+          "media": [
+            "images/r-data-science/nn-table.png",
+            "images/r-data-science/forecast.png"
+          ]
+        },
+        {
+          "id": "cluster",
+          "label": "Clustering",
+          "title": "Clustering wines with k-means",
+          "body": [
+            "For the second task I removed outliers more than three standard deviations from the mean before scaling, since outliers stretch the scale. The number of clusters was checked with four methods (NbClust, elbow, gap statistic and silhouette) and they all agreed that two was the best choice."
+          ],
+          "media": [
+            "images/r-data-science/cluster-count.png",
+            "images/r-data-science/clusters.png"
+          ]
+        },
+        {
+          "id": "pca",
+          "label": "PCA",
+          "title": "Does compressing the data help?",
+          "body": [
+            "PCA kept the 7 components that explain at least 85% of the variance. On the raw data the average silhouette width was low (about 0.22) and the clusters overlapped a little. After PCA the silhouette score improved, which shows the compressed data separated the wines better. The main takeaway was to judge a model with several measures and to be honest about what the plots show."
+          ],
+          "media": [
+            "images/r-data-science/silhouette.png"
+          ]
         }
       ]
     },
@@ -800,45 +1495,112 @@
           "title": "Class diagram",
           "brief": "OOP_Class_UML export as PNG (check no student ID in it).",
           "file": "images/oop-shopping-manager/class-diagram.png",
-          "src": "",
-          "alt": "",
-          "caption": ""
+          "src": "images/oop-shopping-manager/class-diagram.png",
+          "alt": "Placeholder cartoon of a cat sleeping on a laptop, standing in for: Class diagram",
+          "caption": "Placeholder: Class diagram",
+          "placeholder": true
         },
         {
           "kind": "diagram",
           "title": "Use case diagram",
           "brief": "OOP_Use_Case_UML export as PNG.",
           "file": "images/oop-shopping-manager/use-case.png",
-          "src": "",
-          "alt": "",
-          "caption": ""
+          "src": "images/oop-shopping-manager/use-case.png",
+          "alt": "Placeholder cartoon of a cat sleeping on a laptop, standing in for: Use case diagram",
+          "caption": "Placeholder: Use case diagram",
+          "placeholder": true
         },
         {
           "kind": "screenshot",
           "title": "GUI with cart and discount",
           "brief": "GUI with a category selected, items in the cart and the discounted total.",
           "file": "images/oop-shopping-manager/gui.png",
-          "src": "",
-          "alt": "",
-          "caption": ""
+          "src": "images/oop-shopping-manager/gui.png",
+          "alt": "Placeholder cartoon of a cat sleeping on a laptop, standing in for: GUI with cart and discount",
+          "caption": "Placeholder: GUI with cart and discount",
+          "placeholder": true
         },
         {
           "kind": "screenshot",
           "title": "Console menu",
           "brief": "The 7-option console menu.",
           "file": "images/oop-shopping-manager/menu.png",
-          "src": "",
-          "alt": "",
-          "caption": ""
+          "src": "images/oop-shopping-manager/menu.png",
+          "alt": "Placeholder cartoon of a cat sleeping on a laptop, standing in for: Console menu",
+          "caption": "Placeholder: Console menu",
+          "placeholder": true
         },
         {
           "kind": "code",
           "title": "Subclass overriding product details",
           "brief": "Electronics or Clothing extending Product. About 12 lines.",
           "file": "images/oop-shopping-manager/code-inheritance.png",
-          "src": "",
-          "alt": "",
-          "caption": ""
+          "src": "images/oop-shopping-manager/code-inheritance.png",
+          "alt": "Java abstract Product class with three abstract methods and an Electronics subclass that implements them",
+          "caption": "Product defines the contract; Electronics fills it in."
+        }
+      ],
+      "story": [
+        {
+          "id": "design",
+          "label": "Design",
+          "title": "Design before code",
+          "body": [
+            "I drew a use case diagram for what the user can do and a class diagram for how Product, Electronics, Clothing and ShoppingCart relate, and then the code followed it."
+          ],
+          "media": [
+            "images/oop-shopping-manager/use-case.png",
+            "images/oop-shopping-manager/class-diagram.png"
+          ]
+        },
+        {
+          "id": "inheritance",
+          "label": "Classes",
+          "title": "Inheritance for the two product types",
+          "body": [
+            "Electronics and Clothing share an ID, name, quantity and price, and each adds its own fields (brand and warranty for electronics, size and colour for clothing). An abstract Product captures what is shared and what every product must be able to do."
+          ],
+          "media": [
+            "images/oop-shopping-manager/code-inheritance.png"
+          ],
+          "notes": [
+            {
+              "title": "Why abstract?",
+              "text": "A generic product never exists on its own, only electronics or clothing. Abstract stops anyone creating one and makes the compiler enforce the contract."
+            },
+            {
+              "title": "Why three abstract methods?",
+              "text": "Each type prints itself differently, saves a different CSV line and shows different details in the GUI. Abstract methods force every subclass to supply all three."
+            },
+            {
+              "title": "Why call super in the constructor?",
+              "text": "The shared fields are set once in Product, so Electronics and Clothing only have to deal with their own."
+            },
+            {
+              "title": "Why does getDescription exist?",
+              "text": "The GUI needs one text line per product. Each subclass builds it from its own fields, so the GUI never has to ask what type a product is."
+            }
+          ]
+        },
+        {
+          "id": "manager",
+          "label": "Features",
+          "title": "Console manager, CSV and the GUI",
+          "body": [
+            "A console menu adds, deletes and lists products (sorted by ID) and saves and loads them from a CSV file. A graphical interface adds a category drop-down and a details panel, and the shopping cart shows the final price with any discount that applies."
+          ],
+          "media": [
+            "images/oop-shopping-manager/menu.png",
+            "images/oop-shopping-manager/gui.png"
+          ]
+        },
+        {
+          "id": "testing",
+          "label": "Testing",
+          "title": "A written test plan",
+          "body": [
+            "The test plan covered adding, deleting, ordered printing, saving to and loading from the CSV file, opening the GUI and exiting, each with expected results. Looking back, two things I would improve are highlighting low-stock items, which I did not finish, and replacing the manual test plan with automated unit tests and more consistent error handling."
+          ]
         }
       ]
     },
@@ -876,36 +1638,74 @@
           "title": "Part A: ER model",
           "brief": "CourseworkERD redrawn or edited so every table name has no student ID prefix. The generalisation (specialisation) areas are the highlight.",
           "file": "images/database-coursework/erd.png",
-          "src": "",
-          "alt": "",
-          "caption": ""
+          "src": "images/database-coursework/erd.png",
+          "alt": "Placeholder cartoon of a cat sleeping on a laptop, standing in for: Part A: ER model",
+          "caption": "Placeholder: Part A: ER model",
+          "placeholder": true
         },
         {
           "kind": "diagram",
           "title": "Part B: tour company design",
           "brief": "PartBTourmato redrawn without the ID prefix; highlight the linking tables.",
           "file": "images/database-coursework/tourmato.png",
-          "src": "",
-          "alt": "",
-          "caption": ""
+          "src": "images/database-coursework/tourmato.png",
+          "alt": "Placeholder cartoon of a cat sleeping on a laptop, standing in for: Part B: tour company design",
+          "caption": "Placeholder: Part B: tour company design",
+          "placeholder": true
         },
         {
           "kind": "screenshot",
           "title": "Zoom on specialisation",
           "brief": "Cropped close-up of accommodation (apartment / stand-alone room) with its constraint labels.",
           "file": "images/database-coursework/specialisation.png",
-          "src": "",
-          "alt": "",
-          "caption": ""
+          "src": "images/database-coursework/specialisation.png",
+          "alt": "Placeholder cartoon of a cat sleeping on a laptop, standing in for: Zoom on specialisation",
+          "caption": "Placeholder: Zoom on specialisation",
+          "placeholder": true
         },
         {
           "kind": "screenshot",
           "title": "Zoom on a linking table",
           "brief": "Cropped close-up of Tour_Session_Attraction_Coverage with composite key.",
           "file": "images/database-coursework/linking-table.png",
-          "src": "",
-          "alt": "",
-          "caption": ""
+          "src": "images/database-coursework/linking-table.png",
+          "alt": "Placeholder cartoon of a cat sleeping on a laptop, standing in for: Zoom on a linking table",
+          "caption": "Placeholder: Zoom on a linking table",
+          "placeholder": true
+        }
+      ],
+      "story": [
+        {
+          "id": "parta",
+          "label": "Part A",
+          "title": "An ER model for a holiday business",
+          "body": [
+            "Part A is an entity-relationship model for a business that sells accommodation, meals and experiences. The interesting part was specialisation: accommodation is either an apartment or a stand-alone room, meals are delivered or collective, and experiences are on-site (cooking, crafts, fitness) or off-site (hikes, excursions), each with its own attributes and the staff who oversee them."
+          ],
+          "media": [
+            "images/database-coursework/erd.png",
+            "images/database-coursework/specialisation.png"
+          ]
+        },
+        {
+          "id": "partb",
+          "label": "Part B",
+          "title": "Turning a tour company into tables",
+          "body": [
+            "Part B turns a tour company into a relational design with primary and foreign keys. Many-to-many relationships, such as which attractions a tour session covers or which equipment it needs, get their own linking tables with composite keys, and flags such as a food or walking session are stored on the session."
+          ],
+          "media": [
+            "images/database-coursework/tourmato.png",
+            "images/database-coursework/linking-table.png"
+          ]
+        },
+        {
+          "id": "lessons",
+          "label": "Checks",
+          "title": "Checking a design before writing SQL",
+          "body": [
+            "I learned how cardinalities drive keys, when to split a table, and how to check a design against the real-world rules before writing any SQL. All diagrams were drawn in draw.io."
+          ]
         }
       ]
     },
@@ -946,36 +1746,92 @@
           "title": "Methodology flow",
           "brief": "Redrawn stages: passive recon -> active scan -> fingerprint -> vulnerability analysis -> exploit -> report and mitigate.",
           "file": "images/cyber-security-pentest/method.png",
-          "src": "",
-          "alt": "",
-          "caption": ""
+          "src": "images/cyber-security-pentest/method.png",
+          "alt": "Placeholder cartoon of a cat sleeping on a laptop, standing in for: Methodology flow",
+          "caption": "Placeholder: Methodology flow",
+          "placeholder": true
         },
         {
           "kind": "screenshot",
           "title": "Scan output (lab only)",
           "brief": "One Nmap result from the lab machine with all IPs/hostnames cropped or blurred.",
           "file": "images/cyber-security-pentest/nmap.png",
-          "src": "",
-          "alt": "",
-          "caption": ""
+          "src": "images/cyber-security-pentest/nmap.png",
+          "alt": "Placeholder cartoon of a cat sleeping on a laptop, standing in for: Scan output (lab only)",
+          "caption": "Placeholder: Scan output (lab only)",
+          "placeholder": true
         },
         {
           "kind": "screenshot",
           "title": "Wireshark capture",
           "brief": "A capture showing the handshake of SYN vs connect scan, addresses blurred.",
           "file": "images/cyber-security-pentest/wireshark.png",
-          "src": "",
-          "alt": "",
-          "caption": ""
+          "src": "images/cyber-security-pentest/wireshark.png",
+          "alt": "Placeholder cartoon of a cat sleeping on a laptop, standing in for: Wireshark capture",
+          "caption": "Placeholder: Wireshark capture",
+          "placeholder": true
         },
         {
           "kind": "diagram",
           "title": "Attack and defence table",
           "brief": "Table pairing each weakness with its mitigation (no credentials or real targets).",
           "file": "images/cyber-security-pentest/mitigations.png",
-          "src": "",
-          "alt": "",
-          "caption": ""
+          "src": "images/cyber-security-pentest/mitigations.png",
+          "alt": "Placeholder cartoon of a cat sleeping on a laptop, standing in for: Attack and defence table",
+          "caption": "Placeholder: Attack and defence table",
+          "placeholder": true
+        }
+      ],
+      "story": [
+        {
+          "id": "method",
+          "label": "Method",
+          "title": "Working in stages, in a lab",
+          "body": [
+            "This write-up is about method, not targets: all work was done in an isolated lab, and no real systems, addresses or credentials are shown. I worked in stages, because what you learn early decides which later steps are worth running."
+          ],
+          "media": [
+            "images/cyber-security-pentest/method.png"
+          ]
+        },
+        {
+          "id": "recon",
+          "label": "Recon",
+          "title": "Passive reconnaissance",
+          "body": [
+            "Passive reconnaissance comes first: DNS enumeration, public pages and robots.txt. It leaves no trace on the target and shapes which scans are worth running."
+          ]
+        },
+        {
+          "id": "scan",
+          "label": "Scanning",
+          "title": "Active scanning and fingerprinting",
+          "body": [
+            "Host discovery, SYN and connect scans, UDP scans, and service and OS fingerprinting. The choice of scan matters: a ping sweep and half-open SYN scans are quieter than full connect scans, and I could explain the trade-off between stealth and reliability. Fingerprinting then turned open ports into specific, checkable findings."
+          ],
+          "media": [
+            "images/cyber-security-pentest/nmap.png",
+            "images/cyber-security-pentest/wireshark.png"
+          ]
+        },
+        {
+          "id": "attacks",
+          "label": "Weaknesses",
+          "title": "Web flaws, passwords and people",
+          "body": [
+            "In a training web app I analysed SQL injection, cross-site scripting and command injection. Password work covered brute force and dictionary attacks and recovering hashes, and social engineering exercises covered the human side."
+          ]
+        },
+        {
+          "id": "defence",
+          "label": "Defence",
+          "title": "Every finding paired with a fix",
+          "body": [
+            "For each weakness I paired the attack with the control that prevents it: restricting DNS zone transfers, authentication instead of hiding paths in robots.txt, input validation and parameterised queries, rate limiting and a strong password policy. The skill I value most is explaining risk to a non-specialist."
+          ],
+          "media": [
+            "images/cyber-security-pentest/mitigations.png"
+          ]
         }
       ]
     },
@@ -1012,27 +1868,72 @@
           "title": "Program run",
           "brief": "Terminal run showing validation errors then a valid entry and the outcome.",
           "file": "images/grade-progression/run.png",
-          "src": "",
-          "alt": "",
-          "caption": ""
+          "src": "images/grade-progression/run.png",
+          "alt": "Placeholder cartoon of a cat sleeping on a laptop, standing in for: Program run",
+          "caption": "Placeholder: Program run",
+          "placeholder": true
         },
         {
           "kind": "screenshot",
           "title": "Histogram summary",
           "brief": "The histogram-style summary at the end.",
           "file": "images/grade-progression/histogram.png",
-          "src": "",
-          "alt": "",
-          "caption": ""
+          "src": "images/grade-progression/histogram.png",
+          "alt": "Placeholder cartoon of a cat sleeping on a laptop, standing in for: Histogram summary",
+          "caption": "Placeholder: Histogram summary",
+          "placeholder": true
         },
         {
           "kind": "code",
           "title": "Input validation loop",
           "brief": "The try/except loop that only accepts allowed credit values. About 10 lines.",
           "file": "images/grade-progression/code-validation.png",
-          "src": "",
-          "alt": "",
-          "caption": ""
+          "src": "images/grade-progression/code-validation.png",
+          "alt": "Python loop that keeps asking for credits until the input is an integer from the allowed range",
+          "caption": "Keep asking until the input is valid."
+        }
+      ],
+      "story": [
+        {
+          "id": "rules",
+          "label": "Rules",
+          "title": "A first complete program",
+          "body": [
+            "The program takes a student's credits for pass, defer and fail, checks they add up to 120, and decides the outcome: Progress, Progress (module trailer), Do not progress (module retriever) or Exclude. It saves every entry to a text file and prints a histogram-style summary."
+          ],
+          "media": [
+            "images/grade-progression/run.png",
+            "images/grade-progression/histogram.png"
+          ]
+        },
+        {
+          "id": "validation",
+          "label": "Validation",
+          "title": "Input a typo cannot break",
+          "body": [
+            "This was where I first learned that users type the wrong thing, and that a program has to expect it."
+          ],
+          "media": [
+            "images/grade-progression/code-validation.png"
+          ],
+          "notes": [
+            {
+              "title": "Why try and except?",
+              "text": "int() raises an error for anything that is not a whole number. Catching it prints a message and loops again instead of crashing."
+            },
+            {
+              "title": "Why check the allowed range?",
+              "text": "Only multiples of 20 from 0 to 120 are valid credits, so a number can be an integer and still be wrong."
+            },
+            {
+              "title": "Why while True and break?",
+              "text": "The loop repeats until the input is acceptable and only then breaks out, which keeps the happy path short."
+            },
+            {
+              "title": "What would I change now?",
+              "text": "The same loop is copied three times. Today I would move it into one function that takes the prompt as an argument."
+            }
+          ]
         }
       ]
     },
@@ -1067,27 +1968,56 @@
           "title": "Console run",
           "brief": "Java console buying a ticket and showing the seating area.",
           "file": "images/theatre-booking-java/run.png",
-          "src": "",
-          "alt": "",
-          "caption": ""
+          "src": "images/theatre-booking-java/run.png",
+          "alt": "Placeholder cartoon of a cat sleeping on a laptop, standing in for: Console run",
+          "caption": "Placeholder: Console run",
+          "placeholder": true
         },
         {
           "kind": "code",
           "title": "Saving the seating plan",
           "brief": "The save() method writing 0s and 1s. About 10 lines.",
           "file": "images/theatre-booking-java/code-save.png",
-          "src": "",
-          "alt": "",
-          "caption": ""
+          "src": "images/theatre-booking-java/code-save.png",
+          "alt": "Placeholder cartoon of a cat sleeping on a laptop, standing in for: Saving the seating plan",
+          "caption": "Placeholder: Saving the seating plan",
+          "placeholder": true
         },
         {
           "kind": "diagram",
           "title": "Java versus C++ comparison",
           "brief": "Small side-by-side table: arrays and big methods vs classes and tests.",
           "file": "images/theatre-booking-java/compare.png",
-          "src": "",
-          "alt": "",
-          "caption": ""
+          "src": "images/theatre-booking-java/compare.png",
+          "alt": "Placeholder cartoon of a cat sleeping on a laptop, standing in for: Java versus C++ comparison",
+          "caption": "Placeholder: Java versus C++ comparison",
+          "placeholder": true
+        }
+      ],
+      "story": [
+        {
+          "id": "first",
+          "label": "First version",
+          "title": "Arrays, ArrayLists and a text file",
+          "body": [
+            "This was the original Java version of the theatre booking system from my 2022 to 2023 software development module. It lets you buy a ticket by choosing a row and seat with the price set by row, shows the seating area, lists tickets and saves the seating plan to a file as 0s and 1s.",
+            "Seats and tickets are held in arrays and ArrayLists. It worked, but the logic was spread across a few large methods."
+          ],
+          "media": [
+            "images/theatre-booking-java/run.png",
+            "images/theatre-booking-java/code-save.png"
+          ]
+        },
+        {
+          "id": "later",
+          "label": "What changed",
+          "title": "Why I rebuilt it in C++",
+          "body": [
+            "The C++ rewrite moved the rules into Ticket, Person, Row and Auditorium classes with unit tests. Comparing the two is a good measure of how much my design skills improved in a year."
+          ],
+          "media": [
+            "images/theatre-booking-java/compare.png"
+          ]
         }
       ]
     }

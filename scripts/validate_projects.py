@@ -93,6 +93,46 @@ for i, p in enumerate(projects):
                     errors.append(f"{name}: showcase {n} src must be an existing file under images/")
                 elif not item.get("alt"):
                     errors.append(f"{name}: showcase {n} needs 'alt' text")
+    story = p.get("story", [])
+    media_files = {i.get("file") for i in showcase if isinstance(i, dict)} if isinstance(showcase, list) else set()
+    code_files = {i.get("file") for i in showcase if isinstance(i, dict) and i.get("kind") == "code"} if isinstance(showcase, list) else set()
+    if not isinstance(story, list):
+        errors.append(f"{name}: 'story' must be a list")
+    else:
+        step_ids = set()
+        for n, step in enumerate(story, 1):
+            if not isinstance(step, dict):
+                errors.append(f"{name}: story step {n} must be an object")
+                continue
+            sid = step.get("id", "")
+            if not ID_RE.match(sid or ""):
+                errors.append(f"{name}: story step {n} needs a lowercase-with-dashes 'id'")
+            elif sid in step_ids:
+                errors.append(f"{name}: story step {n} duplicate id {sid!r}")
+            step_ids.add(sid)
+            for key in ("label", "title"):
+                if not isinstance(step.get(key), str) or not step.get(key).strip():
+                    errors.append(f"{name}: story step {n} needs '{key}'")
+            body = step.get("body")
+            if not isinstance(body, list) or not body or not all(isinstance(t, str) and t.strip() for t in body):
+                errors.append(f"{name}: story step {n} 'body' must be a list of paragraphs")
+            media = step.get("media", [])
+            if not isinstance(media, list):
+                errors.append(f"{name}: story step {n} 'media' must be a list")
+                media = []
+            for f in media:
+                if f not in media_files:
+                    errors.append(f"{name}: story step {n} media {f!r} is not a showcase file")
+            notes = step.get("notes", [])
+            if not isinstance(notes, list):
+                errors.append(f"{name}: story step {n} 'notes' must be a list")
+            elif notes:
+                if not any(f in code_files for f in media):
+                    errors.append(f"{name}: story step {n} has notes but no code item in its media")
+                for note in notes:
+                    if not (isinstance(note, dict) and note.get("title") and note.get("text")):
+                        errors.append(f"{name}: story step {n} each note needs 'title' and 'text'")
+
     thumb = p.get("thumbnail", "")
     if thumb and not (thumb.startswith("images/") and (PATH.parent.parent / thumb).is_file()):
         errors.append(f"{name}: thumbnail must be an existing file under images/")
