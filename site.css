@@ -326,9 +326,7 @@ body.site {
 .about-lead { font-size: 1.5rem; letter-spacing: -0.02em; }
 .site .about-grid p { font-size: 1.2rem; letter-spacing: -0.02em; }
 .site .pill-list { gap: 0.6rem; margin-bottom: 2rem; }
-.site .pill-list li { padding: 0.8em 1.4em; border: 0; background: var(--olive-ink); color: var(--silver); font-size: 0.9rem; letter-spacing: 0.1em; transform: rotate(-2deg); }
-.site .pill-list li:nth-child(even) { transform: rotate(2deg); }
-.site .pill-list li:nth-child(3n) { transform: rotate(-4deg); }
+.site .pill-list li { padding: 0.8em 1.4em; border: 0; background: var(--olive-ink); color: var(--silver); font-size: 0.9rem; letter-spacing: 0.1em; }
 
 .site .site-footer { padding: 20px 16px; border-top: var(--edge); color: var(--blackish); font: 400 0.95rem/1.4 var(--font-display); letter-spacing: 0.06em; text-transform: uppercase; }
 
@@ -503,31 +501,18 @@ body.site {
 .site .section h3 { font-size: 1.4rem; letter-spacing: 0; }
 .site .code-note h4 { font-size: 1.05rem; letter-spacing: 0; }
 
-/* ---------- Retro background shapes ---------- */
-.site .section { position: relative; isolation: isolate; }
-.site .section::before, .site .hero::before {
+/* ---------- Retro background shape: one large composition behind the About section ---------- */
+#about { position: relative; isolation: isolate; }
+#about::before {
     content: "";
     position: absolute;
+    inset: 0;
     z-index: -1;
     pointer-events: none;
-    background: no-repeat center / contain;
-    opacity: 0.4;
+    background: url("images/site/shape-scene.svg") no-repeat right 3% bottom 3% / min(60%, 860px) auto;
+    opacity: 0.45;
 }
-.site .hero { position: relative; isolation: isolate; }
-.site .hero::before { right: -2%; top: 8%; width: min(30vw, 420px); aspect-ratio: 4 / 5; background-image: url("images/site/shape-flames.svg"); transform: rotate(8deg); }
-.site .statement::before { right: 2%; top: -6%; width: min(26vw, 380px); aspect-ratio: 1; background-image: url("images/site/shape-waves.svg"); }
-#featured::before { left: -4%; bottom: 4%; width: min(24vw, 340px); aspect-ratio: 1; background-image: url("images/site/shape-arches.svg"); transform: rotate(-10deg); }
-#projects::before { right: -3%; top: 2%; width: min(22vw, 320px); aspect-ratio: 4 / 5; background-image: url("images/site/shape-circles.svg"); transform: rotate(6deg); }
-#about::before { right: 1%; bottom: 2%; width: min(22vw, 320px); aspect-ratio: 1; background-image: url("images/site/shape-waves.svg"); transform: rotate(-14deg); }
-.site .project-page { position: relative; isolation: isolate; }
-.site .project-page::before { content: ""; position: absolute; z-index: -1; pointer-events: none; right: -2%; top: 3rem; width: min(24vw, 340px); aspect-ratio: 4 / 5; background: url("images/site/shape-flames.svg") no-repeat center / contain; transform: rotate(8deg); opacity: 0.3; }
-@media (max-width: 767px) {
-    .site .section::before, .site .hero::before, .site .project-page::before { opacity: 0.25; width: 44vw; }
-}
-
-.site .about-skills { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 3rem; margin-top: 1rem; }
-.site .about-skills .pill-list { margin-bottom: 0; }
-@media (max-width: 991px) { .site .about-skills { grid-template-columns: minmax(0, 1fr); gap: 1.5rem; } }
+@media (max-width: 767px) { #about::before { opacity: 0.25; } }
 
 body.site .section .section-title, body.site .section h2.section-title, body.site .card h3, body.site .section h3 {
     font-family: var(--font-fat); font-weight: 400; text-transform: none; letter-spacing: 0;
