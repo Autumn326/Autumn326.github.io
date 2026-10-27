@@ -1,6 +1,6 @@
 const PROJECTS_URL = "data/projects.json";
 
-const state = { projects: [], type: "", tag: "" };
+const state = { projects: [], type: "" };
 
 function el(tag, className, text) {
     const node = document.createElement(tag);
@@ -55,8 +55,7 @@ function renderGrid() {
     const grid = document.getElementById("project-grid");
     grid.replaceChildren();
     const shown = state.projects.filter(p =>
-        (!state.type || p.type === state.type) &&
-        (!state.tag || (p.tags || []).includes(state.tag)));
+        (!state.type || p.type === state.type));
     shown.forEach((p, i) => grid.appendChild(buildCard(p, false, i)));
     revealCards(grid);
     document.getElementById("result-count").textContent =
@@ -79,13 +78,6 @@ function renderFilters() {
         });
         wrap.appendChild(chip);
     });
-
-    const select = document.getElementById("tag-filter");
-    const tags = [...new Set(state.projects.flatMap(p => p.tags || []))]
-        .sort((a, b) => a.localeCompare(b, undefined, { sensitivity: "base" }));
-    select.replaceChildren(new Option("All", ""));
-    tags.forEach(t => select.appendChild(new Option(t, t)));
-    select.value = state.tag;
 }
 
 // The hero clip autoplays muted and looped; visitors who prefer reduced motion get a still frame and controls
@@ -104,10 +96,6 @@ function initHeroClip() {
 async function init() {
     document.getElementById("year").textContent = new Date().getFullYear();
     initHeroClip();
-    document.getElementById("tag-filter").addEventListener("change", e => {
-        state.tag = e.target.value;
-        renderGrid();
-    });
     try {
         const res = await fetch(PROJECTS_URL);
         if (!res.ok) throw new Error(res.status);
