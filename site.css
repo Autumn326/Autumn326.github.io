@@ -7,17 +7,20 @@
 @font-face { font-family: "Oswald"; font-weight: 400; font-style: normal; font-display: swap; src: url("fonts/oswald-400.woff2") format("woff2"); }
 @font-face { font-family: "Oswald"; font-weight: 500; font-style: normal; font-display: swap; src: url("fonts/oswald-500.woff2") format("woff2"); }
 @font-face { font-family: "Oswald"; font-weight: 700; font-style: normal; font-display: swap; src: url("fonts/oswald-700.woff2") format("woff2"); }
+@font-face { font-family: "Bagel Fat One"; font-weight: 400; font-style: normal; font-display: swap; src: url("fonts/bagel-fat-one-400.woff2") format("woff2"); }
 @font-face { font-family: "Tiro Tamil"; font-weight: 400; font-style: normal; font-display: swap; src: url("fonts/tiro-tamil-400.woff2") format("woff2"); }
 @font-face { font-family: "Tiro Tamil"; font-weight: 400; font-style: italic; font-display: swap; src: url("fonts/tiro-tamil-400-italic.woff2") format("woff2"); }
 
 .site {
-    --blackish: #1d1705;
-    --silver: #d8d1bd;
-    --olive: #767f64;
-    --olive-ink: #4f5841;   /* darker olive for small text, so silver text on it stays readable */
-    --sienna: #be5d42;
+    --blackish: #12283a;
+    --silver: #f1e7d6;
+    --olive: #ee8a45;     /* orange */
+    --olive-ink: #1d4a63;   /* navy for fills that carry cream text */
+    --peach: #fbc9a0;
+    --teal: #8fbdb6;
     --grain: url("images/site/grain.png");
     --font-display: "Oswald", "Arial Narrow", Impact, sans-serif;
+    --font-fat: "Bagel Fat One", "Arial Rounded MT Bold", "Trebuchet MS", sans-serif;
     --font-serif: "Tiro Tamil", Georgia, "Times New Roman", serif;
     --edge: 3px solid var(--blackish);
 
@@ -27,7 +30,7 @@
     --color-bg-alt: var(--silver);
     --color-surface: var(--silver);
     --color-text: var(--blackish);
-    --color-text-muted: #4a4430;
+    --color-text-muted: #3a4d5c;
     --color-accent: var(--olive-ink);
     --color-accent-hover: var(--blackish);
     --color-accent-contrast: var(--silver);
@@ -42,7 +45,8 @@
 }
 
 body.site {
-    background: var(--olive);
+    background-color: var(--silver);
+    background-image: var(--grain);
     color: var(--blackish);
     font-family: var(--font-serif);
     font-size: 16px;
@@ -56,8 +60,8 @@ body.site {
     max-width: 1890px;
     margin: 0 auto;
     padding-top: 60px;
-    background-color: var(--silver);
-    background-image: var(--grain);
+    position: relative;
+    overflow-x: clip;
 }
 
 /* ---------- Fixed nav: equal cells with 3px dividers ---------- */
@@ -233,7 +237,7 @@ body.site {
     --color-bg-alt: var(--silver);
     --color-surface: var(--silver);
     --color-text: var(--blackish);
-    --color-text-muted: #4a4430;
+    --color-text-muted: #3a4d5c;
     --color-accent: var(--olive-ink);
     --color-accent-contrast: var(--silver);
     --color-border: var(--blackish);
@@ -313,10 +317,8 @@ body.site {
     letter-spacing: 0.08em;
     text-transform: uppercase;
 }
-.site .chip:hover { background: #bdb7a1; }
+.site .chip:hover { background: #fbd3b0; }
 .site .chip[aria-pressed="true"] { background: var(--olive-ink); border-color: var(--blackish); color: var(--silver); transform: rotate(-2deg); }
-.site .tag-filter { font: 500 0.95rem/1 var(--font-display); letter-spacing: 0.08em; text-transform: uppercase; }
-.site .tag-filter select { padding: 0.55em 0.9em; border: 3px solid var(--blackish); border-radius: 999px; background: var(--silver); color: var(--blackish); font: inherit; text-transform: none; letter-spacing: 0; }
 
 /* ---------- About ---------- */
 .site .about-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 3rem; }
@@ -425,13 +427,13 @@ body.site {
 /* Tabs */
 .site .tabs { top: 60px; background-color: var(--silver); border-bottom: var(--edge); }
 .site .tab { padding: 0.7rem 1.4rem; border: 0; border-radius: 0.6em 0.6em 0 0; font: 700 1.05rem/1 var(--font-display); letter-spacing: 0.08em; text-transform: uppercase; color: var(--blackish); }
-.site .tab:hover { background: #bdb7a1; color: var(--blackish); }
+.site .tab:hover { background: #fbd3b0; color: var(--blackish); }
 .site .tab[aria-selected="true"] { background: var(--olive-ink); color: var(--silver); }
 
 /* Process bar */
 .site .process-nav { top: 117px; background: var(--silver); }
 .site .process-nav a { border: 2px solid var(--blackish); color: var(--blackish); font: 500 0.85rem/1.3 var(--font-display); letter-spacing: 0.08em; text-transform: uppercase; }
-.site .process-nav a:hover { background: #bdb7a1; color: var(--blackish); border-color: var(--blackish); }
+.site .process-nav a:hover { background: #fbd3b0; color: var(--blackish); border-color: var(--blackish); }
 .site .process-nav a[aria-current="step"] { background: var(--olive-ink); border-color: var(--blackish); color: var(--silver); }
 
 /* Design story */
@@ -457,7 +459,7 @@ body.site {
 .site .gallery-tile:hover .showcase-item img, .site .gallery-tile:hover .showcase-item video { box-shadow: 5px 5px 0 var(--blackish); }
 .site .lightbox { border: var(--edge); border-radius: 1em; background: var(--silver); color: var(--blackish); }
 .site .lightbox-btn { border: 3px solid var(--blackish); background: var(--silver); color: var(--blackish); font: 700 0.9rem/1 var(--font-display); letter-spacing: 0.08em; text-transform: uppercase; }
-.site .lightbox-btn:hover { background: #bdb7a1; color: var(--blackish); border-color: var(--blackish); }
+.site .lightbox-btn:hover { background: #fbd3b0; color: var(--blackish); border-color: var(--blackish); }
 .site .lightbox-info { font-size: 1.1rem; color: var(--color-text); }
 
 /* Missing project and generic buttons */
@@ -480,3 +482,53 @@ body.site {
 .site .about-points { margin: 0 0 2rem; padding-left: 1.2rem; font-size: 1.15rem; letter-spacing: -0.02em; line-height: 1.25; }
 .site .about-points li { margin-bottom: 0.4rem; }
 @media (max-width: 991px) { .site .about-story { grid-column: auto; } }
+
+/* ---------- Fun display font: chunky retro sans for the big headings ---------- */
+.site .wordmark, .site .hero-title, .site .section-title, .site .statement .statement-text,
+.site .card h3, .site .project-head h1, .site .project-section h2, .site .step-content h2,
+.site .project-missing h1, .site .section h3, .site .code-note h4, .site .step-marker, .site .card-number {
+    font-family: var(--font-fat);
+    font-weight: 400;
+    text-transform: none;
+    letter-spacing: 0;
+}
+.site .hero .wordmark { font-family: var(--font-fat); font-weight: 400; text-transform: none; letter-spacing: 0; font-size: calc((min(100vw, 1890px) - 32px) / 7.6); line-height: 1; }
+.site .hero-title { font-size: clamp(2.8rem, 7vw, 6.5rem); line-height: 1; }
+.site .section-title { font-size: clamp(2.2rem, 5vw, 4.2rem); line-height: 1.05; }
+.site .statement .statement-text { line-height: 1.12; }
+.site .card h3 { font-size: clamp(1.4rem, 1.8vw, 1.8rem); line-height: 1.1; }
+.site .project-head h1 { font-size: clamp(2.4rem, 8vw, 7rem); line-height: 1; letter-spacing: 0; }
+.site .step-content h2 { font-size: clamp(1.8rem, 3.2vw, 2.9rem); line-height: 1.08; letter-spacing: 0; }
+.site .project-section h2 { font-size: 1.6rem; letter-spacing: 0; }
+.site .section h3 { font-size: 1.4rem; letter-spacing: 0; }
+.site .code-note h4 { font-size: 1.05rem; letter-spacing: 0; }
+
+/* ---------- Retro background shapes ---------- */
+.site .section { position: relative; isolation: isolate; }
+.site .section::before, .site .hero::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    pointer-events: none;
+    background: no-repeat center / contain;
+    opacity: 0.4;
+}
+.site .hero { position: relative; isolation: isolate; }
+.site .hero::before { right: -2%; top: 8%; width: min(30vw, 420px); aspect-ratio: 4 / 5; background-image: url("images/site/shape-flames.svg"); transform: rotate(8deg); }
+.site .statement::before { right: 2%; top: -6%; width: min(26vw, 380px); aspect-ratio: 1; background-image: url("images/site/shape-waves.svg"); }
+#featured::before { left: -4%; bottom: 4%; width: min(24vw, 340px); aspect-ratio: 1; background-image: url("images/site/shape-arches.svg"); transform: rotate(-10deg); }
+#projects::before { right: -3%; top: 2%; width: min(22vw, 320px); aspect-ratio: 4 / 5; background-image: url("images/site/shape-circles.svg"); transform: rotate(6deg); }
+#about::before { right: 1%; bottom: 2%; width: min(22vw, 320px); aspect-ratio: 1; background-image: url("images/site/shape-waves.svg"); transform: rotate(-14deg); }
+.site .project-page { position: relative; isolation: isolate; }
+.site .project-page::before { content: ""; position: absolute; z-index: -1; pointer-events: none; right: -2%; top: 3rem; width: min(24vw, 340px); aspect-ratio: 4 / 5; background: url("images/site/shape-flames.svg") no-repeat center / contain; transform: rotate(8deg); opacity: 0.3; }
+@media (max-width: 767px) {
+    .site .section::before, .site .hero::before, .site .project-page::before { opacity: 0.25; width: 44vw; }
+}
+
+.site .about-skills { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 3rem; margin-top: 1rem; }
+.site .about-skills .pill-list { margin-bottom: 0; }
+@media (max-width: 991px) { .site .about-skills { grid-template-columns: minmax(0, 1fr); gap: 1.5rem; } }
+
+body.site .section .section-title, body.site .section h2.section-title, body.site .card h3, body.site .section h3 {
+    font-family: var(--font-fat); font-weight: 400; text-transform: none; letter-spacing: 0;
+}
