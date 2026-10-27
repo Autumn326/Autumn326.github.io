@@ -80,6 +80,7 @@ I will review each project's files when we reach it and suggest the highlights w
 
 - [x] Project page: Design story tab (numbered steps with a sticky process bar) and Gallery tab (all images and clips, filter and viewer) instead of a Highlights section
 - [x] Design walkthrough written for every project, with code screenshots and the reasoning beside them
+- [x] Home page restyled in a warm printed-zine look (cream, olive, terracotta, grain, Oswald and Tiro Tamil self-hosted in `fonts/`, bordered staggered cards, tilted pill stickers, fixed 60px nav with burger on mobile); project pages keep their own themes
 
 ## Phase 5: Polish and launch
 - [ ] Phone, tablet and desktop checks

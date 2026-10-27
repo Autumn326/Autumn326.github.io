@@ -5,50 +5,75 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Michael Chen | Computer Science Portfolio</title>
     <meta name="description" content="Portfolio of Michael Chen, a Computer Science graduate building iOS apps, machine learning projects and algorithms.">
+    <link rel="preload" href="fonts/oswald-700.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="fonts/tiro-tamil-400.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="home.css">
     <script src="motion.js" defer></script>
     <script src="script.js" defer></script>
 </head>
-<body>
+<body class="home">
     <a class="skip-link" href="#main">Skip to content</a>
 
     <header class="site-header">
         <nav class="nav" aria-label="Main">
-            <a class="nav-brand" href="#top">Michael Chen</a>
-            <ul class="nav-links">
+            <a class="nav-badge" href="#top" aria-label="Michael Chen, back to top"><span>MC</span></a>
+            <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-links" hidden>
+                <span class="burger" aria-hidden="true"></span>
+                <span class="visually-hidden">Menu</span>
+            </button>
+            <ul class="nav-links" id="nav-links">
                 <li><a href="#featured">Featured</a></li>
                 <li><a href="#projects">Projects</a></li>
                 <li><a href="#about">About</a></li>
             </ul>
         </nav>
+        <a class="pill pill-olive pill-nav" href="#featured">See my work</a>
     </header>
 
+    <div class="page">
     <main id="main">
         <section class="hero" id="top">
-            <div class="hero-inner">
-                <p class="eyebrow">Computer Science portfolio</p>
-                <h1>Michael Chen</h1>
-                <p class="tagline">I build iOS apps, machine learning models and clean algorithms.</p>
-                <p class="intro">
-                    I am a First Class Honours BCS Computer Science graduate.
-                    This site collects my projects, from my final year road sign
-                    recognition app to coursework in AI, data science and software design.
-                </p>
-                <div class="hero-actions">
-                    <a class="button" href="#featured">See my work</a>
+            <div class="wordmark-mask"><h1 class="wordmark">Michael Chen</h1></div>
+            <div class="hero-sub">
+                <p>Computer Science graduate</p>
+                <p>iOS apps &middot; AI &middot; Algorithms</p>
+            </div>
+            <div class="hero-frame">
+                <div class="hero-copy">
+                    <p class="kicker">Final year project</p>
+                    <p class="hero-title">Sign Finder</p>
+                    <p class="hero-text">An iPhone app that recognises UK road signs from a photo or the live camera, entirely on the device.</p>
                 </div>
+                <video class="hero-clip" id="hero-clip" src="videos/sign-finder/live-scan.mp4" poster="images/sign-finder/scan.jpg"
+                       autoplay muted loop playsinline preload="auto"
+                       aria-label="Sign Finder live scan: the camera finds a No Entry sign and draws a labelled box around it"></video>
+                <a class="pill pill-dark pill-gallery" href="project.html?id=sign-finder">Read the story</a>
+            </div>
+        </section>
+
+        <section class="section statement" id="hello" aria-labelledby="statement-title">
+            <p class="section-label">Hello</p>
+            <h2 class="statement-text" id="statement-title">I build iOS apps, machine learning models and clean algorithms.</h2>
+            <div class="statement-body">
+                <p>I am a First Class Honours BCS Computer Science graduate.
+                This site collects my projects, from my final year road sign
+                recognition app to coursework in AI, data science and software design.</p>
+                <a class="pill pill-olive" href="#featured">See my work</a>
             </div>
         </section>
 
         <section class="section" id="featured" aria-labelledby="featured-title">
-            <h2 id="featured-title">Featured projects</h2>
+            <p class="section-label">Selected work</p>
+            <h2 class="section-title" id="featured-title">Featured projects</h2>
             <div class="card-grid" id="featured-grid" aria-live="polite">
                 <p class="status">Loading projects…</p>
             </div>
         </section>
 
-        <section class="section section-alt" id="projects" aria-labelledby="projects-title">
-            <h2 id="projects-title">All projects</h2>
+        <section class="section" id="projects" aria-labelledby="projects-title">
+            <p class="section-label">Everything</p>
+            <h2 class="section-title" id="projects-title">All projects</h2>
             <div class="filters">
                 <div class="chips" id="type-filters" role="group" aria-label="Filter by type"></div>
                 <label class="tag-filter">
@@ -61,11 +86,12 @@
         </section>
 
         <section class="section" id="about" aria-labelledby="about-title">
-            <h2 id="about-title">About</h2>
+            <p class="section-label">Who</p>
+            <h2 class="section-title" id="about-title">About</h2>
             <div class="about-grid">
                 <div>
                     <h3>Education</h3>
-                    <p><strong>First Class Honours, BCS Computer Science</strong></p>
+                    <p class="about-lead"><strong>First Class Honours, BCS Computer Science</strong></p>
                     <p>Modules across software development, algorithms, databases, AI, data science,
                     mobile development and cyber security.</p>
                 </div>
@@ -83,11 +109,15 @@
             </div>
         </section>
 
+        <section class="cta" aria-label="Browse the work">
+            <a class="cta-button" href="#projects">Browse all projects</a>
+        </section>
     </main>
 
     <footer class="site-footer">
         <p>&copy; <span id="year">2026</span> Michael Chen. Built with plain HTML, CSS and JavaScript on GitHub Pages.</p>
         <p><a href="#top">Back to top</a></p>
     </footer>
+    </div>
 </body>
 </html>

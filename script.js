@@ -9,10 +9,12 @@ function el(tag, className, text) {
     return node;
 }
 
-function buildCard(project, featured) {
+function buildCard(project, featured, index = 0) {
     const card = el("article", featured ? "card featured-card" : "card");
     card.dataset.id = project.id;
     card.dataset.theme = project.theme;
+    card.style.setProperty("--n", index + 1);
+    card.style.setProperty("--i", index);
     card.appendChild(el("span", "card-badge", project.type.replace("-", " ")));
     if (project.thumbnail) {
         const img = document.createElement("img");
@@ -39,7 +41,10 @@ function buildCard(project, featured) {
 function renderFeatured() {
     const grid = document.getElementById("featured-grid");
     grid.replaceChildren();
-    state.projects.filter(p => p.featured).forEach(p => grid.appendChild(buildCard(p, true)));
+    // Two columns, the second pushed down by CSS, give the staggered layout
+    const columns = [el("div", "stagger-col"), el("div", "stagger-col")];
+    state.projects.filter(p => p.featured).forEach((p, i) => columns[i % 2].appendChild(buildCard(p, true, i)));
+    grid.append(...columns);
     revealCards(grid);
 }
 
@@ -53,7 +58,7 @@ function renderGrid() {
     const shown = state.projects.filter(p =>
         (!state.type || p.type === state.type) &&
         (!state.tag || (p.tags || []).includes(state.tag)));
-    shown.forEach(p => grid.appendChild(buildCard(p, false)));
+    shown.forEach((p, i) => grid.appendChild(buildCard(p, false, i)));
     revealCards(grid);
     document.getElementById("result-count").textContent =
         shown.length === 0 ? "No projects match these filters."
@@ -84,8 +89,43 @@ function renderFilters() {
     select.value = state.tag;
 }
 
+function initNav() {
+    const nav = document.querySelector(".nav");
+    const toggle = document.querySelector(".nav-toggle");
+    if (!nav || !toggle) return;
+    nav.classList.add("js-nav");
+    toggle.hidden = false;
+    const setOpen = open => {
+        toggle.setAttribute("aria-expanded", String(open));
+        nav.classList.toggle("menu-open", open);
+    };
+    toggle.addEventListener("click", () => setOpen(toggle.getAttribute("aria-expanded") !== "true"));
+    nav.querySelector(".nav-links").addEventListener("click", e => { if (e.target.closest("a")) setOpen(false); });
+    document.addEventListener("keydown", e => {
+        if (e.key === "Escape" && nav.classList.contains("menu-open")) {
+            setOpen(false);
+            toggle.focus();
+        }
+    });
+}
+
+// The hero clip autoplays muted and looped; visitors who prefer reduced motion get a still frame and controls
+function initHeroClip() {
+    const clip = document.getElementById("hero-clip");
+    if (!clip) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        clip.autoplay = false;
+        clip.pause();
+        clip.controls = true;
+    } else {
+        clip.play().catch(() => {});
+    }
+}
+
 async function init() {
     document.getElementById("year").textContent = new Date().getFullYear();
+    initNav();
+    initHeroClip();
     document.getElementById("tag-filter").addEventListener("change", e => {
         state.tag = e.target.value;
         renderGrid();
