@@ -5,17 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Project | Michael Chen</title>
     <meta name="description" content="Project write-up from the portfolio of Michael Chen, a Computer Science graduate.">
+    <link rel="preload" href="fonts/oswald-700.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="fonts/tiro-tamil-400.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="site.css">
     <script src="motion.js" defer></script>
     <script src="project.js" defer></script>
 </head>
-<body>
+<body class="site">
     <a class="skip-link" href="#main">Skip to content</a>
 
     <header class="site-header">
         <nav class="nav" aria-label="Main">
-            <a class="nav-brand" href="index.html">Michael Chen</a>
-            <ul class="nav-links">
+            <a class="nav-badge" href="index.html" aria-label="Michael Chen, home"><span>MC</span></a>
+            <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-links" hidden>
+                <span class="burger" aria-hidden="true"></span>
+                <span class="visually-hidden">Menu</span>
+            </button>
+            <ul class="nav-links" id="nav-links">
                 <li><a href="index.html#featured">Featured</a></li>
                 <li><a href="index.html#projects">Projects</a></li>
                 <li><a href="index.html#about">About</a></li>
@@ -23,6 +30,7 @@
         </nav>
     </header>
 
+    <div class="page">
     <main id="main" class="project-page">
         <p class="back-link"><a href="index.html#projects">&larr; All projects</a></p>
         <div id="project-root" aria-live="polite">
@@ -34,5 +42,6 @@
         <p>&copy; <span id="year">2026</span> Michael Chen. Built with plain HTML, CSS and JavaScript on GitHub Pages.</p>
         <p><a href="#main">Back to top</a></p>
     </footer>
+    </div>
 </body>
 </html>

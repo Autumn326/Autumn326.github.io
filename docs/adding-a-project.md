@@ -5,7 +5,7 @@ Every project page is generated from one entry in `data/projects.json`. No HTML 
 1. **Add one entry** to the `projects` list in `data/projects.json`. Copy an existing entry and change it. Required fields: `id`, `title`, `type`, `theme`, `featured`, `date`, `summary`, `tags`, `features`, `links`.
    - `id` is lowercase words joined by dashes (for example `my-new-project`). The page is then available at `project.html?id=my-new-project`.
    - `type` is one of `mobile-app`, `ai`, `data`, `algorithm`, `systems`, `backend`, `database`, `security`, `early`.
-   - `theme` is one of `apple` (light, frosted cards, device frames, springy motion), `ai-graph` (dark, drifting node-and-edge background, the first gallery item is a full-width chart) or `terminal` (blueprint, monospace, diagrams shown first, blinking cursor). Themes live in `styles.css`; motion timings are the `--dur-*`, `--ease`, `--lift` tokens.
+   - `theme` is still required by the validator but is not used for styling: every page shares one look (`site.css`). It is kept so per-project themes can be brought back later.
 2. **Add images** (optional) to the `images/` folder, for example `images/my-new-project/home.png`. Keep them small (under about 500 KB each) because GitHub Pages serves them as plain files.
 3. **Reference the images** in the entry:
    - `"thumbnail": "images/my-new-project/thumb.png"` shows on the home page card.
