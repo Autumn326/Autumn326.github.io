@@ -121,7 +121,6 @@ body.site {
 .pill-olive { background: var(--olive-ink); color: var(--silver); }
 .pill-dark { background: var(--blackish); color: var(--silver); border: 2px solid var(--silver); }
 .site a.pill-olive, .site a.pill-dark { color: var(--silver); }
-.pill-nav { --r: 9deg; position: absolute; top: 14px; right: 9%; z-index: 2; animation: pop var(--dur-slow) var(--ease) 0.9s backwards; }
 @keyframes pop {
     from { opacity: 0; transform: rotate(var(--r)) scale(0.8); }
     to   { opacity: 1; transform: rotate(var(--r)) scale(1); }
@@ -219,10 +218,9 @@ body.site {
 .site .status { margin: 0 0 1rem; color: var(--color-text-muted); font-size: 1.1rem; }
 
 .statement { padding-top: 5.5rem; padding-bottom: 5.5rem; }
-.site .statement .statement-text { max-width: 60%; margin: 0 0 2.5rem; font-size: clamp(2rem, 3vw + 0.6rem, 3rem); }
+.site .statement .statement-text { max-width: none; margin: 0 0 2.5rem; font-size: clamp(2rem, 3vw + 0.6rem, 3rem); }
 .statement-body { display: flex; flex-wrap: wrap; align-items: center; gap: 2rem 3rem; }
-.statement-body p { max-width: 34rem; margin: 0; font-size: 1.4rem; letter-spacing: -0.02em; }
-.statement-body .pill { --r: -4deg; }
+.statement-body p { max-width: none; margin: 0; font-size: 1.4rem; letter-spacing: -0.02em; }
 
 /* ---------- Project cards ---------- */
 .site .card-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 12px; align-items: start; }
@@ -321,56 +319,14 @@ body.site {
 .site .tag-filter select { padding: 0.55em 0.9em; border: 3px solid var(--blackish); border-radius: 999px; background: var(--silver); color: var(--blackish); font: inherit; text-transform: none; letter-spacing: 0; }
 
 /* ---------- About ---------- */
-.site .about-grid { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 3rem; }
+.site .about-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 3rem; }
+@media (max-width: 991px) { .site .about-grid { grid-template-columns: minmax(0, 1fr); } }
 .about-lead { font-size: 1.5rem; letter-spacing: -0.02em; }
 .site .about-grid p { font-size: 1.2rem; letter-spacing: -0.02em; }
 .site .pill-list { gap: 0.6rem; margin-bottom: 2rem; }
 .site .pill-list li { padding: 0.8em 1.4em; border: 0; background: var(--olive-ink); color: var(--silver); font-size: 0.9rem; letter-spacing: 0.1em; transform: rotate(-2deg); }
 .site .pill-list li:nth-child(even) { transform: rotate(2deg); }
 .site .pill-list li:nth-child(3n) { transform: rotate(-4deg); }
-
-/* ---------- Closing call to action ---------- */
-.cta {
-    position: relative;
-    display: grid;
-    place-items: center;
-    min-height: 70vh;
-    overflow: hidden;
-    border-top: var(--edge);
-    background: linear-gradient(to bottom, var(--silver) 0%, #d3a58c 100%);
-}
-.cta::before {   /* soft terracotta glow */
-    content: "";
-    position: absolute;
-    width: 60vw;
-    height: 26vw;
-    min-width: 18rem;
-    border-radius: 50%;
-    background: var(--sienna);
-    opacity: 0.55;
-    filter: blur(110px);
-}
-.cta-button {
-    position: relative;
-    display: grid;
-    place-items: center;
-    width: 380px;
-    max-width: 90vw;
-    height: 200px;
-    padding: 0 3rem;
-    border-radius: 90%;
-    background: var(--olive);
-    color: var(--blackish);
-    font: 700 1.6rem/1.1 var(--font-display);
-    letter-spacing: 0.04em;
-    text-align: center;
-    text-transform: uppercase;
-    text-decoration: none;
-    transform: rotate(-4deg);
-    transition: transform var(--dur-base) var(--ease), opacity var(--dur-fast) var(--ease);
-}
-.site .cta-button { color: var(--blackish); }
-.cta-button:hover { transform: rotate(-2deg) scale(1.03); }
 
 .site .site-footer { padding: 20px 16px; border-top: var(--edge); color: var(--blackish); font: 400 0.95rem/1.4 var(--font-display); letter-spacing: 0.06em; text-transform: uppercase; }
 
@@ -385,7 +341,6 @@ body.site {
 @media (max-width: 767px) {
     .site .page { padding-top: 60px; }
     .nav-badge { width: 76px; }
-    .pill-nav { display: none; }
     /* burger menu, only once JS has marked the nav */
     .nav.js-nav .nav-toggle {
         display: grid;
@@ -443,25 +398,25 @@ body.site {
     .stagger-col + .stagger-col { padding-top: 0; }
     .site .card { order: var(--i, 0); padding: 28px; }
     .site .card-grid { grid-template-columns: minmax(0, 1fr); }
-    .cta { min-height: 55vh; }
 }
 
 @media (prefers-reduced-motion: reduce) {
     .site { --nudge: 0px; }
     .site .card:hover, .site .card:focus-within { transform: none; }
-    .cta-button:hover { transform: rotate(-4deg); }
-    .site .card, .cta-button, .burger { transition-property: box-shadow, background-color, color, opacity; }
+    .site .card, .burger { transition-property: box-shadow, background-color, color, opacity; }
 }
 
 /* ==========================================================================
    Project pages in the same style
    ========================================================================== */
+.site .project-head, .site .glance, .site .learned, .site .step-text { max-width: none; }
+.site .glance { gap: 0 3rem; }
 .site .project-page { max-width: none; margin: 0; padding: 2rem 16px 4rem; }
 .site .back-link { margin: 0 0 1.5rem; }
 .site .back-link a { font: 500 1rem/1 var(--font-display); letter-spacing: 0.1em; text-transform: uppercase; }
 .site .project-head h1 { margin: 0.6rem 0 0.4rem; font: 700 clamp(2.6rem, 9vw, 8rem)/0.95 var(--font-display); letter-spacing: -0.03em; text-transform: uppercase; }
 .site .project-head .card-meta { margin: 0 0 1rem; }
-.site .project-summary { max-width: 52rem; margin: 0 0 1.5rem; font-size: clamp(1.25rem, 2vw, 1.8rem); letter-spacing: -0.02em; line-height: 1.2; }
+.site .project-summary { max-width: none; margin: 0 0 1.5rem; font-size: clamp(1.25rem, 2vw, 1.8rem); letter-spacing: -0.02em; line-height: 1.2; }
 .site .project-section h2 { margin: 0 0 0.9rem; font: 700 1.7rem/1.05 var(--font-display); letter-spacing: -0.01em; text-transform: uppercase; }
 .site .feature-list { font-size: 1.2rem; letter-spacing: -0.02em; line-height: 1.25; }
 .site .feature-list li { margin-bottom: 0.5rem; }
@@ -496,7 +451,7 @@ body.site {
 .site .code-note h4 { margin: 0 0 0.3rem; font: 700 1.1rem/1.15 var(--font-display); letter-spacing: 0.02em; text-transform: uppercase; }
 .site .code-note p { font-size: 1.1rem; letter-spacing: -0.01em; line-height: 1.25; color: var(--color-text); }
 .site .learned { border-top: var(--edge); }
-.site .learned p { font-size: 1.2rem; letter-spacing: -0.02em; max-width: 52rem; }
+.site .learned p { font-size: 1.2rem; letter-spacing: -0.02em; max-width: none; }
 
 /* Gallery and viewer */
 .site .gallery-tile:hover .showcase-item img, .site .gallery-tile:hover .showcase-item video { box-shadow: 5px 5px 0 var(--blackish); }
@@ -517,3 +472,11 @@ body.site {
     .site .step-marker { width: 2.7rem; height: 2.4rem; font-size: 1rem; }
     .site .process-nav { top: 113px; }
 }
+
+/* About me */
+.site .about-story { grid-column: span 2; }
+.site .about-story p { margin: 0 0 1.1rem; font-size: 1.3rem; letter-spacing: -0.02em; line-height: 1.25; }
+.site .about-story .about-lead { font-size: clamp(1.6rem, 2.4vw, 2.2rem); line-height: 1.15; }
+.site .about-points { margin: 0 0 2rem; padding-left: 1.2rem; font-size: 1.15rem; letter-spacing: -0.02em; line-height: 1.25; }
+.site .about-points li { margin-bottom: 0.4rem; }
+@media (max-width: 991px) { .site .about-story { grid-column: auto; } }
