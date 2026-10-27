@@ -340,8 +340,6 @@ function renderProject(project, root) {
     document.title = `${project.title} | Michael Chen`;
     const desc = document.querySelector('meta[name="description"]');
     if (desc) desc.content = project.summary;
-    if (project.theme) document.body.dataset.theme = project.theme;
-    document.body.dataset.type = project.type;
     const preview = new URLSearchParams(location.search).get("preview") === "1";
 
     // Header: always shown

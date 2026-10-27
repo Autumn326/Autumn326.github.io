@@ -12,7 +12,6 @@ function el(tag, className, text) {
 function buildCard(project, featured, index = 0) {
     const card = el("article", featured ? "card featured-card" : "card");
     card.dataset.id = project.id;
-    card.dataset.theme = project.theme;
     card.style.setProperty("--n", index + 1);
     card.style.setProperty("--i", index);
     card.appendChild(el("span", "card-badge", project.type.replace("-", " ")));
@@ -89,26 +88,6 @@ function renderFilters() {
     select.value = state.tag;
 }
 
-function initNav() {
-    const nav = document.querySelector(".nav");
-    const toggle = document.querySelector(".nav-toggle");
-    if (!nav || !toggle) return;
-    nav.classList.add("js-nav");
-    toggle.hidden = false;
-    const setOpen = open => {
-        toggle.setAttribute("aria-expanded", String(open));
-        nav.classList.toggle("menu-open", open);
-    };
-    toggle.addEventListener("click", () => setOpen(toggle.getAttribute("aria-expanded") !== "true"));
-    nav.querySelector(".nav-links").addEventListener("click", e => { if (e.target.closest("a")) setOpen(false); });
-    document.addEventListener("keydown", e => {
-        if (e.key === "Escape" && nav.classList.contains("menu-open")) {
-            setOpen(false);
-            toggle.focus();
-        }
-    });
-}
-
 // The hero clip autoplays muted and looped; visitors who prefer reduced motion get a still frame and controls
 function initHeroClip() {
     const clip = document.getElementById("hero-clip");
@@ -124,7 +103,6 @@ function initHeroClip() {
 
 async function init() {
     document.getElementById("year").textContent = new Date().getFullYear();
-    initNav();
     initHeroClip();
     document.getElementById("tag-filter").addEventListener("change", e => {
         state.tag = e.target.value;

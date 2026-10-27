@@ -63,7 +63,7 @@ Each project: [ ] confirm summary and dates  [ ] pick screenshots/diagrams  [ ] 
 I will review each project's files when we reach it and suggest the highlights worth showing.
 
 ## Phase 4: Styling and themes
-- [x] Define themes: `apple`, `ai-graph`, `terminal`
+- [x] Define themes: `apple`, `ai-graph`, `terminal` (later dropped: one shared look for every page, see `site.css`; the `theme` field stays in the data, unused)
 - [x] Apple: device/monitor frame for screenshots, system fonts, rounded frosted cards (no Apple logos or artwork)
 - [x] AI graph: dark background, node-and-edge pattern, charts as hero
 - [x] Terminal/blueprint: monospace type, diagrams up front
@@ -80,7 +80,7 @@ I will review each project's files when we reach it and suggest the highlights w
 
 - [x] Project page: Design story tab (numbered steps with a sticky process bar) and Gallery tab (all images and clips, filter and viewer) instead of a Highlights section
 - [x] Design walkthrough written for every project, with code screenshots and the reasoning beside them
-- [x] Home page restyled in a warm printed-zine look (cream, olive, terracotta, grain, Oswald and Tiro Tamil self-hosted in `fonts/`, bordered staggered cards, tilted pill stickers, fixed 60px nav with burger on mobile); project pages keep their own themes
+- [x] One shared style for the whole site (home and project pages): warm printed-zine look, Oswald and Tiro Tamil self-hosted in `fonts/`, bordered cards, tilted pill stickers, fixed 60px nav with burger on mobile
 
 ## Phase 5: Polish and launch
 - [ ] Phone, tablet and desktop checks

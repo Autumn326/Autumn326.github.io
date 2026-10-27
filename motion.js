@@ -21,3 +21,28 @@
         });
     };
 })();
+
+// Mobile menu: a burger button toggles the link list (links stay visible without JS)
+(function () {
+    function initNav() {
+        const nav = document.querySelector(".nav");
+        const toggle = document.querySelector(".nav-toggle");
+        if (!nav || !toggle) return;
+        nav.classList.add("js-nav");
+        toggle.hidden = false;
+        const setOpen = open => {
+            toggle.setAttribute("aria-expanded", String(open));
+            nav.classList.toggle("menu-open", open);
+        };
+        toggle.addEventListener("click", () => setOpen(toggle.getAttribute("aria-expanded") !== "true"));
+        nav.querySelector(".nav-links").addEventListener("click", e => { if (e.target.closest("a")) setOpen(false); });
+        document.addEventListener("keydown", e => {
+            if (e.key === "Escape" && nav.classList.contains("menu-open")) {
+                setOpen(false);
+                toggle.focus();
+            }
+        });
+    }
+    if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", initNav);
+    else initNav();
+})();
