@@ -225,7 +225,7 @@ h1, h2, h3 { line-height: 1.2; }
 
 /* ---------- Project page ---------- */
 .project-page { max-width: 70rem; margin: 0 auto; padding: 2rem var(--space) 3.5rem; }
-.project-head, .glance, .learned { max-width: 52rem; }
+
 .back-link { margin: 0 0 1.5rem; }
 .project-head h1 { font-size: clamp(2rem, 6vw, 2.75rem); margin: 0.5rem 0 0.25rem; }
 .project-summary { font-size: 1.15rem; }
