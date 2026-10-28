@@ -23,6 +23,7 @@
     --font-fat: "Bagel Fat One", "Arial Rounded MT Bold", "Trebuchet MS", sans-serif;
     --font-serif: "Tiro Tamil", Georgia, "Times New Roman", serif;
     --edge: 3px solid var(--blackish);
+    --col: min(100vw, 1240px);   /* width of the content column */
 
     /* Re-point the shared tokens so chips, tags and status text follow the palette */
     --font-body: var(--font-serif);
@@ -45,11 +46,7 @@
 }
 
 body.site {
-    background-color: var(--silver);
-    background-image: url("images/site/bg-blobs.webp");
-    background-repeat: repeat-y;
-    background-position: top center;
-    background-size: max(100%, 1100px) auto;
+    background: transparent;
     color: var(--blackish);
     font-family: var(--font-serif);
     font-size: 16px;
@@ -60,7 +57,7 @@ body.site {
 .site .skip-link { background: var(--blackish); color: var(--silver); }
 
 .site .page {
-    max-width: 1240px;
+    max-width: var(--col);
     margin: 0 auto;
     padding-top: 60px;
     position: relative;
@@ -79,7 +76,7 @@ body.site {
     -webkit-backdrop-filter: none;
     backdrop-filter: none;
 }
-.site .nav { max-width: 1240px; height: 57px; margin: 0 auto; padding: 0; gap: 0; align-items: stretch; justify-content: flex-start; flex-wrap: nowrap; }
+.site .nav { max-width: var(--col); height: 57px; margin: 0 auto; padding: 0; gap: 0; align-items: stretch; justify-content: flex-start; flex-wrap: nowrap; }
 .nav-badge { display: grid; place-items: center; width: 90px; padding: 0; text-decoration: none; }
 .nav-badge span {
     display: grid;
@@ -147,7 +144,7 @@ body.site {
 .site .hero .wordmark {
     display: block;
     margin: 0;
-    font: 700 calc((min(100vw, 1240px) - 32px) / 6)/0.96 var(--font-display);
+    font: 700 calc((min(100vw, var(--col)) - 32px) / 6)/0.96 var(--font-display);
     letter-spacing: -0.01em;
     text-transform: uppercase;
     white-space: nowrap;
@@ -493,8 +490,8 @@ body.site {
     text-transform: none;
     letter-spacing: 0;
 }
-.site .hero .wordmark { font-family: var(--font-fat); font-weight: 400; text-transform: none; letter-spacing: 0; font-size: calc((min(100vw, 1240px) - 32px) / 7.6); line-height: 1; }
-.site .hero-title { font-size: clamp(2.6rem, 5.5vw, 5.2rem); line-height: 1; }
+.site .hero .wordmark { font-family: var(--font-fat); font-weight: 400; text-transform: none; letter-spacing: 0; font-size: calc((min(100vw, var(--col)) - 32px) / 7.6); line-height: 1; }
+.site .hero-title { font-size: clamp(2.4rem, 4.2vw, 5rem); line-height: 1; }
 .site .section-title { font-size: clamp(2.2rem, 5vw, 4.2rem); line-height: 1.05; }
 .site .statement .statement-text { line-height: 1.12; }
 .site .card h3 { font-size: clamp(1.4rem, 1.8vw, 1.8rem); line-height: 1.1; }
@@ -510,7 +507,23 @@ body.site .section .section-title, body.site .section h2.section-title, body.sit
 
 .site .status { color: var(--blackish); }
 
-/* Narrow screens: text spans the shapes, so a light cream wash keeps it readable */
-@media (max-width: 900px) {
-    .site .page { background-color: rgba(241, 231, 214, 0.82); }
+/* ---------- Page background: one framed illustration fixed behind the page ---------- */
+html:has(body.site) { background: #f1e7d6; }
+.site-bg { position: fixed; inset: 60px 0 0 0; z-index: -1; pointer-events: none; overflow: hidden; }
+.site-bg .bg-layer {
+    position: absolute;
+    inset: 0;
+    background-repeat: repeat-y;
+    background-position: 50% 0;
+    background-size: max(100vw, 900px) auto;
+}
+.site-bg .bg-back { background-image: url("images/site/bg-back.webp"); }
+.site-bg .bg-front { background-image: url("images/site/bg-front.webp"); }
+/* Wide screens: the column sits in the beige middle so the shapes frame it */
+@media (min-width: 1200px) {
+    .site { --col: min(1240px, 56vw); }
+}
+/* Narrower screens: text spans the shapes, so a light cream wash keeps it readable */
+@media (max-width: 1199px) {
+    .site .page { background-color: rgba(241, 231, 214, 0.84); }
 }

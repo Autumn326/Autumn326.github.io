@@ -46,3 +46,30 @@
     if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", initNav);
     else initNav();
 })();
+
+// Background parallax: the two background layers drift at different speeds as the page scrolls.
+// Visitors who prefer reduced motion get both layers scrolling with the page, like an ordinary background.
+(function () {
+    const layers = [
+        [document.querySelector(".site-bg .bg-back"), 0.3],
+        [document.querySelector(".site-bg .bg-front"), 0.6]
+    ].filter(l => l[0]);
+    if (!layers.length) return;
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    let ticking = false;
+
+    function update() {
+        ticking = false;
+        const y = window.scrollY;
+        layers.forEach(([node, speed]) => {
+            node.style.backgroundPosition = `50% ${-y * (reduce ? 1 : speed)}px`;
+        });
+    }
+    window.addEventListener("scroll", () => {
+        if (!ticking) {
+            ticking = true;
+            requestAnimationFrame(update);
+        }
+    }, { passive: true });
+    update();
+})();
