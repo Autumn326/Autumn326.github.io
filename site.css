@@ -46,7 +46,10 @@
 
 body.site {
     background-color: var(--silver);
-    background-image: var(--grain);
+    background-image: url("images/site/bg-blobs.webp");
+    background-repeat: repeat-y;
+    background-position: top center;
+    background-size: max(100%, 1100px) auto;
     color: var(--blackish);
     font-family: var(--font-serif);
     font-size: 16px;
@@ -57,9 +60,11 @@ body.site {
 .site .skip-link { background: var(--blackish); color: var(--silver); }
 
 .site .page {
-    max-width: 1890px;
+    max-width: 1240px;
     margin: 0 auto;
     padding-top: 60px;
+    background-color: var(--silver);
+    background-image: var(--grain);
     position: relative;
     overflow-x: clip;
 }
@@ -76,7 +81,7 @@ body.site {
     -webkit-backdrop-filter: none;
     backdrop-filter: none;
 }
-.site .nav { max-width: 1890px; height: 57px; margin: 0 auto; padding: 0; gap: 0; align-items: stretch; justify-content: flex-start; flex-wrap: nowrap; }
+.site .nav { max-width: 1240px; height: 57px; margin: 0 auto; padding: 0; gap: 0; align-items: stretch; justify-content: flex-start; flex-wrap: nowrap; }
 .nav-badge { display: grid; place-items: center; width: 90px; padding: 0; text-decoration: none; }
 .nav-badge span {
     display: grid;
@@ -144,7 +149,7 @@ body.site {
 .site .hero .wordmark {
     display: block;
     margin: 0;
-    font: 700 calc((min(100vw, 1890px) - 32px) / 6)/0.96 var(--font-display);
+    font: 700 calc((min(100vw, 1240px) - 32px) / 6)/0.96 var(--font-display);
     letter-spacing: -0.01em;
     text-transform: uppercase;
     white-space: nowrap;
@@ -490,7 +495,7 @@ body.site {
     text-transform: none;
     letter-spacing: 0;
 }
-.site .hero .wordmark { font-family: var(--font-fat); font-weight: 400; text-transform: none; letter-spacing: 0; font-size: calc((min(100vw, 1890px) - 32px) / 7.6); line-height: 1; }
+.site .hero .wordmark { font-family: var(--font-fat); font-weight: 400; text-transform: none; letter-spacing: 0; font-size: calc((min(100vw, 1240px) - 32px) / 7.6); line-height: 1; }
 .site .hero-title { font-size: clamp(2.8rem, 7vw, 6.5rem); line-height: 1; }
 .site .section-title { font-size: clamp(2.2rem, 5vw, 4.2rem); line-height: 1.05; }
 .site .statement .statement-text { line-height: 1.12; }
@@ -501,19 +506,13 @@ body.site {
 .site .section h3 { font-size: 1.4rem; letter-spacing: 0; }
 .site .code-note h4 { font-size: 1.05rem; letter-spacing: 0; }
 
-/* ---------- Retro background shape: one large composition behind the About section ---------- */
-#about { position: relative; isolation: isolate; }
-#about::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    z-index: -1;
-    pointer-events: none;
-    background: url("images/site/shape-scene.svg") no-repeat right 3% bottom 3% / min(60%, 860px) auto;
-    opacity: 0.45;
-}
-@media (max-width: 767px) { #about::before { opacity: 0.25; } }
-
 body.site .section .section-title, body.site .section h2.section-title, body.site .card h3, body.site .section h3 {
     font-family: var(--font-fat); font-weight: 400; text-transform: none; letter-spacing: 0;
+}
+
+.site .status { color: var(--blackish); }
+
+/* Narrow screens: the page is the full width, so let the blobs show faintly through the cream */
+@media (max-width: 1240px) {
+    .site .page { background-color: rgba(241, 231, 214, 0.9); background-image: none; }
 }
