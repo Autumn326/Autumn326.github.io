@@ -13,6 +13,7 @@
     <script src="script.js" defer></script>
 </head>
 <body class="site">
+    <div class="site-bg" aria-hidden="true"><div class="bg-layer bg-back"></div><div class="bg-layer bg-front"></div></div>
     <a class="skip-link" href="#main">Skip to content</a>
 
     <header class="site-header">
@@ -26,6 +27,7 @@
                 <li><a href="#featured">Featured</a></li>
                 <li><a href="#projects">Projects</a></li>
                 <li><a href="#about">About me</a></li>
+                <li><a href="#skills">Skills</a></li>
             </ul>
         </nav>
     </header>
@@ -35,14 +37,19 @@
         <section class="hero" id="top">
             <div class="wordmark-mask"><h1 class="wordmark">Michael Chen</h1></div>
             <div class="hero-sub">
-                <p>Computer Science graduate</p>
-                <p>iOS apps &middot; AI &middot; Algorithms</p>
+                <p>First Class Honours Computer Science graduate</p>
+                <p>AI &middot; Machine learning &middot; Algorithms</p>
             </div>
             <div class="hero-frame">
                 <div class="hero-copy">
                     <p class="kicker">Final year project</p>
                     <p class="hero-title">Sign Finder</p>
-                    <p class="hero-text">An iPhone app that recognises UK road signs from a photo or the live camera, entirely on the device.</p>
+                    <p class="hero-text">A real-time road sign detection app that runs entirely on the iPhone, from a photo or the live camera, so no image ever leaves the device.</p>
+                    <ul class="hero-points">
+                        <li>Custom-trained object detection model built in Python and TensorFlow, deployed on-device with Core ML</li>
+                        <li>Own dataset of over <strong>70,000 entries</strong> across 15+ sign categories</li>
+                        <li><strong>Sub-100 ms inference</strong> on iPhone hardware, tested against a live camera feed</li>
+                    </ul>
                 </div>
                 <video class="hero-clip" id="hero-clip" src="videos/sign-finder/live-scan.mp4" poster="images/sign-finder/scan.jpg"
                        autoplay muted loop playsinline preload="auto"
@@ -55,9 +62,9 @@
             <p class="section-label">Hello</p>
             <h2 class="statement-text" id="statement-title">I build iOS apps, machine learning models and clean algorithms.</h2>
             <div class="statement-body">
-                <p>I am a First Class Honours BCS Computer Science graduate.
-                This site collects my projects, from my final year road sign
-                recognition app to coursework in AI, data science and software design.</p>
+                <p>I am a First Class Honours BCS Computer Science graduate who enjoys the whole path from an idea to something that runs: designing it, building it, testing it and measuring how well it works.</p>
+                <p>This site collects my projects, from my final year road sign recognition app, which runs a custom-trained model entirely on the phone, to coursework in AI, data science, databases, algorithms and software design. Each project has a write-up that follows the design process, with screenshots, short clips and the reasoning behind the code.</p>
+                <p>If you only have a minute, start with Sign Finder above. If you have longer, the featured projects below show the range, and the About me and Skills sections cover the rest.</p>
             </div>
         </section>
 
@@ -83,47 +90,78 @@
             <h2 class="section-title" id="about-title">About me</h2>
             <div class="about-grid">
                 <div class="about-story">
-                    <p class="about-lead">I'm Michael, a Computer Science graduate who likes turning an idea into something that really works on a phone or a laptop.</p>
+                    <p class="about-lead">I'm Michael, a Computer Science graduate who likes turning an idea into something clear and useful on a phone or a laptop.</p>
                     <p>I graduated with a First Class Honours BCS Computer Science degree. Along the way I studied software development, algorithms, databases, AI, data science, mobile development and cyber security, and I have tried to build something real in most of them.</p>
                     <p>My final year project, Sign Finder, is the one that shows best how I work. It is an iPhone app that recognises UK road signs from a photo or the live camera, entirely on the device so no image ever leaves the phone. I built the dataset myself from public sets plus my own annotated photos, compared several models, and learned to check the deployment path before committing to a training framework.</p>
                     <p>I like to design before I code. For the shopping manager I drew the use case and class diagrams first, for the theatre booking system I put the rules in one class and wrote tests that read like sentences, and for the Sudoku solver I let simple logic do most of the work and only guess when it has to. In the machine learning projects I judge a model with several measures and say plainly what the plots show, including where it gets things wrong.</p>
-                    <p>I also like going back to my own work. My first Python program was one long script, and I have rebuilt that kind of code since with small functions and tests. The theatre system started life in Java and now lives in C++. Next on my list are a more balanced sign dataset, an LSTM for the sentiment model, and a puzzle generator for the Sudoku solver.</p>
+                    <p>I also like going back to my own work. My first Python program was one long script, and I have rebuilt that kind of code since with small functions and tests. The theatre system started life in Java and now lives in C++. To this day I still update my projects, like adding over 40,000 more data entries to my Sign Finder dataset.</p>
                 </div>
                 <div class="about-side">
                     <h3>Education</h3>
                     <p class="about-lead"><strong>First Class Honours, BCS Computer Science</strong></p>
                     <p>Modules across software development, algorithms, databases, AI, data science,
                     mobile development and cyber security.</p>
+                    <p>Alongside the final year project there is coursework in Swift, Java, C++, Python and R:
+                    a weather app, a theatre booking system, a Sudoku solver, database design, neural networks
+                    and clustering, and hands-on security labs.</p>
                     <h3>How I work</h3>
                     <ul class="about-points">
                         <li>Design first: diagrams and plans before code</li>
                         <li>Test early, with tests that explain themselves</li>
                         <li>Measure honestly and report the limits</li>
                         <li>Keep it private and simple, such as on-device processing</li>
+                        <li>Compare several approaches before settling on one</li>
+                        <li>Go back to old work and rebuild it with what I have learned</li>
+                        <li>Explain decisions in plain language, next to the code</li>
                     </ul>
                 </div>
-                <div class="about-skills">
-                    <div>
-                        <h3>Languages</h3>
-                        <ul class="pill-list">
-                            <li>Swift</li><li>Python</li><li>Java</li><li>C++</li><li>R</li><li>SQL</li>
-                        </ul>
-                    </div>
-                    <div>
-                        <h3>Libraries</h3>
-                        <ul class="pill-list">
-                            <li>TensorFlow</li><li>Keras</li><li>scikit-learn</li><li>pandas</li>
-                            <li>matplotlib</li><li>neuralnet</li><li>factoextra</li><li>NbClust</li><li>Catch</li>
-                        </ul>
-                    </div>
-                    <div>
-                        <h3>Frameworks and tools</h3>
-                        <ul class="pill-list">
-                            <li>SwiftUI</li><li>Core ML</li><li>Create ML</li><li>Vision</li><li>AVFoundation</li>
-                            <li>MapKit</li><li>Jersey</li><li>Maven</li><li>Git</li><li>Xcode</li><li>NetBeans</li>
-                            <li>LabelImg</li><li>draw.io</li><li>Wireshark</li><li>Nmap</li>
-                        </ul>
-                    </div>
+            </div>
+        </section>
+
+        <section class="section" id="skills" aria-labelledby="skills-title">
+            <h2 class="section-title" id="skills-title">Skills</h2>
+            <div class="skills-groups">
+                <div>
+                    <h3>Languages</h3>
+                    <ul class="pill-list">
+                            <li>Swift</li>
+                            <li>Python</li>
+                            <li>Java</li>
+                            <li>C++</li>
+                            <li>R</li>
+                            <li>SQL</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3>Libraries</h3>
+                    <ul class="pill-list">
+                            <li>TensorFlow</li>
+                            <li>Keras</li>
+                            <li>scikit-learn</li>
+                            <li>pandas</li> <li>matplotlib</li>
+                            <li>neuralnet</li>
+                            <li>factoextra</li>
+                            <li>NbClust</li>
+                            <li>Catch</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3>Frameworks and tools</h3>
+                    <ul class="pill-list">
+                            <li>SwiftUI</li>
+                            <li>Core ML</li>
+                            <li>Create ML</li>
+                            <li>Vision</li>
+                            <li>AVFoundation</li> <li>MapKit</li>
+                            <li>Jersey</li>
+                            <li>Maven</li>
+                            <li>Git</li>
+                            <li>Xcode</li>
+                            <li>NetBeans</li> <li>LabelImg</li>
+                            <li>draw.io</li>
+                            <li>Wireshark</li>
+                            <li>Nmap</li>
+                    </ul>
                 </div>
             </div>
         </section>
