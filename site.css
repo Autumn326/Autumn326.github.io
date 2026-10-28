@@ -529,9 +529,7 @@ html:has(body.site) { background: #f1e7d6; }
     .site .page { background-color: rgba(241, 231, 214, 0.84); }
 }
 
-/* About: each skills group has its heading on top, with the names running across underneath as plain text */
-.site .about-skills { grid-column: 1 / -1; display: grid; gap: 1.6rem; margin-top: 1rem; }
-.site .about-skills h3 { margin: 0 0 0.5rem; }
-.site .about-skills .pill-list { display: block; margin: 0; padding: 0; list-style: none; font-size: 1.3rem; line-height: 1.4; letter-spacing: -0.02em; }
-.site .about-skills .pill-list li { display: inline; padding: 0; border: 0; background: none; color: var(--blackish); font: inherit; letter-spacing: inherit; text-transform: none; transform: none; border-radius: 0; }
-.site .about-skills .pill-list li:not(:last-child)::after { content: ", "; }
+/* Skills: its own section, each group with its title on top and the blue pills running across underneath */
+.site .skills-groups { display: grid; gap: 2rem; }
+.site .skills-groups h3 { margin: 0 0 0.8rem; }
+.site .skills-groups .pill-list { margin: 0; }
