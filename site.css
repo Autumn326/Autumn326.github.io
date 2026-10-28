@@ -517,6 +517,7 @@ html:has(body.site) { background: #f1e7d6; }
     background-position: 50% 0;
     background-size: max(100vw, 900px) auto;
 }
+.site-bg::after { content: ""; position: absolute; inset: 0; background: url("images/site/bg-frame.svg") 0 0 / 100% 100% no-repeat; }
 .site-bg .bg-back { background-image: url("images/site/bg-back.webp"); }
 .site-bg .bg-front { background-image: url("images/site/bg-front.webp"); }
 /* Wide screens: the column sits in the beige middle so the shapes frame it */
