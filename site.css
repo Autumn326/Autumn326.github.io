@@ -533,3 +533,16 @@ html:has(body.site) { background: #f1e7d6; }
 .site .skills-groups { display: grid; gap: 2rem; }
 .site .skills-groups h3 { margin: 0 0 0.8rem; }
 .site .skills-groups .pill-list { margin: 0; }
+
+/* Hero: a short list of the headline facts under the Sign Finder blurb */
+.site .hero-text { max-width: 34rem; font-size: 1.25rem; }
+.site .hero-points { margin: 1.1rem 0 0; padding-left: 1.2rem; max-width: 34rem; font-size: 1.05rem; line-height: 1.3; letter-spacing: -0.01em; }
+.site .hero-points li { margin-bottom: 0.45rem; }
+.site .hero-points strong { font-weight: 700; }
+/* No rule between the hero and the first text section */
+.site .statement { border-top: 0; }
+/* Hello: a few short paragraphs */
+.site .statement-body { display: block; max-width: none; }
+.site .statement-body p { margin: 0 0 1.1rem; font-size: 1.3rem; line-height: 1.3; }
+.site .hero-sub { font-size: clamp(1.1rem, 1.7vw, 1.6rem); gap: 0.2rem 2rem; flex-wrap: wrap; }
+.site .hero-sub p { white-space: normal; }
